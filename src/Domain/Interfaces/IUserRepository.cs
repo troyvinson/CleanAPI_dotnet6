@@ -2,7 +2,7 @@
 
 namespace Domain.Interfaces;
 
-internal interface IUserRoleRepository 
+public interface IUserRoleRepository 
 {
     Task<IEnumerable<Company>> GetAllUserRolesAsync(bool trackChanges);
     Task<Company?> GetUserRoleByIdAsync(int roleId, bool trackChanges);

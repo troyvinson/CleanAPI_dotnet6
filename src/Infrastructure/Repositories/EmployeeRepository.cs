@@ -5,7 +5,7 @@ using Domain.Entities;
 
 namespace Infrastructure.Repositories;
 
-internal sealed class EmployeeRepository : RepositoryBase<Employee>, IEmployeeRepository
+public sealed class EmployeeRepository : RepositoryBase<Employee>, IEmployeeRepository
 {
     public EmployeeRepository(RepositoryContext repositoryContext)
         : base(repositoryContext) { }
