@@ -1,7 +1,6 @@
 ﻿using Domain.RequestFeatures;
-using Microsoft.EntityFrameworkCore;
 using Infrastructure.Repositories.Extensions;
-using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 

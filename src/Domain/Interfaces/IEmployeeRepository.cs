@@ -3,7 +3,7 @@ using Domain.RequestFeatures;
 
 namespace Domain.Interfaces;
 
-internal interface IEmployeeRepository
+public interface IEmployeeRepository
 {
     Task<PagedList<Employee>> GetEmployeesForCompanyAsync(int companyId, EmployeeParameters employeeParameters, bool trackChanges);
 

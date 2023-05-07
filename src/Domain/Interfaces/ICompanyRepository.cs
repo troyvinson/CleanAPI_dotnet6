@@ -2,7 +2,7 @@
 
 namespace Domain.Interfaces;
 
-internal interface ICompanyRepository
+public interface ICompanyRepository
 {
     Task<IEnumerable<Company>> GetAllCompaniesAsync(bool trackChanges);
     Task<Company?> GetCompanyByIdAsync(int companyId, bool trackChanges);

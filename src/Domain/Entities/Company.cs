@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities;
 
-internal class Company
+public class Company
 {
     [Column("CompanyId")]
     public int Id { get; set; }
