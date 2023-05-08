@@ -37,12 +37,12 @@ public class CompaniesController : ControllerBase
     /// <summary>
     /// Get a company by its id
     /// </summary>
-    /// <param name="companyId"></param>
+    /// <param name="id"></param>
     /// <returns></returns>
-    [HttpGet("{companyId:int}", Name = "CompanyById")]
-    public async Task<IActionResult> GetCompanyAsync(int companyId)
+    [HttpGet("{id:int}", Name = "CompanyById")]
+    public async Task<IActionResult> GetCompanyAsync(int id)
     {
-        var company = await _sender.Send(new GetCompanyQuery(companyId, TrackChanges: false));
+        var company = await _sender.Send(new GetCompanyQuery(id, TrackChanges: false));
 
         return Ok(company);
     }
@@ -52,12 +52,12 @@ public class CompaniesController : ControllerBase
     /// </summary>
     /// <remarks>Replace {companyIds} with a comma-delimited series of ints. 
     /// Swagger does not do this very well, so try testing in Postman.</remarks>
-    /// <param name="companyIds"></param>
+    /// <param name="ids"></param>
     /// <returns></returns>
-    [HttpGet("collection/{companyIds}", Name = "CompanyCollection")]
-    public async Task<IActionResult> GetCompanyCollectionAsync(string companyIds)
+    [HttpGet("collection/{ids}", Name = "CompanyCollection")]
+    public async Task<IActionResult> GetCompanyCollectionAsync(string ids)
     {
-        var companies = await _sender.Send(new GetCompaniesByIdsQuery(companyIds, TrackChanges: false));
+        var companies = await _sender.Send(new GetCompaniesByIdsQuery(ids, TrackChanges: false));
 
         return Ok(companies);
     }
@@ -94,16 +94,16 @@ public class CompaniesController : ControllerBase
     /// <summary>
     /// Updates an existing company
     /// </summary>
-    /// <param name="companyId"></param>
+    /// <param name="id"></param>
     /// <param name="companyForUpdateDto"></param>
     /// <returns></returns>
-    [HttpPut("{companyId:int}")]
-    public async Task<IActionResult> UpdateCompanyAsync(int companyId, CompanyForUpdateDto companyForUpdateDto)
+    [HttpPut("{id:int}")]
+    public async Task<IActionResult> UpdateCompanyAsync(int id, CompanyForUpdateDto companyForUpdateDto)
     {
         if (companyForUpdateDto is null)
             return BadRequest("CompanyForUpdateDto object is null");
 
-        await _sender.Send(new UpdateCompanyCommand(companyId, companyForUpdateDto, TrackChanges: true));
+        await _sender.Send(new UpdateCompanyCommand(id, companyForUpdateDto, TrackChanges: true));
 
         return NoContent();
     }
@@ -113,7 +113,7 @@ public class CompaniesController : ControllerBase
     /// </summary>
     /// <param name="companyId"></param>
     /// <returns></returns>
-    [HttpDelete("{companyId:int}")]
+    [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteCompanyAsync(int companyId)
     {
         await _publisher.Publish(new CompanyDeletedNotification(companyId, TrackChanges: false));
