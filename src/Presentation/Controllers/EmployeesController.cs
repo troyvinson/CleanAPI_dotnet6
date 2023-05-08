@@ -1,5 +1,6 @@
 ﻿using Application.Commands.Employees;
 using Application.Queries.Employees;
+using Domain.Entities;
 using Domain.RequestFeatures;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -33,11 +34,11 @@ public class EmployeesController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetEmployeesForCompanyAsync(int companyId, [FromQuery] EmployeeParameters employeeParameters)
     {
-        var pagedResult = await _sender.Send(new GetEmployeesForCompanyQuery(companyId, employeeParameters, TrackChanges: false));
+        (IEnumerable<EmployeeDto> employees, MetaData metaData) = await _sender.Send(new GetEmployeesForCompanyQuery(companyId, employeeParameters, TrackChanges: false));
 
-        Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedResult.metaData));
+        Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metaData));
 
-        return Ok(pagedResult.employees);
+        return Ok(employees);
     }
 
     /// <summary>
@@ -104,7 +105,7 @@ public class EmployeesController : ControllerBase
         if (!ModelState.IsValid)
             return UnprocessableEntity(ModelState);
 
-        await _sender.Send(new UpdateEmployeeCommand(companyId, id, employeeToUpdate, companyTrackChanges: false, employeeTrackChanges: true));
+        await _sender.Send(new UpdateEmployeeCommand(companyId, id, employeeToUpdate, CompanyTrackChanges: false, EmployeeTrackChanges: true));
 
         return NoContent();
     }
@@ -122,17 +123,17 @@ public class EmployeesController : ControllerBase
     {
         if (patchDoc is null)
             return BadRequest("patchDoc object sent from client is null.");
+        
+        (EmployeeForUpdateDto employeeToPatch, _) = await _sender.Send(new GetEmployeeForPatchQuery(companyId, id, CompanyTrackChanges: false, EmployeeTrackChanges: true));
 
-        var result = await _sender.Send(new GetEmployeeForPatchQuery(companyId, id, CompanyTrackChanges: false, EmployeeTrackChanges: true));
+        patchDoc.ApplyTo(employeeToPatch, ModelState);
 
-        patchDoc.ApplyTo(result.employeeToPatch, ModelState);
-
-        TryValidateModel(result.employeeToPatch);
+        TryValidateModel(employeeToPatch);
 
         if (!ModelState.IsValid)
             return UnprocessableEntity(ModelState);
 
-        await _sender.Send(new UpdateEmployeeCommand(companyId, id, result.employeeToPatch, companyTrackChanges: false, employeeTrackChanges: true));
+        await _sender.Send(new UpdateEmployeeCommand(companyId, id, employeeToPatch, CompanyTrackChanges: false, EmployeeTrackChanges: true));
 
         return NoContent();
     }

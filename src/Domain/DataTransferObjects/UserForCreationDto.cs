@@ -1,12 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Domain.DataTransferObjects;
 
-namespace Domain.DataTransferObjects
-{
-    public abstract record UserForManipulation
-    {
-    }
-}
+public abstract record UserForCreationDto : UserForManipulationDto;

@@ -119,5 +119,70 @@
             <param name="patchDoc"></param>
             <returns></returns>
         </member>
+        <member name="M:Presentation.Controllers.UsersController.GetUsersAsync">
+            <summary>
+            Gets the list of all users
+            </summary>
+            <returns>The users list</returns>
+        </member>
+        <member name="M:Presentation.Controllers.UsersController.GetUserAsync(System.Int32)">
+            <summary>
+            Get a user by its id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Presentation.Controllers.UsersController.GetUserCollectionAsync(System.String)">
+            <summary>
+            Gets a collection of users by their ids
+            </summary>
+            <remarks>Replace {userIds} with a comma-delimited series of ints. 
+            Swagger does not do this very well, so try testing in Postman.</remarks>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Presentation.Controllers.UsersController.CreateUserAsync(Domain.DataTransferObjects.UserForCreationDto)">
+            <summary>
+            Creates a newly created user
+            </summary>
+            <param name="userToCreate"></param>
+            <returns>A newly created user</returns>
+        </member>
+        <member name="M:Presentation.Controllers.UsersController.CreateUserCollectionAsync(System.Collections.Generic.IEnumerable{Domain.DataTransferObjects.UserForCreationDto})">
+            <summary>
+            Creates new users from a collection
+            </summary>
+            <param name="userCollection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Presentation.Controllers.UsersController.UpdateUserAsync(System.Int32,Domain.DataTransferObjects.UserForUpdateDto)">
+            <summary>
+            Updates an existing user
+            </summary>
+            <param name="id"></param>
+            <param name="userForUpdateDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Presentation.Controllers.UsersController.DeleteUserAsync(System.Int32)">
+            <summary>
+            Deletes an existing user
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Presentation.Controllers.UsersController.PartiallyUpdateUserAsync(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{Domain.DataTransferObjects.UserForUpdateDto})">
+            <summary>
+            Partially updates an existing user
+            </summary>
+            <param name="id"></param>
+            <param name="patchDoc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Presentation.Controllers.UsersController.GetUsersOptions">
+            <summary>
+            Get available HTTP Verbs
+            </summary>
+            <returns></returns>
+        </member>
     </members>
 </doc>

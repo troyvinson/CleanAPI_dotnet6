@@ -1,8 +1,4 @@
-﻿using Application.Commands.UserCommands;
-using Application.Notifications;
-using Application.Queries.UserQueries;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,9 +25,10 @@ public class UsersController : ControllerBase
     [HttpGet(Name = "GetUsers")]
     public async Task<IActionResult> GetUsersAsync()
     {
-        var users = await _sender.Send(new GetUsersQuery(TrackChanges: false));
+        //var users = await _sender.Send(new GetUsersQuery(TrackChanges: false));
 
-        return Ok(users);
+        //return Ok(users);
+        return Ok();
     }
 
     /// <summary>
@@ -42,9 +39,10 @@ public class UsersController : ControllerBase
     [HttpGet("{id:int}", Name = "UserById")]
     public async Task<IActionResult> GetUserAsync(int id)
     {
-        var user = await _sender.Send(new GetUserQuery(id, TrackChanges: false));
+        //var user = await _sender.Send(new GetUserQuery(id, TrackChanges: false));
 
-        return Ok(user);
+        //return Ok(user);
+        return Ok();
     }
 
     /// <summary>
@@ -57,9 +55,10 @@ public class UsersController : ControllerBase
     [HttpGet("collection/{ids}", Name = "UserCollection")]
     public async Task<IActionResult> GetUserCollectionAsync(string ids)
     {
-        var users = await _sender.Send(new GetUsersByIdsQuery(ids, TrackChanges: false));
+        //var users = await _sender.Send(new GetUsersByIdsQuery(ids, TrackChanges: false));
 
-        return Ok(users);
+        //return Ok(users);
+        return Ok();
     }
 
 
@@ -72,9 +71,10 @@ public class UsersController : ControllerBase
 #pragma warning restore CS1572 // XML comment has a param tag, but there is no parameter by that name
     public async Task<IActionResult> CreateUserAsync([FromBody] UserForCreationDto userToCreate)
     {
-        var user = await _sender.Send(new CreateUserCommand(userToCreate));
+        //var user = await _sender.Send(new CreateUserCommand(userToCreate));
 
-        return CreatedAtRoute("UserById", new { userId = user.Id }, user);
+        //return CreatedAtRoute("UserById", new { userId = user.Id }, user);
+        return Ok();
     }
 
     /// <summary>
@@ -86,9 +86,10 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> CreateUserCollectionAsync
         ([FromBody] IEnumerable<UserForCreationDto> userCollection)
     {
-        var result = await _sender.Send(new CreateUserCollectionCommand(userCollection));
+        //var result = await _sender.Send(new CreateUserCollectionCommand(userCollection));
 
-        return CreatedAtRoute("UserCollection", new { result.ids }, result.users);
+        //return CreatedAtRoute("UserCollection", new { result.ids }, result.users);
+        return Ok();
     }
 
     /// <summary>
@@ -100,12 +101,13 @@ public class UsersController : ControllerBase
     [HttpPut("{id:int}")]
     public async Task<IActionResult> UpdateUserAsync(int id, UserForUpdateDto userForUpdateDto)
     {
-        if (userForUpdateDto is null)
-            return BadRequest("UserForUpdateDto object is null");
+        //if (userForUpdateDto is null)
+        //    return BadRequest("UserForUpdateDto object is null");
 
-        await _sender.Send(new UpdateUserCommand(id, userForUpdateDto, TrackChanges: true));
+        //await _sender.Send(new UpdateUserCommand(id, userForUpdateDto, TrackChanges: true));
 
-        return NoContent();
+        //return NoContent();
+        return Ok();
     }
 
     /// <summary>
@@ -116,7 +118,7 @@ public class UsersController : ControllerBase
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteUserAsync(int userId)
     {
-        await _publisher.Publish(new UserDeletedNotification(userId, TrackChanges: false));
+        //await _publisher.Publish(new UserDeletedNotification(userId, TrackChanges: false));
 
         return NoContent();
     }
@@ -130,19 +132,19 @@ public class UsersController : ControllerBase
     [HttpPatch("{id:int}")]
     public async Task<IActionResult> PartiallyUpdateUserAsync(int id, [FromBody] JsonPatchDocument<UserForUpdateDto> patchDoc)
     {
-        if (patchDoc is null)
-            return BadRequest("patchDoc object sent from client is null.");
+        //if (patchDoc is null)
+        //    return BadRequest("patchDoc object sent from client is null.");
 
-        var result = await _sender.Send(new GetUserForPatchQuery(id, TrackChanges: false));
+        //var result = await _sender.Send(new GetUserForPatchQuery(id, TrackChanges: false));
 
-        patchDoc.ApplyTo(result.userToPatch, ModelState);
+        //patchDoc.ApplyTo(result.userToPatch, ModelState);
 
-        TryValidateModel(result.userToPatch);
+        //TryValidateModel(result.userToPatch);
 
-        if (!ModelState.IsValid)
-            return UnprocessableEntity(ModelState);
+        //if (!ModelState.IsValid)
+        //    return UnprocessableEntity(ModelState);
 
-        await _sender.Send(new UpdateUserCommand(id, result.userToPatch, TrackChanges: false));
+        //await _sender.Send(new UpdateUserCommand(id, result.userToPatch, TrackChanges: false));
 
         return NoContent();
     }

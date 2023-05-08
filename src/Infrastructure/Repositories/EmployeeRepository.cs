@@ -11,6 +11,8 @@ public sealed class EmployeeRepository : RepositoryBase<Employee>, IEmployeeRepo
 
     public async Task<PagedList<Employee>> GetEmployeesForCompanyAsync(int companyId, EmployeeParameters employeeParameters, bool trackChanges)
     {
+        employeeParameters.SearchTerm ??= string.Empty;
+
         var employees = await FindByCondition(e => e.CompanyId.Equals(companyId), trackChanges)
             .FilterEmployees(employeeParameters.MinAge, employeeParameters.MaxAge)
             .Search(employeeParameters.SearchTerm)

@@ -8,7 +8,7 @@ public sealed class CreateCompanyCollectionCommandValidator : AbstractValidator<
 {
 	public CreateCompanyCollectionCommandValidator()
 	{
-		RuleForEach(c => c.companyCollection).ChildRules(c =>
+		RuleForEach(c => c.CompanyCollection).ChildRules(c =>
 		{
             c.RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required.");
             c.RuleFor(x => x.Name).MaximumLength(60).WithMessage("Name is too long (60 chars max).");
@@ -20,7 +20,7 @@ public sealed class CreateCompanyCollectionCommandValidator : AbstractValidator<
 
 	public override ValidationResult Validate(ValidationContext<CreateCompanyCollectionCommand> context)
 	{
-		return context.InstanceToValidate.companyCollection is null
+		return context.InstanceToValidate.CompanyCollection is null
 			? new ValidationResult(new[] { new ValidationFailure("CompanyForCreationDto",
 				"CompanyForCreationDto object is null") })
 			: base.Validate(context);

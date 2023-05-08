@@ -2,4 +2,4 @@
 
 namespace Application.Queries.Companies;
 
-public sealed record GetCompaniesByIdsQuery(string ids, bool TrackChanges) : IRequest<IEnumerable<CompanyDto>>;
+public sealed record GetCompaniesByIdsQuery(string Ids, bool TrackChanges) : IRequest<IEnumerable<CompanyDto>>;

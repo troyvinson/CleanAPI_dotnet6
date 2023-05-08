@@ -1,6 +1,7 @@
 ﻿using Application.Commands.Companies;
 using Application.Notifications;
 using Application.Queries.Companies;
+using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
@@ -69,7 +70,6 @@ public class CompaniesController : ControllerBase
     /// <param name="companyToCreate"></param>
     /// <returns>A newly created company</returns>
     [HttpPost(Name = "CreateCompany")]
-#pragma warning restore CS1572 // XML comment has a param tag, but there is no parameter by that name
     public async Task<IActionResult> CreateCompanyAsync([FromBody] CompanyForCreationDto companyToCreate)
     {
         var company = await _sender.Send(new CreateCompanyCommand(companyToCreate));
@@ -86,9 +86,9 @@ public class CompaniesController : ControllerBase
     public async Task<IActionResult> CreateCompanyCollectionAsync
         ([FromBody] IEnumerable<CompanyForCreationDto> companyCollection)
     {
-        var result = await _sender.Send(new CreateCompanyCollectionCommand(companyCollection));
+        (IEnumerable<CompanyDto> companies, string ids) = await _sender.Send(new CreateCompanyCollectionCommand(companyCollection));
 
-        return CreatedAtRoute("CompanyCollection", new { result.ids }, result.companies);
+        return CreatedAtRoute("CompanyCollection", new { ids }, companies);
     }
 
     /// <summary>
@@ -133,16 +133,16 @@ public class CompaniesController : ControllerBase
         if (patchDoc is null)
             return BadRequest("patchDoc object sent from client is null.");
 
-        var result = await _sender.Send(new GetCompanyForPatchQuery(id, TrackChanges: false));
+        (CompanyForUpdateDto companyToPatch, _) = await _sender.Send(new GetCompanyForPatchQuery(id, TrackChanges: false));
 
-        patchDoc.ApplyTo(result.companyToPatch, ModelState);
+        patchDoc.ApplyTo(companyToPatch, ModelState);
 
-        TryValidateModel(result.companyToPatch);
+        TryValidateModel(companyToPatch);
 
         if (!ModelState.IsValid)
             return UnprocessableEntity(ModelState);
 
-        await _sender.Send(new UpdateCompanyCommand(id, result.companyToPatch, TrackChanges: false));
+        await _sender.Send(new UpdateCompanyCommand(id, companyToPatch, TrackChanges: false));
 
         return NoContent();
     }

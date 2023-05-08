@@ -22,7 +22,7 @@ internal sealed class CreateCompanyCollectionHandler : IRequestHandler<CreateCom
         if (request is null)
             throw new CompanyCollectionBadRequest();
 
-        var companyEntities = _mapper.Map<IEnumerable<Company>>(request.companyCollection);
+        var companyEntities = _mapper.Map<IEnumerable<Company>>(request.CompanyCollection);
         foreach (var company in companyEntities)
         {
             _repository.Company.CreateCompany(company);

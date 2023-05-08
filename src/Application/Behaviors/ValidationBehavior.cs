@@ -22,10 +22,11 @@ public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<
 		var errorsDictionary = _validators
 			.Select(x => x.Validate(context))
 			.SelectMany(x => x.Errors)
-			.Where(x => x != null)
+            .Where(x => x != null)
 			.GroupBy(
-				x => x.PropertyName.Substring(x.PropertyName.IndexOf('.') + 1),
-				x => x.ErrorMessage,
+                //x => x.PropertyName.Substring(x.PropertyName.IndexOf('.') + 1),
+                x => x.PropertyName[(x.PropertyName.IndexOf('.') + 1)..],
+                x => x.ErrorMessage,
 				(propertyName, errorMessages) => new
 				{
 					Key = propertyName,

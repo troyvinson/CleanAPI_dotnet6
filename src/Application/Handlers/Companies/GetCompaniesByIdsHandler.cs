@@ -21,7 +21,7 @@ internal sealed class GetCompaniesByIdsHandler : IRequestHandler<GetCompaniesByI
         if (request is null)
             throw new IdParametersBadRequestException();
 
-        var ids = request.ids.Split(',').Select(id => int.Parse(id)).ToList();
+        var ids = request.Ids.Split(',').Select(id => int.Parse(id)).ToList();
 
         var companyEntities = await _repository.Company.GetCompaniesByIdsAsync(ids, request.TrackChanges);
         if (ids.Count() != companyEntities.Count())

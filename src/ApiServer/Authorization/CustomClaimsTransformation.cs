@@ -7,10 +7,9 @@ public class CustomClaimsTransformation : IClaimsTransformation
 {
     public Task<ClaimsPrincipal> TransformAsync(ClaimsPrincipal principal)
     {
-        ClaimsIdentity claimsIdentity = new ClaimsIdentity();
+        ClaimsIdentity claimsIdentity = new();
 
         //get roles from the db
-        var user = principal.Identity.Name;
 
 
         if (!principal.HasClaim(claim => claim.Type == ClaimTypes.Role))

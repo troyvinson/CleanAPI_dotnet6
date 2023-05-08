@@ -3,23 +3,43 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities;
 
-public class Employee
+public class Employee 
 {
     [Column("EmployeeId")]
     public int Id { get; set; }
 
-    [Required(ErrorMessage = "Employee name is a required field.")]
-    [MaxLength(30, ErrorMessage = "Maximum length for the Name is 30 characters.")]
-    public string? Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "Age is a required field.")]
     public int Age { get; set; }
 
-    [Required(ErrorMessage = "Position is a required field.")]
-    [MaxLength(20, ErrorMessage = "Maximum length for the Position is 20 characters.")]
-    public string? Position { get; set; }
+    public string Position { get; set; } = string.Empty;
 
     [ForeignKey(nameof(Company))]
     public int CompanyId { get; set; }
     public Company? Company { get; set; }
+
+
+    public override string ToString()
+    {
+        return "Employee " + Id;
+    }
+
+    protected bool Equals(Employee other)
+    {
+        return Id.Equals(other.Id);
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj is null) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        if (obj.GetType() != this.GetType()) return false;
+        return Equals((Employee)obj);
+    }
+
+    public override int GetHashCode()
+    {
+        return Id.GetHashCode();
+    }
+
 }

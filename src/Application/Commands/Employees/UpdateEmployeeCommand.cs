@@ -3,4 +3,4 @@
 namespace Application.Commands.Employees;
 
 public sealed record UpdateEmployeeCommand
-    (int companyId, int employeeyId, EmployeeForUpdateDto Employee, bool companyTrackChanges, bool employeeTrackChanges) : IRequest<Unit>;
+    (int CompanyId, int EmployeeyId, EmployeeForUpdateDto Employee, bool CompanyTrackChanges, bool EmployeeTrackChanges) : IRequest<Unit>;

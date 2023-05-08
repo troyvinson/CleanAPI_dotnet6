@@ -20,7 +20,7 @@ internal sealed class CreateEmployeeHandler : IRequestHandler<CreateEmployeeComm
     {
         var employeeEntity = _mapper.Map<Employee>(request.Employee);
 
-        _repository.Employee.CreateEmployeeForCompany(request.companyId, employeeEntity);
+        _repository.Employee.CreateEmployeeForCompany(request.CompanyId, employeeEntity);
         await _repository.SaveAsync();
 
         var employeeToReturn = _mapper.Map<EmployeeDto>(employeeEntity);
