@@ -2,7 +2,7 @@
 
 namespace Infrastructure.Repositories;
 
-internal sealed class UserRepository : RepositoryBase<User>, IUserRepository
+public sealed class UserRepository : RepositoryBase<User>, IUserRepository
 {
     public UserRepository(RepositoryContext repositoryContext)
         : base(repositoryContext)

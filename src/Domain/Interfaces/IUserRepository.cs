@@ -3,7 +3,7 @@ using Domain.RequestFeatures;
 
 namespace Domain.Interfaces;
 
-internal interface IUserRoleRepository 
+public interface IUserRepository 
 {
     Task<IEnumerable<User>> GetAllUsersAsync(bool trackChanges);
     Task<User?> GetUserByIdAsync(int userId, bool trackChanges);
