@@ -1,5 +1,5 @@
 ﻿using MediatR;
 
-namespace Application.Queries.CompanyQueries;
+namespace Application.Queries.Companies;
 
 public sealed record GetCompaniesQuery(bool TrackChanges) : IRequest<IEnumerable<CompanyDto>>;

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Application.Commands.CompanyCommands;
+namespace Application.Commands.Companies;
 
 public sealed record UpdateCompanyCommand
     (int Id, CompanyForUpdateDto Company, bool TrackChanges) : IRequest<Unit>;

@@ -1,4 +1,4 @@
-﻿using Application.Commands.CompanyCommands;
+﻿using Application.Commands.Companies;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Exceptions;

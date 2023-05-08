@@ -1,4 +1,4 @@
-﻿using Application.Commands.EmployeeCommands;
+﻿using Application.Commands.Employees;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;

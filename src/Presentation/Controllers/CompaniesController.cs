@@ -1,6 +1,6 @@
-﻿using Application.Commands.CompanyCommands;
+﻿using Application.Commands.Companies;
 using Application.Notifications;
-using Application.Queries.CompanyQueries;
+using Application.Queries.Companies;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;

@@ -1,5 +1,5 @@
-﻿using Application.Commands.EmployeeCommands;
-using Application.Queries.EmployeeQueries;
+﻿using Application.Commands.Employees;
+using Application.Queries.Employees;
 using Domain.RequestFeatures;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
