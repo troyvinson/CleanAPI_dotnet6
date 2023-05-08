@@ -12,7 +12,7 @@ internal sealed class EmailHandler : INotificationHandler<CompanyDeletedNotifica
     public async Task Handle(CompanyDeletedNotification notification, CancellationToken cancellationToken)
     {
         // Email configureation here
-        _logger.LogWarn($"Delete action for the company with id: {notification.Id} has occurred.");
+        _logger.LogWarn($"Delete action for the company with id: {notification.CompanyId} has occurred.");
 
         await Task.CompletedTask;
     }

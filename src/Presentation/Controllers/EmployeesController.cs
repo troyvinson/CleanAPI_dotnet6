@@ -137,4 +137,17 @@ public class EmployeesController : ControllerBase
 
         return NoContent();
     }
+
+    /// <summary>
+    /// Get available HTTP Verbs
+    /// </summary>
+    /// <returns></returns>
+    [HttpOptions]
+    public IActionResult GetOptions()
+    {
+        Response.Headers.Add("Allow", "GET, OPTIONS, POST, PUT, PATCH, DELETE");
+        return Ok();
+    }
+
+
 }

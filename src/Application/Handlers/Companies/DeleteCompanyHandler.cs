@@ -12,9 +12,9 @@ internal sealed class DeleteCompanyHandler : INotificationHandler<CompanyDeleted
 
     public async Task Handle(CompanyDeletedNotification notification, CancellationToken cancellationToken)
     {
-        var company = await _repository.Company.GetCompanyByIdAsync(notification.Id, notification.TrackChanges);
+        var company = await _repository.Company.GetCompanyByIdAsync(notification.CompanyId, notification.TrackChanges);
         if (company is null)
-            throw new CompanyNotFoundException(notification.Id);
+            throw new CompanyNotFoundException(notification.CompanyId);
 
         _repository.Company.DeleteCompany(company);
         await _repository.SaveAsync();

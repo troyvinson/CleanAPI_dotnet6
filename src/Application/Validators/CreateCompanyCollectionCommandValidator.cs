@@ -1,4 +1,5 @@
 ﻿using Application.Commands.Companies;
+using Application.Commands.Users;
 using FluentValidation;
 using FluentValidation.Results;
 

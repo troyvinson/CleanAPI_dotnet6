@@ -2,4 +2,4 @@
 
 namespace Application.Commands.Employees;
 
-public record DeleteEmployeeCommand(int companyId, int employeeId, bool TrackChanges) : IRequest;
+public record DeleteEmployeeCommand(int CompanyId, int EmployeeId, bool TrackChanges) : IRequest;

@@ -152,7 +152,7 @@ public class CompaniesController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpOptions]
-    public IActionResult GetCompaniesOptions()
+    public IActionResult GetOptions()
     {
         Response.Headers.Add("Allow", "GET, OPTIONS, POST, PUT, PATCH, DELETE");
         return Ok();

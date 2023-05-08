@@ -1,4 +1,5 @@
 ﻿using Application.Queries.Companies;
+using Application.Queries.Users;
 using AutoMapper;
 using MediatR;
 

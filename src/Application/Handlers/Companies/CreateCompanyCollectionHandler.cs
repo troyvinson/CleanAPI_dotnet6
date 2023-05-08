@@ -1,6 +1,5 @@
 ﻿using Application.Commands.Companies;
 using AutoMapper;
-using Domain.Entities;
 using Domain.Exceptions;
 using MediatR;
 

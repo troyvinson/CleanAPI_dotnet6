@@ -2,4 +2,4 @@
 
 namespace Application.Commands.Companies;
 
-public record DeleteCompanyCommand(int Id, bool TrackChanges) : IRequest;
+public record DeleteCompanyCommand(int CompanyId, bool TrackChanges) : IRequest;
