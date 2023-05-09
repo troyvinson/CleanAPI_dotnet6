@@ -1,12 +1,16 @@
-﻿using Domain.Interfaces;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities;
 
-public class Role : ISoftDeletable
+public class Role
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
     public string? Description { get; set; }
-    public bool IsDeleted { get; set; }
+
+    [ForeignKey(nameof(RoleType))]
+    public int RoleTypeId { get; set; }
+    public RoleType RoleType { get; set; } = null!;
+
 }
 

@@ -27,8 +27,8 @@ internal sealed class GetUsersByIdsHandler : IRequestHandler<GetUsersByIdsQuery,
         if (ids.Count() != userEntities.Count())
             throw new CollectionByIdsBadRequestException();
 
-        var companiesToReturn = _mapper.Map<IEnumerable<UserDto>>(userEntities);
+        var usersToReturn = _mapper.Map<IEnumerable<UserDto>>(userEntities);
 
-        return companiesToReturn;
+        return usersToReturn;
     }
 }

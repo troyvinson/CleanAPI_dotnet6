@@ -1,6 +1,5 @@
 ﻿using Application.Commands.Employees;
 using Application.Queries.Employees;
-using Domain.Entities;
 using Domain.RequestFeatures;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -123,7 +122,7 @@ public class EmployeesController : ControllerBase
     {
         if (patchDoc is null)
             return BadRequest("patchDoc object sent from client is null.");
-        
+
         (EmployeeForUpdateDto employeeToPatch, _) = await _sender.Send(new GetEmployeeForPatchQuery(companyId, id, CompanyTrackChanges: false, EmployeeTrackChanges: true));
 
         patchDoc.ApplyTo(employeeToPatch, ModelState);

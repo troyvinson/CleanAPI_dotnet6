@@ -12,9 +12,8 @@ internal sealed class DeleteUserHandler : INotificationHandler<UserDeletedNotifi
 
     public async Task Handle(UserDeletedNotification notification, CancellationToken cancellationToken)
     {
-        var user = await _repository.User.GetUserByIdAsync(notification.UserId, notification.TrackChanges);
-        if (user is null)
-            throw new UserNotFoundException(notification.UserId);
+        var user = await _repository.User.GetUserByIdAsync(notification.UserId, notification.TrackChanges)
+            ?? throw new NotFoundException($"User identified by '{notification.UserId}' was not found in the database.");
 
         _repository.User.DeleteUser(user);
         await _repository.SaveAsync();

@@ -1,4 +1,5 @@
 ﻿using Application.Queries.Employees;
+using Application.Queries.Members;
 using AutoMapper;
 using Domain.Exceptions;
 using Domain.RequestFeatures;

@@ -2,7 +2,7 @@
 
 /// <summary>
 ///  Creates instances of defined repository classes and registers them inside 
-///  the dependency injection container at once by registering just this class.
+///  the dependency injection container all at once by registering just this class.
 /// </summary>
 /// <example>
 /// Adding to DI container in Startup.cs:
@@ -17,6 +17,9 @@ public sealed class RepositoryManager : IRepositoryManager
     private readonly Lazy<ICompanyRepository> _companyRepository;
     private readonly Lazy<IEmployeeRepository> _employeeRepository;
     private readonly Lazy<IUserRepository> _userRepository;
+    private readonly Lazy<IRoleRepository> _roleRepository;
+    private readonly Lazy<ITenantRepository> _tenantRepository;
+    private readonly Lazy<IMemberRepository> _memberRepository;
 
     public RepositoryManager(RepositoryContext repositoryContext)
     {
@@ -24,14 +27,18 @@ public sealed class RepositoryManager : IRepositoryManager
         _companyRepository = new Lazy<ICompanyRepository>(() => new CompanyRepository(repositoryContext));
         _employeeRepository = new Lazy<IEmployeeRepository>(() => new EmployeeRepository(repositoryContext));
         _userRepository = new Lazy<IUserRepository>(() => new UserRepository(repositoryContext));
+        _roleRepository = new Lazy<IRoleRepository>(() => new RoleRepository(repositoryContext));
+        _memberRepository = new Lazy<IMemberRepository>(() => new MemberRepository(repositoryContext));
+        _tenantRepository = new Lazy<ITenantRepository>(() => new TenantRepository(repositoryContext));
     }
 
     // Provide access to the defined repository class
     public ICompanyRepository Company => _companyRepository.Value;
     public IEmployeeRepository Employee => _employeeRepository.Value;
     public IUserRepository User => _userRepository.Value;
-    public IRoleRepository Role => throw new NotImplementedException();
-    public ITenantRepository Tenant => throw new NotImplementedException();
+    public IRoleRepository Role => _roleRepository.Value;
+    public ITenantRepository Tenant => _tenantRepository.Value;
+    public IMemberRepository Member => _memberRepository.Value;
 
     // Saves changes to the database
     public async Task SaveAsync() => await _repositoryContext.SaveChangesAsync();

@@ -6,8 +6,11 @@ public class Tenant : ISoftDeletable
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
+
+
+    public bool IsEnabled { get; set; }
     public bool IsDeleted { get; set; }
 
 
-    public ICollection<UserTenant> UserTenants { get; set; } = new List<UserTenant>();
+    public ICollection<Member> Members { get; set; } = new List<Member>();
 }

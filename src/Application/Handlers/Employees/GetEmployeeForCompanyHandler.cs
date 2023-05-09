@@ -1,4 +1,5 @@
 ﻿using Application.Queries.Employees;
+using Application.Queries.Members;
 using AutoMapper;
 using Domain.Exceptions;
 using MediatR;
@@ -18,9 +19,8 @@ internal sealed class GetEmployeeForCompanyHandler : IRequestHandler<GetEmployee
 
     public async Task<EmployeeDto> Handle(GetEmployeeForCompanyQuery request, CancellationToken cancellationToken)
     {
-        var employee = await _repository.Employee.GetEmployeeForCompanyAsync(request.CompanyId, request.EmployeeId, request.TrackChanges);
-        if (employee is null)
-            throw new EmployeeNotFoundException(request.EmployeeId, request.CompanyId);
+        var employee = await _repository.Employee.GetEmployeeForCompanyAsync(request.CompanyId, request.EmployeeId, request.TrackChanges) 
+            ?? throw new EmployeeNotFoundException(request.EmployeeId, request.CompanyId);
 
         var employeeDto = _mapper.Map<EmployeeDto>(employee);
 

@@ -19,7 +19,7 @@ public class RepositoryContext : DbContext
     public DbSet<Tenant> Tenants { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Role> Roles { get; set; }
-    public DbSet<UserTenant> UserTenants { get; set; }
+    public DbSet<Member> Members { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -29,7 +29,7 @@ public class RepositoryContext : DbContext
         modelBuilder.ApplyConfiguration(new RoleConfiguration());
         modelBuilder.ApplyConfiguration(new TenantConfiguration());
         modelBuilder.ApplyConfiguration(new UserConfiguration());
-        modelBuilder.ApplyConfiguration(new UserTenantConfiguration());
+        modelBuilder.ApplyConfiguration(new MemberConfiguration());
 
 
     }

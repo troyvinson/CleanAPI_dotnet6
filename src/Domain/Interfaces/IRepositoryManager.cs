@@ -7,6 +7,7 @@ public interface IRepositoryManager
     IUserRepository User { get; }
     IRoleRepository Role { get; }
     ITenantRepository Tenant { get; }
+    IMemberRepository Member { get; }
 
     Task SaveAsync();
 }

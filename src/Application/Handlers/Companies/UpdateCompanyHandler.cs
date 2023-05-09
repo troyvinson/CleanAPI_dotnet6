@@ -18,9 +18,8 @@ internal sealed class UpdateCompanyHandler : IRequestHandler<UpdateCompanyComman
 
     public async Task<Unit> Handle(UpdateCompanyCommand request, CancellationToken cancellationToken)
     {
-        var companyEntity = await _repository.Company.GetCompanyByIdAsync(request.CompanyId, request.TrackChanges);
-        if (companyEntity is null)
-            throw new CompanyNotFoundException(request.CompanyId);
+        var companyEntity = await _repository.Company.GetCompanyByIdAsync(request.CompanyId, request.TrackChanges) 
+            ?? throw new CompanyNotFoundException(request.CompanyId);
 
         _mapper.Map(request.Company, companyEntity);
         await _repository.SaveAsync();

@@ -19,7 +19,7 @@ internal sealed class CreateUserCollectionHandler : IRequestHandler<CreateUserCo
     public async Task<(IEnumerable<UserDto> users, string ids)> Handle(CreateUserCollectionCommand request, CancellationToken cancellationToken)
     {
         if (request is null)
-            throw new UserCollectionBadRequest();
+            throw new BadRequestException("User collection sent from client is null.");
 
         var userEntities = _mapper.Map<IEnumerable<User>>(request.UserCollection);
         foreach (var user in userEntities)

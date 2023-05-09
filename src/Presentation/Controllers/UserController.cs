@@ -68,7 +68,7 @@ public class UsersController : ControllerBase
     /// <param name="userToCreate"></param>
     /// <returns>A newly created user</returns>
     [HttpPost(Name = "CreateUser")]
-#pragma warning restore CS1572 // XML comment has a param tag, but there is no parameter by that name
+//#pragma warning restore CS1572 // XML comment has a param tag, but there is no parameter by that name
     public async Task<IActionResult> CreateUserAsync([FromBody] UserForCreationDto userToCreate)
     {
         var user = await _sender.Send(new CreateUserCommand(userToCreate));
@@ -85,9 +85,9 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> CreateUserCollectionAsync
         ([FromBody] IEnumerable<UserForCreationDto> userCollection)
     {
-        var result = await _sender.Send(new CreateUserCollectionCommand(userCollection));
+        (IEnumerable<UserDto> users, string ids) = await _sender.Send(new CreateUserCollectionCommand(userCollection));
 
-        return CreatedAtRoute("UserCollection", new { result.ids }, result.users);
+        return CreatedAtRoute("UserCollection", new { ids }, users);
     }
 
     /// <summary>
@@ -127,21 +127,23 @@ public class UsersController : ControllerBase
     /// <param name="patchDoc"></param>
     /// <returns></returns>
     [HttpPatch("{id:int}")]
-    public async Task<IActionResult> PartiallyUpdateUserAsync(int id, [FromBody] JsonPatchDocument<UserForUpdateDto> patchDoc)
+    public async Task<IActionResult> PartiallyUpdateUserAsync(int id, 
+        [FromBody] JsonPatchDocument<UserForUpdateDto> patchDoc)
     {
         if (patchDoc is null)
             return BadRequest("patchDoc object sent from client is null.");
 
-        var result = await _sender.Send(new GetUserForPatchQuery(id, TrackChanges: false));
+        (UserForUpdateDto userToPatch, _) = 
+            await _sender.Send(new GetUserForPatchQuery(id, TrackChanges: false));
 
-        patchDoc.ApplyTo(result.userToPatch, ModelState);
+        patchDoc.ApplyTo(userToPatch, ModelState);
 
-        TryValidateModel(result.userToPatch);
+        _ = TryValidateModel(userToPatch);
 
         if (!ModelState.IsValid)
             return UnprocessableEntity(ModelState);
 
-        await _sender.Send(new UpdateUserCommand(id, result.userToPatch, TrackChanges: false));
+        await _sender.Send(new UpdateUserCommand(id, userToPatch, TrackChanges: false));
 
         return NoContent();
     }

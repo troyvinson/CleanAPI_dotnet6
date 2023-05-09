@@ -2,8 +2,11 @@
 
 public class UserParameters : RequestParameters
 {
-    public UserParameters() => OrderBy = "username";
+    public UserParameters()
+    {
+        OrderBy = "username";
+    }
 
-	public string? SearchTerm { get; set; }
+    public string? SearchTerm { get; set; }
 
 }

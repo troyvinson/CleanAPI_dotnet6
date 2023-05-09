@@ -19,11 +19,8 @@
 
   <ItemGroup>
     <Folder Include="Commands\Roles\" />
-    <Folder Include="Commands\Tenants\" />
     <Folder Include="Handlers\Roles\" />
-    <Folder Include="Handlers\Tenants\" />
     <Folder Include="Queries\Roles\" />
-    <Folder Include="Queries\Tenants\" />
   </ItemGroup>
 
 </Project>

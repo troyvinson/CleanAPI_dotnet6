@@ -1,4 +1,5 @@
 ﻿using Application.Queries.Employees;
+using Application.Queries.Members;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Exceptions;
@@ -19,13 +20,11 @@ internal sealed class GetEmployeeForPatchHandler : IRequestHandler<GetEmployeeFo
 
     public async Task<(EmployeeForUpdateDto employeeToPatch, Employee employeeEntity)> Handle(GetEmployeeForPatchQuery request, CancellationToken cancellationToken)
     {
-        var company = await _repository.Company.GetCompanyByIdAsync(request.CompanyId, request.CompanyTrackChanges);
-        if (company is null)
-            throw new CompanyNotFoundException(request.CompanyId);
+        _ = await _repository.Company.GetCompanyByIdAsync(request.CompanyId, request.CompanyTrackChanges)
+            ?? throw new CompanyNotFoundException(request.CompanyId);
 
-        var employee = await _repository.Employee.GetEmployeeForCompanyAsync(request.CompanyId, request.EmployeeId, request.EmployeeTrackChanges);
-        if (employee is null)
-            throw new EmployeeNotFoundException(request.EmployeeId, request.CompanyId);
+        var employee = await _repository.Employee.GetEmployeeForCompanyAsync(request.CompanyId, request.EmployeeId, request.EmployeeTrackChanges) 
+            ?? throw new EmployeeNotFoundException(request.EmployeeId, request.CompanyId);
 
         var employeeToPatch = _mapper.Map<EmployeeForUpdateDto>(employee);
 

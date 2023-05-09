@@ -18,10 +18,9 @@ internal sealed class GetUserHandler : IRequestHandler<GetUserQuery, UserDto>
 
     public async Task<UserDto> Handle(GetUserQuery request, CancellationToken cancellationToken)
     {
-        var user = await _repository.User.GetUserByIdAsync(request.UserId, request.TrackChanges);
-        if (user is null)
-            throw new UserNotFoundException(request.UserId);
-
+        var user = await _repository.User.GetUserByIdAsync(request.UserId, request.TrackChanges)
+            ?? throw new NotFoundException($"User identified by '{request.UserId}' was not found in the database.");
+        
         var userDto = _mapper.Map<UserDto>(user);
 
         return userDto;

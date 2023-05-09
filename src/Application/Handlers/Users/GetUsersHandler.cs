@@ -18,7 +18,7 @@ internal sealed class GetUsersHandler : IRequestHandler<GetUsersQuery, IEnumerab
     public async Task<IEnumerable<UserDto>> Handle(GetUsersQuery request,
         CancellationToken cancellationToken)
     {
-        var users = await _repository.User.GetAllUsersAsync(request.TrackChanges);
+        var users = await _repository.User.GetUsersAsync(request.TrackChanges);
 
         var usersDto = _mapper.Map<IEnumerable<UserDto>>(users);
 

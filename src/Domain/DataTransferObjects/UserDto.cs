@@ -1,4 +1,6 @@
-﻿namespace Domain.DataTransferObjects;
+﻿using Domain.Entities;
+
+namespace Domain.DataTransferObjects;
 
 public record UserDto(int Id, string Username, string Email);
 
