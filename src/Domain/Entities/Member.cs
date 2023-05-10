@@ -12,11 +12,11 @@ public class Member : BaseEntity, ISoftDeletable
 
     [ForeignKey(nameof(Tenant))]
     public int TenantId { get; set; }
-    public Tenant Tenant { get; set; } = null!;
+    public Tenant Tenant { get; set; }
 
     [ForeignKey(nameof(User))]
     public int UserId { get; set; }
-    public User User { get; set; } = null!;
+    public User User { get; set; }
 
     public bool IsEnabled { get; set; }
     public bool IsDeleted { get; set; }
