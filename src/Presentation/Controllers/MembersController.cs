@@ -9,7 +9,6 @@ using System.Text.Json;
 
 namespace Presentation.Controllers;
 
-[Authorize]
 [Route("api/tenants/{tenantId:int}/members")]
 [ApiController]
 [ApiExplorerSettings(GroupName = "v1")]

@@ -1,5 +1,4 @@
-﻿using Domain.Entities;
-using Infrastructure.Configurations.Expressions;
+﻿using Infrastructure.Configurations.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

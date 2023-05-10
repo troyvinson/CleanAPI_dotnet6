@@ -1,3 +1,11 @@
 ﻿namespace Domain.DataTransferObjects;
 
-public record MemberDto(int Id, string Name, int Age, string Position);
+public record MemberDto
+{
+    public int Id { get; set; }
+    public string Position { get; set; }
+    public DateTime DateJoined { get; set; }
+    public int TenantId { get; set; }
+    public int UserId { get; set; }
+
+}

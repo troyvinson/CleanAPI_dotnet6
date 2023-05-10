@@ -1,10 +1,13 @@
-﻿namespace Domain.DataTransferObjects;
+﻿using Domain.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Domain.DataTransferObjects;
 
 public abstract record MemberForManipulationDto
 {
-    public string Name { get; init; }
+    public string Position { get; set; }
+    public DateTime DateJoined { get; set; }
+    public int TenantId { get; set; }
+    public int UserId { get; set; }
 
-    public int Age { get; init; }
-
-    public string Position { get; init; }
 }

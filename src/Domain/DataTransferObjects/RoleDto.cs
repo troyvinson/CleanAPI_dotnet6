@@ -1,4 +1,11 @@
 ﻿namespace Domain.DataTransferObjects;
 
-public record RoleDto(int Id, string Name, string Description, int TypeId, string TypeName);
+public record RoleDto
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public int TypeId { get; set; }
+    public string TypeName { get; set; }
 
+}

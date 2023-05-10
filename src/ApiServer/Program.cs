@@ -20,7 +20,7 @@ builder.Services.AddMediatR(cfg =>
 });
 
 builder.Services.ConfigureValidationBehavior();
-builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddAutoMapper(typeof(Application.AssemblyReference).Assembly);
 builder.Services.AddHttpContextAccessor();
 builder.Services.ConfigureSwagger();
 builder.Services.AddEndpointsApiExplorer();

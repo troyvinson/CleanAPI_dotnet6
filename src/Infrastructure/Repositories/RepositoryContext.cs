@@ -34,7 +34,6 @@ public class RepositoryContext : DbContext
         modelBuilder.ApplyConfiguration(new MemberConfiguration());
         modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
         modelBuilder.ApplyConfiguration(new MemberRoleConfiguration());
-
     }
 
     public override int SaveChanges()
