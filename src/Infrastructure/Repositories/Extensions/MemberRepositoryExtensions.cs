@@ -10,14 +10,14 @@ public static class MemberRepositoryExtensions
     /// <param name="members"></param>
     /// <param name="searchTerm"></param>
     /// <returns>A list of members matching the search term</returns>
-    public static IQueryable<Member> Search(this IQueryable<Member> members, string searchTerm)
+    public static IQueryable<Member> Search(this IQueryable<Member> members, string? searchTerm)
     {
         if (string.IsNullOrWhiteSpace(searchTerm))
             return members;
 
         var lowerCaseTerm = searchTerm.Trim().ToLower();
 
-        return members.Where(e => e.User.Username.ToLower().Contains(lowerCaseTerm));
+        return members.Where(e => e.User!.Username.ToLower().Contains(lowerCaseTerm));
     }
 
     /// <summary>
@@ -26,7 +26,7 @@ public static class MemberRepositoryExtensions
     /// <param name="members"></param>
     /// <param name="orderByQueryString"></param>
     /// <returns>A list of members ordered by the URL "orderBy" query parameter instruction</returns>
-    public static IQueryable<Member> Sort(this IQueryable<Member> members, string orderByQueryString)
+    public static IQueryable<Member> Sort(this IQueryable<Member> members, string? orderByQueryString)
     {
         if (string.IsNullOrWhiteSpace(orderByQueryString))
             return members.OrderBy(e => e.Id);

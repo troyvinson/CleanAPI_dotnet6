@@ -6,12 +6,12 @@ public class Role : BaseEntity
 {
     [Column("RoleId")]
     public int Id { get; set; }
-    public string Name { get; set; }
-    public string Description { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string? Description { get; set; }
 
     [ForeignKey(nameof(RoleType))]
     public int RoleTypeId { get; set; }
-    public RoleType RoleType { get; set; }
+    public RoleType? RoleType { get; set; }
 
 }
 

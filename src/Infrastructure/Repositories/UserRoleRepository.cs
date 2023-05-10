@@ -10,7 +10,7 @@ public sealed class UserRoleRepository : RepositoryBase<UserRole>, IUserRoleRepo
 
     public async Task<IEnumerable<UserRole>> GetUserRolesAsync(bool trackChanges) =>
         await FindAll(trackChanges)
-        .OrderBy(u => u.Role.RoleType.Name == "UserRole")
+        .OrderBy(u => u.Role!.RoleType!.Name == "UserRole")
         .ToListAsync();
 
     public void CreateUserRole(UserRole userRole) => base.Create(userRole);

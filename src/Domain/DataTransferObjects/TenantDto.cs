@@ -3,8 +3,8 @@
 public record TenantDto
 {
     public int Id { get; set; }
-    public string Name { get; set; }
-    public bool IsEnabled { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public bool IsEnabled { get; set; } = true;
 }
 
 

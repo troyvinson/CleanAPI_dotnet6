@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers;
 
+[ApiExplorerSettings(GroupName = "v1", IgnoreApi = true)]
 [Route("api/companies")]
 [ApiController]
-[ApiExplorerSettings(GroupName = "v1")]
 public class CompaniesController : ControllerBase
 {
     private readonly ISender _sender;

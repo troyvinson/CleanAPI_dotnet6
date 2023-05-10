@@ -17,7 +17,7 @@ public sealed class MemberRepository : RepositoryBase<Member>, IMemberRepository
 
         var members = await FindByCondition(e => e.TenantId.Equals(tenantId), trackChanges)
             .Search(memberParameters.SearchTerm)
-            .OrderBy(e => e.Id)
+            .Sort(memberParameters.OrderBy)
             .ToListAsync();
 
         return PagedList<Member>

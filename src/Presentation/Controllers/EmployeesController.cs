@@ -9,10 +9,9 @@ using System.Text.Json;
 
 namespace Presentation.Controllers;
 
-[Authorize]
+[ApiExplorerSettings(GroupName = "v1", IgnoreApi = true)]
 [Route("api/companies/{companyId:int}/employees")]
 [ApiController]
-[ApiExplorerSettings(GroupName = "v1")]
 public class EmployeesController : ControllerBase
 {
     private readonly ISender _sender;

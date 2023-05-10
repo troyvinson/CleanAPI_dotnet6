@@ -8,10 +8,12 @@ public sealed class MemberRoleRepository : RepositoryBase<MemberRole>, IMemberRo
     {
     }
 
-    public async Task<IEnumerable<MemberRole>> GetMemberRolesAsync(bool trackChanges) =>
-        await FindAll(trackChanges)
-        .OrderBy(u => u.Role.RoleType.Name == "MemberRole")
+    public async Task<IEnumerable<MemberRole>> GetMemberRolesAsync(bool trackChanges)
+    {
+        return await FindAll(trackChanges)
+        .OrderBy(u => u.Role!.RoleType!.Name == "MemberRole")
         .ToListAsync();
+    }
 
     public void CreateMemberRole(MemberRole MemberRole) => base.Create(MemberRole);
 

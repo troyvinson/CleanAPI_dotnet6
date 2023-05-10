@@ -22,7 +22,7 @@ public static class EmployeeRepositoryExtensions
     /// <param name="employees"></param>
     /// <param name="searchTerm"></param>
     /// <returns>A list of employees matching the search term</returns>
-    public static IQueryable<Employee> Search(this IQueryable<Employee> employees, string searchTerm)
+    public static IQueryable<Employee> Search(this IQueryable<Employee> employees, string? searchTerm)
     {
         if (string.IsNullOrWhiteSpace(searchTerm))
             return employees;
@@ -38,7 +38,7 @@ public static class EmployeeRepositoryExtensions
     /// <param name="employees"></param>
     /// <param name="orderByQueryString"></param>
     /// <returns>A list of employees ordered by the URL "orderBy" query parameter instruction</returns>
-    public static IQueryable<Employee> Sort(this IQueryable<Employee> employees, string orderByQueryString)
+    public static IQueryable<Employee> Sort(this IQueryable<Employee> employees, string? orderByQueryString)
     {
         if (string.IsNullOrWhiteSpace(orderByQueryString))
             return employees.OrderBy(e => e.Id);

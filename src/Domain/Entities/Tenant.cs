@@ -13,5 +13,5 @@ public class Tenant : BaseEntity, ISoftDeletable
     public bool IsDeleted { get; set; }
 
 
-    public ICollection<Member> Members { get; set; } = new List<Member>();
+    public ICollection<Member>? Members { get; set; }
 }
