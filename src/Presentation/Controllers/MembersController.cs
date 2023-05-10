@@ -10,7 +10,7 @@ using System.Text.Json;
 namespace Presentation.Controllers;
 
 [Authorize]
-[Route("api/companies/{tenantId:int}/members")]
+[Route("api/tenants/{tenantId:int}/members")]
 [ApiController]
 [ApiExplorerSettings(GroupName = "v1")]
 public class MembersController : ControllerBase

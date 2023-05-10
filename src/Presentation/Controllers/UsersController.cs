@@ -68,7 +68,7 @@ public class UsersController : ControllerBase
     /// <param name="userToCreate"></param>
     /// <returns>A newly created user</returns>
     [HttpPost(Name = "CreateUser")]
-//#pragma warning restore CS1572 // XML comment has a param tag, but there is no parameter by that name
+    //#pragma warning restore CS1572 // XML comment has a param tag, but there is no parameter by that name
     public async Task<IActionResult> CreateUserAsync([FromBody] UserForCreationDto userToCreate)
     {
         var user = await _sender.Send(new CreateUserCommand(userToCreate));
@@ -127,13 +127,13 @@ public class UsersController : ControllerBase
     /// <param name="patchDoc"></param>
     /// <returns></returns>
     [HttpPatch("{id:int}")]
-    public async Task<IActionResult> PartiallyUpdateUserAsync(int id, 
+    public async Task<IActionResult> PartiallyUpdateUserAsync(int id,
         [FromBody] JsonPatchDocument<UserForUpdateDto> patchDoc)
     {
         if (patchDoc is null)
             return BadRequest("patchDoc object sent from client is null.");
 
-        (UserForUpdateDto userToPatch, _) = 
+        (UserForUpdateDto userToPatch, _) =
             await _sender.Send(new GetUserForPatchQuery(id, TrackChanges: false));
 
         patchDoc.ApplyTo(userToPatch, ModelState);
