@@ -69,12 +69,12 @@ public static class ServiceExtensions
             var description = "API description. Arbitrary text in CommonMark or HTML.";
             s.SwaggerDoc("v1", new OpenApiInfo { Title = "Clean API V1", Version = "v1", Description = description });
             s.SwaggerDoc("v2", new OpenApiInfo { Title = "Clean API V2", Version = "v2", Description = description });
-            
+
             // Set the documentation path for the Swagger JSON and UI.
             var xmlFile = $"{typeof(Presentation.AssemblyReference).Assembly.GetName().Name}.xml";
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
             s.IncludeXmlComments(xmlPath);
-            
+
             // Include 'SecurityScheme' to use JWT Authentication
             var jwtSecurityScheme = new OpenApiSecurityScheme
             {

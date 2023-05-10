@@ -1,6 +1,5 @@
 ﻿using Application.Commands.Companies;
 using AutoMapper;
-using Domain.Entities;
 using MediatR;
 
 namespace Application.Handlers.Companies;

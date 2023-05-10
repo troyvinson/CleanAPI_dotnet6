@@ -1,7 +1,5 @@
 ﻿using Application.Queries.Employees;
-using Application.Queries.Members;
 using AutoMapper;
-using Domain.Entities;
 using Domain.Exceptions;
 using MediatR;
 
@@ -23,7 +21,7 @@ internal sealed class GetEmployeeForPatchHandler : IRequestHandler<GetEmployeeFo
         _ = await _repository.Company.GetCompanyByIdAsync(request.CompanyId, request.CompanyTrackChanges)
             ?? throw new CompanyNotFoundException(request.CompanyId);
 
-        var employee = await _repository.Employee.GetEmployeeForCompanyAsync(request.CompanyId, request.EmployeeId, request.EmployeeTrackChanges) 
+        var employee = await _repository.Employee.GetEmployeeForCompanyAsync(request.CompanyId, request.EmployeeId, request.EmployeeTrackChanges)
             ?? throw new EmployeeNotFoundException(request.EmployeeId, request.CompanyId);
 
         var employeeToPatch = _mapper.Map<EmployeeForUpdateDto>(employee);

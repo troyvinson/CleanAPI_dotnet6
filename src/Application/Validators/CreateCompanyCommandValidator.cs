@@ -6,8 +6,8 @@ namespace Application.Validators;
 
 public sealed class CreateCompanyCommandValidator : AbstractValidator<CreateCompanyCommand>
 {
-	public CreateCompanyCommandValidator()
-	{
+    public CreateCompanyCommandValidator()
+    {
         RuleFor(x => x.Company.Name).NotEmpty().WithMessage("Name is required.");
         RuleFor(x => x.Company.Name).MaximumLength(60).WithMessage("Name is too long (60 chars max).");
         RuleFor(x => x.Company.Address).NotEmpty().WithMessage("Address is required.");
@@ -16,10 +16,10 @@ public sealed class CreateCompanyCommandValidator : AbstractValidator<CreateComp
     }
 
     public override ValidationResult Validate(ValidationContext<CreateCompanyCommand> context)
-	{
-		return context.InstanceToValidate.Company is null
-			? new ValidationResult(new[] { new ValidationFailure("CompanyForCreationDto",
-				"CompanyForCreationDto object is null") })
-			: base.Validate(context);
-	}
+    {
+        return context.InstanceToValidate.Company is null
+            ? new ValidationResult(new[] { new ValidationFailure("CompanyForCreationDto",
+                "CompanyForCreationDto object is null") })
+            : base.Validate(context);
+    }
 }

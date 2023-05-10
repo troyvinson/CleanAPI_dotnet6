@@ -1,5 +1,4 @@
 ﻿using Application.Queries.Companies;
-using Application.Queries.Tenants;
 using AutoMapper;
 using Domain.Exceptions;
 using MediatR;

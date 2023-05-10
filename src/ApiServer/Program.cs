@@ -1,6 +1,5 @@
 using ApiServer.Extensions;
 using Domain.Interfaces;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.HttpOverrides;
 using NLog;
 
@@ -16,7 +15,7 @@ builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.ConfigureAuthentication(builder.Configuration);
 
 builder.Services.AddMediatR(cfg =>
-{ 
+{
     cfg.RegisterServicesFromAssemblyContaining(typeof(Application.AssemblyReference));
 });
 
@@ -26,7 +25,8 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.ConfigureSwagger();
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddControllers(config => {
+builder.Services.AddControllers(config =>
+{
     config.RespectBrowserAcceptHeader = true;
     config.ReturnHttpNotAcceptable = true;
 })

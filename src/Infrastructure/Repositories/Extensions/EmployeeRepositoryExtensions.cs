@@ -1,5 +1,4 @@
 ﻿using System.Linq.Dynamic.Core;
-using Domain.Entities;
 
 namespace Infrastructure.Repositories.Extensions;
 
@@ -26,9 +25,9 @@ public static class EmployeeRepositoryExtensions
     public static IQueryable<Employee> Search(this IQueryable<Employee> employees, string searchTerm)
     {
         if (string.IsNullOrWhiteSpace(searchTerm))
-            return employees; 
+            return employees;
 
-        var lowerCaseTerm = searchTerm.Trim().ToLower(); 
+        var lowerCaseTerm = searchTerm.Trim().ToLower();
 
         return employees.Where(e => e.Name.ToLower().Contains(lowerCaseTerm));
     }

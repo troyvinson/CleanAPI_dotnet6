@@ -20,7 +20,7 @@ internal sealed class GetUserHandler : IRequestHandler<GetUserQuery, UserDto>
     {
         var user = await _repository.User.GetUserByIdAsync(request.UserId, request.TrackChanges)
             ?? throw new NotFoundException($"User identified by '{request.UserId}' was not found in the database.");
-        
+
         var userDto = _mapper.Map<UserDto>(user);
 
         return userDto;

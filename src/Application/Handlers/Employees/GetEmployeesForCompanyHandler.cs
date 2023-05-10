@@ -1,5 +1,4 @@
 ﻿using Application.Queries.Employees;
-using Application.Queries.Members;
 using AutoMapper;
 using Domain.Exceptions;
 using Domain.RequestFeatures;
@@ -23,7 +22,7 @@ internal sealed class GetEmployeesForCompanyHandler : IRequestHandler<GetEmploye
         if (request is null)
             throw new IdParametersBadRequestException();
 
-        if (!request.EmployeeParameters.ValidAgeRange) 
+        if (!request.EmployeeParameters.ValidAgeRange)
             throw new MaxAgeRangeBadRequestException();
 
         var company = await _repository.Company.GetCompanyByIdAsync(request.CompanyId, request.TrackChanges);

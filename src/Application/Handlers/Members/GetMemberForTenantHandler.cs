@@ -18,7 +18,7 @@ internal sealed class GetMemberForTenantHandler : IRequestHandler<GetMemberForTe
 
     public async Task<MemberDto> Handle(GetMemberForTenantQuery request, CancellationToken cancellationToken)
     {
-        var member = await _repository.Member.GetMemberForTenantAsync(request.TenantId, request.MemberId, request.TrackChanges) 
+        var member = await _repository.Member.GetMemberForTenantAsync(request.TenantId, request.MemberId, request.TrackChanges)
             ?? throw new NotFoundException($"Member ID: {request.MemberId} not found for Tenant ID: {request.TenantId}");
 
         var memberDto = _mapper.Map<MemberDto>(member);

@@ -1,9 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities;
 
-public class Employee 
+public class Employee
 {
     [Column("EmployeeId")]
     public int Id { get; set; }
@@ -16,7 +15,7 @@ public class Employee
 
     [ForeignKey(nameof(Company))]
     public int CompanyId { get; set; }
-    public Company? Company { get; set; }
+    public Company Company { get; set; }
 
 
     public override string ToString()
@@ -29,7 +28,7 @@ public class Employee
         return Id.Equals(other.Id);
     }
 
-    public override bool Equals(object? obj)
+    public override bool Equals(object obj)
     {
         if (obj is null) return false;
         if (ReferenceEquals(this, obj)) return true;

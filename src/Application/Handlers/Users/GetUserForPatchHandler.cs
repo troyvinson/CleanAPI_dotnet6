@@ -1,7 +1,5 @@
-﻿using Application.Queries.Companies;
-using Application.Queries.Users;
+﻿using Application.Queries.Users;
 using AutoMapper;
-using Domain.Entities;
 using Domain.Exceptions;
 using MediatR;
 
@@ -20,7 +18,7 @@ internal sealed class GetUserForPatchHandler : IRequestHandler<GetUserForPatchQu
 
     public async Task<(UserForUpdateDto userToPatch, User userEntity)> Handle(GetUserForPatchQuery request, CancellationToken cancellationToken)
     {
-        var user = await _repository.User.GetUserByIdAsync(request.UserId, request.TrackChanges) 
+        var user = await _repository.User.GetUserByIdAsync(request.UserId, request.TrackChanges)
             ?? throw new NotFoundException($"User identified by '{request.UserId}' was not found in the database.");
 
         var userToPatch = _mapper.Map<UserForUpdateDto>(user);

@@ -1,6 +1,6 @@
-﻿using Domain.Models;
-using Domain.Exceptions;
+﻿using Domain.Exceptions;
 using Domain.Interfaces;
+using Domain.Models;
 using Microsoft.AspNetCore.Diagnostics;
 using System.Text.Json;
 

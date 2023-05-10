@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities;
 
@@ -8,13 +7,13 @@ public class Company
     [Column("CompanyId")]
     public int Id { get; set; }
 
-    public string? Name { get; set; }
+    public string Name { get; set; }
 
-    public string? Address { get; set; }
+    public string Address { get; set; }
 
-    public string? Country { get; set; }
+    public string Country { get; set; }
 
-    public ICollection<Employee>? Employees { get; set; }
+    public ICollection<Employee> Employees { get; set; }
 
 
     public override string ToString()
@@ -27,7 +26,7 @@ public class Company
         return Id.Equals(other.Id);
     }
 
-    public override bool Equals(object? obj)
+    public override bool Equals(object obj)
     {
         if (obj is null) return false;
         if (ReferenceEquals(this, obj)) return true;

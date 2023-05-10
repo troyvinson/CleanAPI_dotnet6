@@ -18,7 +18,7 @@ internal sealed class UpdateTenantHandler : IRequestHandler<UpdateTenantCommand,
 
     public async Task<Unit> Handle(UpdateTenantCommand request, CancellationToken cancellationToken)
     {
-        var tenantEntity = await _repository.Tenant.GetTenantByIdAsync(request.TenantId, request.TrackChanges) 
+        var tenantEntity = await _repository.Tenant.GetTenantByIdAsync(request.TenantId, request.TrackChanges)
             ?? throw new NotFoundException($"Tenant ID: {request.TenantId} was not found.");
 
         _mapper.Map(request.Tenant, tenantEntity);

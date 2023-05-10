@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Domain.RequestFeatures;
+﻿namespace Domain.RequestFeatures;
 
 public class PagedList<T> : List<T>
 {

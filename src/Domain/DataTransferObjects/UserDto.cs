@@ -1,6 +1,3 @@
-﻿using Domain.Entities;
+﻿namespace Domain.DataTransferObjects;
 
-namespace Domain.DataTransferObjects;
-
-public record UserDto(int Id, string Username, string Email);
-
+public record UserDto(int Id, string GivenName, string Surname, string Username, string Email, string PhoneNumber);

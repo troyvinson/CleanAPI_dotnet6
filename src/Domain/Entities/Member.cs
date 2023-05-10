@@ -7,7 +7,7 @@ public class Member : BaseEntity, ISoftDeletable
 {
     [Column("MemberId")]
     public int Id { get; set; }
-    public string? Position { get; set; }
+    public string Position { get; set; }
     public DateTime DateJoined { get; set; } = DateTime.UtcNow;
 
     [ForeignKey(nameof(Tenant))]
