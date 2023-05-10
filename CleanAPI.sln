@@ -17,9 +17,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B0BC54CA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "tests\UnitTests\UnitTests.csproj", "{1F5560FC-284A-42A7-AFC3-0C9E1ACDA170}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "tests\IntegrationTests\IntegrationTests.csproj", "{BF6FFD34-62F2-42F1-9BB7-6EB7811B72F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationTests", "tests\IntegrationTests\IntegrationTests.csproj", "{BF6FFD34-62F2-42F1-9BB7-6EB7811B72F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcceptanceTests", "tests\AcceptanceTests\AcceptanceTests.csproj", "{33F8EE53-27F8-493E-B4D7-9409F2806B77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcceptanceTests", "tests\AcceptanceTests\AcceptanceTests.csproj", "{33F8EE53-27F8-493E-B4D7-9409F2806B77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataMigrations", "src\DataMigrations\DataMigrations.csproj", "{015D2B71-D799-4B47-8C13-DF8253CE8639}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{33F8EE53-27F8-493E-B4D7-9409F2806B77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33F8EE53-27F8-493E-B4D7-9409F2806B77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33F8EE53-27F8-493E-B4D7-9409F2806B77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{015D2B71-D799-4B47-8C13-DF8253CE8639}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{015D2B71-D799-4B47-8C13-DF8253CE8639}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{015D2B71-D799-4B47-8C13-DF8253CE8639}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{015D2B71-D799-4B47-8C13-DF8253CE8639}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
