@@ -21,5 +21,5 @@ public class Member : BaseEntity, ISoftDeletable
     public bool IsEnabled { get; set; }
     public bool IsDeleted { get; set; }
 
-
+    public virtual ICollection<MemberRole> MemberRoles { get; set; }
 }

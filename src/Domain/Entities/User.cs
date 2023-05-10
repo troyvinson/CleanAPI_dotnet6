@@ -17,6 +17,7 @@ public class User : BaseEntity, ISoftDeletable
     public bool IsEnabled { get; set; }
     public bool IsDeleted { get; set; }
 
+    public ICollection<UserRole> UserRoles { get; set; }
     public ICollection<Member>? Memberships { get; set; }
 }
 

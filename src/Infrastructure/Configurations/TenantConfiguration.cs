@@ -10,7 +10,8 @@ public class TenantConfiguration : IEntityTypeConfiguration<Tenant>
 {
     public void Configure(EntityTypeBuilder<Tenant> builder)
     {
-        builder.HasQueryFilter(SoftDeleteExpression.CreateFilterExpression(typeof(Tenant)));
+        builder.HasQueryFilter(t => !t.IsDeleted);
+        //builder.HasQueryFilter(SoftDeleteExpression.CreateFilterExpression(typeof(Tenant)));
 
         //builder.HasData
         //(

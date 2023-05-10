@@ -1,6 +1,6 @@
 ﻿namespace UnitTests;
 
-public class UserTester
+public class RoleTester
 {
 
 

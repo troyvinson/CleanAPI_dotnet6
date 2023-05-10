@@ -5,11 +5,25 @@ namespace Infrastructure.Configurations;
 
 public class RoleTypeConfiguration : IEntityTypeConfiguration<RoleType>
 {
-    public void Configure(EntityTypeBuilder<RoleType> modelBuilder)
+    public void Configure(EntityTypeBuilder<RoleType> builder)
     {
-        modelBuilder.HasData(
-            new Role { Id = 1, Name = "Application" },
-            new Role { Id = 2, Name = "Tenant" }
+        builder.HasData(
+            new RoleType 
+            { 
+                Id = 1, 
+                Name = "UserRole", 
+                Description = string.Empty,
+                CreatedDate = DateTimeOffset.Now,
+                UpdatedDate = DateTimeOffset.Now,
+            },
+            new RoleType 
+            { 
+                Id = 2, 
+                Name = "MemberRole", 
+                Description = string.Empty,
+                CreatedDate = DateTimeOffset.Now,
+                UpdatedDate = DateTimeOffset.Now,
+            }
         );
     }
 }

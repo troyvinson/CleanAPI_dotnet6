@@ -9,7 +9,8 @@ public class MemberConfiguration : IEntityTypeConfiguration<Member>
 {
     public void Configure(EntityTypeBuilder<Member> builder)
     {
-        builder.HasQueryFilter(SoftDeleteExpression.CreateFilterExpression(typeof(Member)));
+        builder.HasQueryFilter(m => !m.IsDeleted);
+        //builder.HasQueryFilter(SoftDeleteExpression.CreateFilterExpression(typeof(Member)));
 
         //builder.HasData
         //(

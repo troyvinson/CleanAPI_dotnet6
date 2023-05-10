@@ -8,7 +8,7 @@ namespace Domain.Entities
 {
     public class BaseEntity
     {
-        public DateTime CreatedDate { get; set; }
-        public DateTime UpdatedDate { get; set; }
+        public DateTimeOffset CreatedDate { get; set; }
+        public DateTimeOffset UpdatedDate { get; set; }
     }
 }

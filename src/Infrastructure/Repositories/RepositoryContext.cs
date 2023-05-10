@@ -20,6 +20,8 @@ public class RepositoryContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Role> Roles { get; set; }
     public DbSet<Member> Members { get; set; }
+    public DbSet<MemberRole> MemberRoles { get; set; }
+    public DbSet<UserRole> UserRoles { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -27,9 +29,12 @@ public class RepositoryContext : DbContext
         modelBuilder.ApplyConfiguration(new CompanyConfiguration());
         modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
         modelBuilder.ApplyConfiguration(new RoleConfiguration());
+        modelBuilder.ApplyConfiguration(new RoleTypeConfiguration());
         modelBuilder.ApplyConfiguration(new TenantConfiguration());
         modelBuilder.ApplyConfiguration(new UserConfiguration());
         modelBuilder.ApplyConfiguration(new MemberConfiguration());
+        modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
+        modelBuilder.ApplyConfiguration(new MemberRoleConfiguration());
 
     }
 
@@ -43,11 +48,11 @@ public class RepositoryContext : DbContext
 
         foreach (var entityEntry in entries)
         {
-            ((BaseEntity)entityEntry.Entity).UpdatedDate = DateTime.Now;
+            ((BaseEntity)entityEntry.Entity).UpdatedDate = DateTimeOffset.Now;
 
             if (entityEntry.State == EntityState.Added)
             {
-                ((BaseEntity)entityEntry.Entity).CreatedDate = DateTime.Now;
+                ((BaseEntity)entityEntry.Entity).CreatedDate = DateTimeOffset.Now;
             }
         }
 
