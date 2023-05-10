@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class RoleType
+    public class RoleType : BaseEntity
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;

@@ -2,7 +2,7 @@
 
 namespace Domain.Entities;
 
-public class Tenant : ISoftDeletable
+public class Tenant : BaseEntity, ISoftDeletable
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;

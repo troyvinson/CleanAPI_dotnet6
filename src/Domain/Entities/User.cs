@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities;
 
-public class User : ISoftDeletable
+public class User : BaseEntity, ISoftDeletable
 {
     [Column("UserId")]
     public int Id { get; set; }
