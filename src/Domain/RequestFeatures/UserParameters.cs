@@ -2,10 +2,7 @@
 
 public class UserParameters : RequestParameters
 {
-    public UserParameters()
-    {
-        OrderBy = "username";
-    }
+    public string? OrderBy { get; set; } = "id";
 
     public string SearchTerm { get; set; } = string.Empty;
 

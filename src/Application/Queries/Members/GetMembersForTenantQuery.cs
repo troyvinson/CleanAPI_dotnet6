@@ -3,6 +3,4 @@ using MediatR;
 
 namespace Application.Queries.Members;
 
-public sealed record GetMembersForTenantQuery(int TenantId,
-    MemberParameters MemberParameters, bool TrackChanges)
-    : IRequest<(IEnumerable<MemberDto> members, MetaData metaData)>;
+public sealed record GetMembersForTenantQuery(int TenantId, bool TrackChanges) : IRequest<IEnumerable<MemberDto>>;

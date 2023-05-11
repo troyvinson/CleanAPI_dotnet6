@@ -1,9 +1,7 @@
 ﻿using Application.Commands.Members;
 using Application.Queries.Members;
-using Application.Queries.Tenants;
 using Domain.RequestFeatures;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
@@ -25,15 +23,30 @@ public class MembersController : ControllerBase
     }
 
     /// <summary>
-    /// Get all members for a tenant
+    /// Gets a collection of members by their ids
+    /// </summary>
+    /// <remarks>Replace {tenantIds} with a comma-delimited series of ints. </remarks>
+    /// <param name="tenantId"></param>
+    /// <param name="ids"></param>
+    /// <returns></returns>
+    [HttpGet]
+    public async Task<IActionResult> GetMembersForTenantAsync(int tenantId)
+    {
+        var members = await _sender.Send(new GetMembersForTenantQuery(tenantId, TrackChanges: false));
+
+        return Ok(members);
+    }
+
+    /// <summary>
+    /// Get members for a tenant by page
     /// </summary>
     /// <param name="tenantId"></param>
     /// <param name="memberParameters"></param>
     /// <returns></returns>
-    [HttpGet]
-    public async Task<IActionResult> GetMembersForTenantAsync(int tenantId, [FromQuery] MemberParameters memberParameters)
+    [HttpGet("paged")]
+    public async Task<IActionResult> GetMembersForTenantPagedAsync(int tenantId, [FromQuery] MemberParameters memberParameters)
     {
-        (IEnumerable<MemberDto> members, MetaData metaData) = await _sender.Send(new GetMembersForTenantQuery(tenantId, memberParameters, TrackChanges: false));
+        (IEnumerable<MemberDto> members, MetaData metaData) = await _sender.Send(new GetMembersForTenantPagedQuery(tenantId, memberParameters, TrackChanges: false));
 
         Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metaData));
 
@@ -58,6 +71,7 @@ public class MembersController : ControllerBase
     /// Gets a collection of members by their ids
     /// </summary>
     /// <remarks>Replace {tenantIds} with a comma-delimited series of ints. </remarks>
+    /// <param name="tenantId"></param>
     /// <param name="ids"></param>
     /// <returns></returns>
     [HttpGet("collection/{ids}", Name = "MemberCollection")]

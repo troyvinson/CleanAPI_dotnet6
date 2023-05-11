@@ -12,14 +12,13 @@ public sealed class MemberRepository : RepositoryBase<Member>, IMemberRepository
     {
     }
 
-    public async Task<PagedList<Member>> GetMembersForTenantAsync(int tenantId, MemberParameters memberParameters, bool trackChanges)
-    {
-        memberParameters.SearchTerm ??= string.Empty;
-        memberParameters.OrderBy ??= string.Empty;
+    public async Task<IEnumerable<Member>> GetMembersForTenantAsync(int tenantId, bool trackChanges) =>
+        await FindByCondition(e => e.TenantId.Equals(tenantId), trackChanges)
+        .ToListAsync();
 
+    public async Task<PagedList<Member>> GetMembersForTenantPagedAsync(int tenantId, MemberParameters memberParameters, bool trackChanges)
+    {
         var members = await FindByCondition(e => e.TenantId.Equals(tenantId), trackChanges)
-            .Search(memberParameters.SearchTerm)
-            .Sort(memberParameters.OrderBy)
             .ToListAsync();
 
         return PagedList<Member>

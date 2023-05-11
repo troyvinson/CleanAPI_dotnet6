@@ -5,7 +5,8 @@ namespace Domain.Interfaces;
 
 public interface IMemberRepository
 {
-    Task<PagedList<Member>> GetMembersForTenantAsync(int tenantId, MemberParameters memberParameters, bool trackChanges);
+    Task<IEnumerable<Member>> GetMembersForTenantAsync(int tenantId, bool trackChanges);
+    Task<PagedList<Member>> GetMembersForTenantPagedAsync(int tenantId, MemberParameters memberParameters, bool trackChanges);
     Task<Member?> GetMemberForTenantAsync(int tenantId, int memberId, bool trackChanges);
     Task<IEnumerable<Member>> GetMembersByIdsAsync(int tenantId, IEnumerable<int> memberIds, bool trackChanges);
     void CreateMemberForTenant(int tenantId, Member member);
