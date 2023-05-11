@@ -57,7 +57,7 @@ public class MembersController : ControllerBase
     /// <summary>
     /// Gets a collection of members by their ids
     /// </summary>
-    /// <remarks>Replace {tenantIds} with a comma-delimited series of ints. 
+    /// <remarks>Replace {tenantIds} with a comma-delimited series of ints. </remarks>
     /// <param name="ids"></param>
     /// <returns></returns>
     [HttpGet("collection/{ids}", Name = "MemberCollection")]

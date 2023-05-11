@@ -1,6 +1,7 @@
 ﻿using Domain.RequestFeatures;
 using Infrastructure.Repositories.Extensions;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Infrastructure.Repositories;
 
@@ -40,5 +41,24 @@ public sealed class MemberRepository : RepositoryBase<Member>, IMemberRepository
     }
 
     public void DeleteMember(Member member) => Delete(member);
+
+
+    public override IQueryable<Member> FindByCondition(Expression<Func<Member, bool>> expression, bool trackChanges)
+    {
+        if (expression is null)
+        {
+            throw new ArgumentNullException(nameof(expression));
+        }
+
+        return !trackChanges ?
+          RepositoryContext.Set<Member>().Where(expression)
+            .Include(t => t.Tenant)
+            .Include(u => u.User)
+            .AsNoTracking() :
+          RepositoryContext.Set<Member>().Where(expression)
+            .Include(t => t.Tenant)
+            .Include(u => u.User);
+    }
+
 
 }

@@ -23,7 +23,7 @@ public class RepositoryBase<T> : IRepositoryBase<T> where T : class
           RepositoryContext.Set<T>().AsNoTracking() :
           RepositoryContext.Set<T>();
 
-    public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges)
+    public virtual IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges)
     {
         if (expression is null)
         {
