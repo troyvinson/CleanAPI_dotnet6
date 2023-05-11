@@ -2,7 +2,7 @@
 
 namespace Presentation.Controllers;
 
-[Route("api/roles")]
+[Route("api/[controller]")]
 [ApiController]
 [ApiExplorerSettings(GroupName = "v1")]
 public class RolesController : ControllerBase

@@ -1,5 +1,6 @@
 ﻿using Application.Commands.Members;
 using Application.Queries.Members;
+using Application.Queries.Tenants;
 using Domain.RequestFeatures;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -9,7 +10,7 @@ using System.Text.Json;
 
 namespace Presentation.Controllers;
 
-[Route("api/tenants/{tenantId:int}/members")]
+[Route("api/[controller]/{tenantId:int}/members")]
 [ApiController]
 [ApiExplorerSettings(GroupName = "v1")]
 public class MembersController : ControllerBase
@@ -52,6 +53,21 @@ public class MembersController : ControllerBase
 
         return Ok(member);
     }
+
+    /// <summary>
+    /// Gets a collection of members by their ids
+    /// </summary>
+    /// <remarks>Replace {tenantIds} with a comma-delimited series of ints. 
+    /// <param name="ids"></param>
+    /// <returns></returns>
+    [HttpGet("collection/{ids}", Name = "MemberCollection")]
+    public async Task<IActionResult> GetMemberCollectionAsync(int tenantId, string ids)
+    {
+        var members = await _sender.Send(new GetMembersByIdsQuery(tenantId, ids, TrackChanges: false));
+
+        return Ok(members);
+    }
+
 
     /// <summary>
     /// Creates a newly created member for a tenant

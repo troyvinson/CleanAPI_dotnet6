@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers;
 
-[Route("api/users")]
+[Route("api/[controller]")]
 [ApiController]
 [ApiExplorerSettings(GroupName = "v1")]
 public class UsersController : ControllerBase
@@ -50,7 +50,6 @@ public class UsersController : ControllerBase
     /// Gets a collection of users by their ids
     /// </summary>
     /// <remarks>Replace {userIds} with a comma-delimited series of ints. 
-    /// Swagger does not do this very well, so try testing in Postman.</remarks>
     /// <param name="ids"></param>
     /// <returns></returns>
     [HttpGet("collection/{ids}", Name = "UserCollection")]

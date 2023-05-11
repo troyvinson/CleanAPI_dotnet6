@@ -14,6 +14,7 @@ public sealed class MemberRepository : RepositoryBase<Member>, IMemberRepository
     public async Task<PagedList<Member>> GetMembersForTenantAsync(int tenantId, MemberParameters memberParameters, bool trackChanges)
     {
         memberParameters.SearchTerm ??= string.Empty;
+        memberParameters.OrderBy ??= string.Empty;
 
         var members = await FindByCondition(e => e.TenantId.Equals(tenantId), trackChanges)
             .Search(memberParameters.SearchTerm)
@@ -28,6 +29,10 @@ public sealed class MemberRepository : RepositoryBase<Member>, IMemberRepository
         await FindByCondition(e => e.TenantId.Equals(tenantId) && e.Id.Equals(memberId), trackChanges)
         .SingleOrDefaultAsync();
 
+    public async Task<IEnumerable<Member>> GetMembersByIdsAsync(int tenantId, IEnumerable<int> memberIds, bool trackChanges) =>
+        await FindByCondition(e => e.TenantId.Equals(tenantId) && memberIds.Contains(e.Id), trackChanges)
+        .ToListAsync();
+
     public void CreateMemberForTenant(int tenantId, Member member)
     {
         member.TenantId = tenantId;
@@ -35,4 +40,5 @@ public sealed class MemberRepository : RepositoryBase<Member>, IMemberRepository
     }
 
     public void DeleteMember(Member member) => Delete(member);
+
 }

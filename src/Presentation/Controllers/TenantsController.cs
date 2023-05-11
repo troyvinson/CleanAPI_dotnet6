@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers;
 
-[Route("api/tenants")]
+[Route("api/[controller]")]
 [ApiController]
 [ApiExplorerSettings(GroupName = "v1")]
 public class TenantsController : ControllerBase
@@ -50,7 +50,6 @@ public class TenantsController : ControllerBase
     /// Gets a collection of tenants by their ids
     /// </summary>
     /// <remarks>Replace {tenantIds} with a comma-delimited series of ints. 
-    /// Swagger does not do this very well, so try testing in Postman.</remarks>
     /// <param name="ids"></param>
     /// <returns></returns>
     [HttpGet("collection/{ids}", Name = "TenantCollection")]

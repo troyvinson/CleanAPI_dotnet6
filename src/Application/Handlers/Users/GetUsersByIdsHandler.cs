@@ -24,7 +24,7 @@ internal sealed class GetUsersByIdsHandler : IRequestHandler<GetUsersByIdsQuery,
         var ids = request.UserIds.Split(',').Select(id => int.Parse(id)).ToList();
 
         var userEntities = await _repository.User.GetUsersByIdsAsync(ids, request.TrackChanges);
-        if (ids.Count() != userEntities.Count())
+        if (ids.Count != userEntities.Count())
             throw new CollectionByIdsBadRequestException();
 
         var usersToReturn = _mapper.Map<IEnumerable<UserDto>>(userEntities);
