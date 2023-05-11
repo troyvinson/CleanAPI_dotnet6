@@ -23,7 +23,7 @@ public class MembersController : ControllerBase
     }
 
     /// <summary>
-    /// Gets a collection of members by their ids
+    /// Get a collection members for a tenant  
     /// </summary>
     /// <remarks>Replace {tenantIds} with a comma-delimited series of ints. </remarks>
     /// <param name="tenantId"></param>
@@ -38,7 +38,7 @@ public class MembersController : ControllerBase
     }
 
     /// <summary>
-    /// Get members for a tenant by page
+    /// Get a collection members for a tenant using pagination
     /// </summary>
     /// <param name="tenantId"></param>
     /// <param name="memberParameters"></param>
