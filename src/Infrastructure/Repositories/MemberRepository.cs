@@ -12,31 +12,27 @@ public sealed class MemberRepository : RepositoryBase<Member>, IMemberRepository
     {
     }
 
-    public async Task<PagedList<Member>> GetMembersForTenantAsync(int tenantId, MemberSearchParameters memberSearchParameters, bool trackChanges)
+    public async Task<PagedList<Member>> GetMembersForTenantAsync(int tenantId, MemberParameters memberParameters, bool trackChanges)
     {
+        memberParameters.SearchTerm ??= string.Empty;
+        memberParameters.OrderBy ??= string.Empty;
+
         var members = await FindByCondition(e => e.TenantId.Equals(tenantId), trackChanges)
-            .Search(memberSearchParameters.SearchTerm)
-            .Sort(memberSearchParameters.OrderBy)
+            .Search(memberParameters.SearchTerm)
+            .Sort(memberParameters.OrderBy)
             .ToListAsync();
 
         return PagedList<Member>
-            .ToPagedList(members, memberSearchParameters.PageNumber, memberSearchParameters.PageSize);
+            .ToPagedList(members, memberParameters.PageNumber, memberParameters.PageSize);
     }
 
     public async Task<Member?> GetMemberForTenantAsync(int tenantId, int memberId, bool trackChanges) =>
         await FindByCondition(e => e.TenantId.Equals(tenantId) && e.Id.Equals(memberId), trackChanges)
         .SingleOrDefaultAsync();
 
-    public async Task<PagedList<Member>> GetMembersByIdsAsync(int tenantId, IEnumerable<int> memberIds, MemberParameters memberParameters, bool trackChanges)
-    {
-        var members = await FindByCondition(e => e.TenantId.Equals(tenantId) && memberIds.Contains(e.Id), trackChanges)
-        .Sort(memberParameters.OrderBy)
+    public async Task<IEnumerable<Member>> GetMembersByIdsAsync(int tenantId, IEnumerable<int> memberIds, bool trackChanges) =>
+        await FindByCondition(e => e.TenantId.Equals(tenantId) && memberIds.Contains(e.Id), trackChanges)
         .ToListAsync();
-
-        return PagedList<Member>
-            .ToPagedList(members, memberParameters.PageNumber, memberParameters.PageSize);
-
-    }
 
     public void CreateMemberForTenant(int tenantId, Member member)
     {

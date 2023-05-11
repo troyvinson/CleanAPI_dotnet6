@@ -49,7 +49,7 @@ public class UsersController : ControllerBase
     /// <summary>
     /// Gets a collection of users by their ids
     /// </summary>
-    /// <remarks>Replace {userIds} with a comma-delimited series of ints. </remarks>    
+    /// <remarks>Replace {userIds} with a comma-delimited series of ints. 
     /// <param name="ids"></param>
     /// <returns></returns>
     [HttpGet("collection/{ids}", Name = "UserCollection")]

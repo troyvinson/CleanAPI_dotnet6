@@ -28,12 +28,12 @@ public class MembersController : ControllerBase
     /// Get all members for a tenant
     /// </summary>
     /// <param name="tenantId"></param>
-    /// <param name="memberSearchParameters"></param>
+    /// <param name="memberParameters"></param>
     /// <returns></returns>
     [HttpGet]
-    public async Task<IActionResult> GetMembersForTenantAsync(int tenantId, [FromQuery] MemberSearchParameters memberSearchParameters)
+    public async Task<IActionResult> GetMembersForTenantAsync(int tenantId, [FromQuery] MemberParameters memberParameters)
     {
-        (IEnumerable<MemberDto> members, MetaData metaData) = await _sender.Send(new GetMembersForTenantQuery(tenantId, memberSearchParameters, TrackChanges: false));
+        (IEnumerable<MemberDto> members, MetaData metaData) = await _sender.Send(new GetMembersForTenantQuery(tenantId, memberParameters, TrackChanges: false));
 
         Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metaData));
 
@@ -59,13 +59,11 @@ public class MembersController : ControllerBase
     /// </summary>
     /// <remarks>Replace {tenantIds} with a comma-delimited series of ints. </remarks>
     /// <param name="ids"></param>
-    /// <param name="tenantId"></param>
-    /// <param name="memberParameters"></param>
     /// <returns></returns>
     [HttpGet("collection/{ids}", Name = "MemberCollection")]
-    public async Task<IActionResult> GetMemberCollectionAsync(int tenantId, string ids, [FromQuery] MemberParameters memberParameters)
+    public async Task<IActionResult> GetMemberCollectionAsync(int tenantId, string ids)
     {
-        var members = await _sender.Send(new GetMembersByIdsQuery(tenantId, ids, memberParameters, TrackChanges: false));
+        var members = await _sender.Send(new GetMembersByIdsQuery(tenantId, ids, TrackChanges: false));
 
         return Ok(members);
     }

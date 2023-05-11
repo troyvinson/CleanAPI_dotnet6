@@ -49,7 +49,7 @@ public class TenantsController : ControllerBase
     /// <summary>
     /// Gets a collection of tenants by their ids
     /// </summary>
-    /// <remarks>Replace {tenantIds} with a comma-delimited series of ints. </remarks>
+    /// <remarks>Replace {tenantIds} with a comma-delimited series of ints. 
     /// <param name="ids"></param>
     /// <returns></returns>
     [HttpGet("collection/{ids}", Name = "TenantCollection")]
