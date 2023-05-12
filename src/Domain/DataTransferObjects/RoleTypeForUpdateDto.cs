@@ -1,4 +1,4 @@
 ﻿
 namespace Domain.DataTransferObjects;
 
-public abstract record RoleTypeForUpdateDto : RoleTypeForManipulationDto;
+public record RoleTypeForUpdateDto : RoleTypeForManipulationDto;

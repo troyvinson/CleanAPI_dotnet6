@@ -1,3 +1,3 @@
 ﻿namespace Domain.DataTransferObjects;
 
-public abstract record TenantForCreationDto : TenantForManipulationDto;
+public record TenantForCreationDto : TenantForManipulationDto;

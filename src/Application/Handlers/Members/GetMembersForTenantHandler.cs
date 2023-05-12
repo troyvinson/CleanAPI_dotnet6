@@ -25,7 +25,7 @@ internal sealed class GetMembersForTenantHandler : IRequestHandler<GetMembersFor
         _ = await _repository.Tenant.GetTenantByIdAsync(request.TenantId, request.TrackChanges)
             ?? throw new NotFoundException($"Tenant ID: {request.TenantId} was not found.");
 
-        var membersEntities = await _repository.Member.GetMembersForTenantAsync(request.TenantId, request.TrackChanges);
+        var membersEntities = await _repository.Member.GetMembersForTenantAsync(request.TenantId, request.MemberParameters, request.TrackChanges);
 
         var membersDto = _mapper.Map<IEnumerable<MemberDto>>(membersEntities);
 

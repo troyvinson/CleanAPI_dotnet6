@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Application.Handlers.Employees;
 
-internal sealed class GetEmployeesForCompanyHandler : IRequestHandler<GetEmployeesForCompanyQuery, (IEnumerable<EmployeeDto> employees, MetaData metaData)>
+internal sealed class GetEmployeesForCompanyHandler : IRequestHandler<GetEmployeesForCompanyQuery, (IEnumerable<EmployeeDto> employees, PagingMetaData metaData)>
 {
     private readonly IRepositoryManager _repository;
     private readonly IMapper _mapper;
@@ -17,7 +17,7 @@ internal sealed class GetEmployeesForCompanyHandler : IRequestHandler<GetEmploye
         _mapper = mapper;
     }
 
-    public async Task<(IEnumerable<EmployeeDto> employees, MetaData metaData)> Handle(GetEmployeesForCompanyQuery request, CancellationToken cancellationToken)
+    public async Task<(IEnumerable<EmployeeDto> employees, PagingMetaData metaData)> Handle(GetEmployeesForCompanyQuery request, CancellationToken cancellationToken)
     {
         if (request is null)
             throw new IdParametersBadRequestException();

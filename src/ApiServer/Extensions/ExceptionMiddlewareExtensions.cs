@@ -19,31 +19,42 @@ public static class ExceptionMiddlewareExtensions
                 var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
                 if (contextFeature != null)
                 {
-                    context.Response.StatusCode = contextFeature.Error switch
+                    switch (contextFeature.Error)
                     {
-                        NotFoundException => StatusCodes.Status404NotFound,
-                        BadRequestException => StatusCodes.Status400BadRequest,
-                        ValidationAppException => StatusCodes.Status422UnprocessableEntity,
-                        _ => StatusCodes.Status500InternalServerError
-                    };
+                        case NotFoundException:
+                            context.Response.StatusCode = StatusCodes.Status404NotFound;
+                            await WriteErrorDetails(context, contextFeature.Error.Message, context.Response.StatusCode);
+                            break;
+                        case BadRequestException:
+                            context.Response.StatusCode = StatusCodes.Status400BadRequest;
+                            await WriteErrorDetails(context, contextFeature.Error.Message, context.Response.StatusCode);
+                            break;
+                        case ValidationAppException exception:
+                            context.Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
+                            await context.Response.WriteAsync(JsonSerializer.Serialize(new { exception.Errors }));
+                            break;
+                        default:
+                            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                            await WriteErrorDetails(context, contextFeature.Error.Message, context.Response.StatusCode);
+                            break;
+                    }
 
                     logger.LogError($"An error occurred: {contextFeature.Error}");
 
-                    if (contextFeature.Error is ValidationAppException exception)
-                    {
-                        await context.Response
-                        .WriteAsync(JsonSerializer.Serialize(new { exception.Errors }));
-                    }
-                    else
-                    {
-                        await context.Response.WriteAsync(new ErrorDetails()
-                        {
-                            StatusCode = context.Response.StatusCode,
-                            Message = contextFeature.Error.Message,
-                        }.ToString());
-                    }
                 }
             });
         });
+    }
+
+    private static async Task WriteErrorDetails(HttpContext context, string message, int statusCode)
+    {
+        var response = new ErrorDetails
+        {
+            StatusCode = statusCode,
+            Message = message,
+            Path = context.Request.Path.Value ?? string.Empty,
+            Method = context!.Request.Method ?? string.Empty
+        };
+        await context.Response.WriteAsync(JsonSerializer.Serialize(response));
     }
 }

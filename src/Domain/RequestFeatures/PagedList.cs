@@ -2,11 +2,11 @@
 
 public class PagedList<T> : List<T>
 {
-    public MetaData MetaData { get; set; }
+    public PagingMetaData MetaData { get; set; }
 
     public PagedList(List<T> items, int count, int pageNumber, int pageSize)
     {
-        MetaData = new MetaData
+        MetaData = new PagingMetaData
         {
             TotalCount = count,
             PageSize = pageSize,

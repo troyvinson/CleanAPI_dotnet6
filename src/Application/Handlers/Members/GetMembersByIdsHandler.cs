@@ -23,10 +23,7 @@ internal sealed class GetMembersByIdsHandler : IRequestHandler<GetMembersByIdsQu
 
         var ids = request.MemberIds.Split(',').Select(id => int.Parse(id)).ToList();
 
-        var memberEntities = await _repository.Member.GetMembersByIdsAsync(request.TenantId, ids, request.TrackChanges);
-
-        if (ids.Count != memberEntities.Count())
-            throw new CollectionByIdsBadRequestException();
+        var memberEntities = await _repository.Member.GetMembersByIdsAsync(request.TenantId, ids, request.MemberParameters, request.TrackChanges);
 
         var MembersToReturn = _mapper.Map<IEnumerable<MemberDto>>(memberEntities);
 

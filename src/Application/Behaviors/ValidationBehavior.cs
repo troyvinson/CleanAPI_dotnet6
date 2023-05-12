@@ -24,7 +24,6 @@ public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<
             .SelectMany(x => x.Errors)
             .Where(x => x != null)
             .GroupBy(
-                //x => x.PropertyName.Substring(x.PropertyName.IndexOf('.') + 1),
                 x => x.PropertyName[(x.PropertyName.IndexOf('.') + 1)..],
                 x => x.ErrorMessage,
                 (propertyName, errorMessages) => new

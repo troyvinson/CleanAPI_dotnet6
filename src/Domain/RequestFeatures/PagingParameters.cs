@@ -1,6 +1,6 @@
 ﻿namespace Domain.RequestFeatures;
 
-public abstract class RequestParameters
+public abstract class PagingParameters
 {
     const int maxPageSize = 50;
     public int PageNumber { get; set; } = 1;

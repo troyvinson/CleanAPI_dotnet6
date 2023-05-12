@@ -1,6 +1,6 @@
 ﻿namespace Domain.RequestFeatures;
 
-public class UserParameters : RequestParameters
+public class UserParameters : PagingParameters
 {
     public string? OrderBy { get; set; } = "id";
 

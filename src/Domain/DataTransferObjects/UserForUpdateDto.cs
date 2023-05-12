@@ -1,3 +1,3 @@
 ﻿namespace Domain.DataTransferObjects;
 
-public abstract record UserForUpdateDto : UserForManipulationDto;
+public record UserForUpdateDto : UserForManipulationDto;

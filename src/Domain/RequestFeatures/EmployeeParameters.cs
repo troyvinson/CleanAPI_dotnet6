@@ -1,6 +1,6 @@
 ﻿namespace Domain.RequestFeatures;
 
-public class EmployeeParameters : RequestParameters
+public class EmployeeParameters : PagingParameters
 {
     public string? OrderBy { get; set; } = "name";
 

@@ -1,15 +1,22 @@
 ﻿using Application.Commands.Tenants;
 using Application.Notifications;
 using Application.Queries.Tenants;
+using Domain.Models;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Presentation.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
 [ApiExplorerSettings(GroupName = "v1")]
+[Produces("application/json")]
+[SwaggerResponse(StatusCodes.Status401Unauthorized)]
+[SwaggerResponse(StatusCodes.Status403Forbidden)]
+[SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetails))]
 public class TenantsController : ControllerBase
 {
     private readonly ISender _sender;
@@ -22,23 +29,13 @@ public class TenantsController : ControllerBase
     }
 
     /// <summary>
-    /// Gets the list of all tenants
-    /// </summary>
-    /// <returns>The tenants list</returns>
-    [HttpGet(Name = "GetTenants")]
-    public async Task<IActionResult> GetTenantsAsync()
-    {
-        var tenants = await _sender.Send(new GetTenantsQuery(TrackChanges: false));
-
-        return Ok(tenants);
-    }
-
-    /// <summary>
     /// Get a tenant by its id
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id:int}", Name = "TenantById")]
+    [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(TenantDto))]
+    [SwaggerResponse(StatusCodes.Status404NotFound, Type = typeof(ErrorDetails))]
     public async Task<IActionResult> GetTenantAsync(int id)
     {
         var tenant = await _sender.Send(new GetTenantQuery(id, TrackChanges: false));
@@ -47,11 +44,25 @@ public class TenantsController : ControllerBase
     }
 
     /// <summary>
-    /// Gets a collection of tenants by their ids
+    /// Gets the list of all tenants
+    /// </summary>
+    /// <returns>The tenants list</returns>
+    [HttpGet(Name = "GetTenants")]
+    [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(IEnumerable<TenantDto>))]
+    public async Task<IActionResult> GetTenantsAsync()
+    {
+        var tenants = await _sender.Send(new GetTenantsQuery(TrackChanges: false));
+
+        return Ok(tenants);
+    }
+
+    /// <summary>
+    /// Gets a list of tenants by their ids
     /// </summary>
     /// <remarks>Replace {tenantIds} with a comma-delimited series of ints. </remarks>
     /// <param name="ids"></param>
     /// <returns></returns>
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<TenantDto>))]
     [HttpGet("collection/{ids}", Name = "TenantCollection")]
     public async Task<IActionResult> GetTenantCollectionAsync(string ids)
     {
@@ -65,8 +76,10 @@ public class TenantsController : ControllerBase
     /// Creates a newly created tenant
     /// </summary>
     /// <param name="tenantToCreate"></param>
-    /// <returns>A newly created tenant</returns>
+    /// <response code="422">Unprocessable Entity: returns dictionary of errors</response>
     [HttpPost(Name = "CreateTenant")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IReadOnlyDictionary<string, string[]>))]
     public async Task<IActionResult> CreateTenantAsync([FromBody] TenantForCreationDto tenantToCreate)
     {
         var tenant = await _sender.Send(new CreateTenantCommand(tenantToCreate));
@@ -78,8 +91,10 @@ public class TenantsController : ControllerBase
     /// Creates new tenants from a collection
     /// </summary>
     /// <param name="tenantCollection"></param>
-    /// <returns></returns>
+    /// <response code="422">Unprocessable Entity: returns dictionary of errors</response>
     [HttpPost("collection")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IReadOnlyDictionary<string, string[]>))]
     public async Task<IActionResult> CreateTenantCollectionAsync
         ([FromBody] IEnumerable<TenantForCreationDto> tenantCollection)
     {
@@ -93,8 +108,11 @@ public class TenantsController : ControllerBase
     /// </summary>
     /// <param name="id"></param>
     /// <param name="tenantForUpdateDto"></param>
-    /// <returns></returns>
+    /// <response code="422">Unprocessable Entity: returns dictionary of errors</response>
     [HttpPut("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IReadOnlyDictionary<string, string[]>))]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> UpdateTenantAsync(int id, TenantForUpdateDto tenantForUpdateDto)
     {
         if (tenantForUpdateDto is null)
@@ -106,25 +124,15 @@ public class TenantsController : ControllerBase
     }
 
     /// <summary>
-    /// Deletes an existing tenant
-    /// </summary>
-    /// <param name="tenantId"></param>
-    /// <returns></returns>
-    [HttpDelete("{id:int}")]
-    public async Task<IActionResult> DeleteTenantAsync(int tenantId)
-    {
-        await _publisher.Publish(new TenantDeletedNotification(tenantId, TrackChanges: false));
-
-        return NoContent();
-    }
-
-    /// <summary>
     /// Partially updates an existing tenant
     /// </summary>
     /// <param name="id"></param>
     /// <param name="patchDoc"></param>
-    /// <returns></returns>
+    /// <response code="422">Unprocessable Entity: returns dictionary of errors</response>
     [HttpPatch("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IReadOnlyDictionary<string, string[]>))]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> PartiallyUpdateTenantAsync(int id, [FromBody] JsonPatchDocument<TenantForUpdateDto> patchDoc)
     {
         if (patchDoc is null)
@@ -145,14 +153,18 @@ public class TenantsController : ControllerBase
     }
 
     /// <summary>
-    /// Get available HTTP Verbs
+    /// Deletes an existing tenant
     /// </summary>
+    /// <param name="tenantId"></param>
     /// <returns></returns>
-    [HttpOptions]
-    public IActionResult GetOptions()
+    [HttpDelete("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> DeleteTenantAsync(int tenantId)
     {
-        Response.Headers.Add("Allow", "GET, OPTIONS, POST, PUT, PATCH, DELETE");
-        return Ok();
+        await _publisher.Publish(new TenantDeletedNotification(tenantId, TrackChanges: false));
+
+        return NoContent();
     }
 
 }

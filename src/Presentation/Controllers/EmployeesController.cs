@@ -32,7 +32,7 @@ public class EmployeesController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetEmployeesForCompanyAsync(int companyId, [FromQuery] EmployeeParameters employeeParameters)
     {
-        (IEnumerable<EmployeeDto> employees, MetaData metaData) = await _sender.Send(new GetEmployeesForCompanyQuery(companyId, employeeParameters, TrackChanges: false));
+        (IEnumerable<EmployeeDto> employees, PagingMetaData metaData) = await _sender.Send(new GetEmployeesForCompanyQuery(companyId, employeeParameters, TrackChanges: false));
 
         Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metaData));
 

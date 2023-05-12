@@ -4,5 +4,5 @@ using MediatR;
 namespace Application.Queries.Members;
 
 public sealed record GetMembersForTenantPagedQuery(int TenantId,
-    MemberParameters MemberParameters, bool TrackChanges)
-    : IRequest<(IEnumerable<MemberDto> members, MetaData metaData)>;
+    MemberAndPagingParameters MemberParameters, bool TrackChanges)
+    : IRequest<(IEnumerable<MemberDto> members, PagingMetaData metaData)>;

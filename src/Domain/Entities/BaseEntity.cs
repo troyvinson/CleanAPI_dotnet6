@@ -1,8 +1,7 @@
-﻿namespace Domain.Entities
+﻿namespace Domain.Entities;
+
+public class BaseEntity
 {
-    public class BaseEntity
-    {
-        public DateTimeOffset CreatedDate { get; set; }
-        public DateTimeOffset UpdatedDate { get; set; }
-    }
+    public DateTimeOffset CreatedDate { get; set; }
+    public DateTimeOffset UpdatedDate { get; set; }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Domain.RequestFeatures;
 
-public class MetaData
+public class PagingMetaData
 {
     public int CurrentPage { get; set; }
     public int TotalPages { get; set; }

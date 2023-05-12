@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Application.Handlers.Members;
 
-internal sealed class GetMembersForTenantPagedHandler : IRequestHandler<GetMembersForTenantPagedQuery, (IEnumerable<MemberDto> members, MetaData metaData)>
+internal sealed class GetMembersForTenantPagedHandler : IRequestHandler<GetMembersForTenantPagedQuery, (IEnumerable<MemberDto> members, PagingMetaData metaData)>
 {
     private readonly IRepositoryManager _repository;
     private readonly IMapper _mapper;
@@ -17,7 +17,7 @@ internal sealed class GetMembersForTenantPagedHandler : IRequestHandler<GetMembe
         _mapper = mapper;
     }
 
-    public async Task<(IEnumerable<MemberDto> members, MetaData metaData)> Handle(GetMembersForTenantPagedQuery request, CancellationToken cancellationToken)
+    public async Task<(IEnumerable<MemberDto> members, PagingMetaData metaData)> Handle(GetMembersForTenantPagedQuery request, CancellationToken cancellationToken)
     {
         if (request is null)
             throw new IdParametersBadRequestException();

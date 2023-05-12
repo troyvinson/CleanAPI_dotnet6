@@ -1,15 +1,22 @@
 ﻿using Application.Commands.Users;
 using Application.Notifications;
 using Application.Queries.Users;
+using Domain.Models;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Presentation.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
 [ApiExplorerSettings(GroupName = "v1")]
+[Produces("application/json")]
+[SwaggerResponse(StatusCodes.Status401Unauthorized)]
+[SwaggerResponse(StatusCodes.Status403Forbidden)]
+[SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetails))]
 public class UsersController : ControllerBase
 {
     private readonly ISender _sender;
@@ -26,6 +33,8 @@ public class UsersController : ControllerBase
     /// </summary>
     /// <returns>The users list</returns>
     [HttpGet(Name = "GetUsers")]
+    [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(IEnumerable<UserDto>))]
+    [SwaggerResponse(StatusCodes.Status404NotFound, Type = typeof(ErrorDetails))]
     public async Task<IActionResult> GetUsersAsync()
     {
         var users = await _sender.Send(new GetUsersQuery(TrackChanges: false));
@@ -39,6 +48,8 @@ public class UsersController : ControllerBase
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id:int}", Name = "UserById")]
+    [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(UserDto))]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetUserAsync(int id)
     {
         var user = await _sender.Send(new GetUserQuery(id, TrackChanges: false));
@@ -47,12 +58,14 @@ public class UsersController : ControllerBase
     }
 
     /// <summary>
-    /// Gets a collection of users by their ids
+    /// Gets a list of users by their ids
     /// </summary>
     /// <remarks>Replace {userIds} with a comma-delimited series of ints.</remarks> 
     /// <param name="ids"></param>
     /// <returns></returns>
     [HttpGet("collection/{ids}", Name = "UserCollection")]
+    [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(IEnumerable<UserDto>))]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetUserCollectionAsync(string ids)
     {
         var users = await _sender.Send(new GetUsersByIdsQuery(ids, TrackChanges: false));
@@ -65,9 +78,10 @@ public class UsersController : ControllerBase
     /// Creates a newly created user
     /// </summary>
     /// <param name="userToCreate"></param>
-    /// <returns>A newly created user</returns>
+    /// <response code="422">Unprocessable Entity: returns dictionary of errors</response>
     [HttpPost(Name = "CreateUser")]
-    //#pragma warning restore CS1572 // XML comment has a param tag, but there is no parameter by that name
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IReadOnlyDictionary<string, string[]>))]
     public async Task<IActionResult> CreateUserAsync([FromBody] UserForCreationDto userToCreate)
     {
         var user = await _sender.Send(new CreateUserCommand(userToCreate));
@@ -79,8 +93,10 @@ public class UsersController : ControllerBase
     /// Creates new users from a collection
     /// </summary>
     /// <param name="userCollection"></param>
-    /// <returns></returns>
+    /// <response code="422">Unprocessable Entity: returns dictionary of errors</response>
     [HttpPost("collection")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IReadOnlyDictionary<string, string[]>))]
     public async Task<IActionResult> CreateUserCollectionAsync
         ([FromBody] IEnumerable<UserForCreationDto> userCollection)
     {
@@ -94,8 +110,11 @@ public class UsersController : ControllerBase
     /// </summary>
     /// <param name="id"></param>
     /// <param name="userForUpdateDto"></param>
-    /// <returns></returns>
+    /// <response code="422">Unprocessable Entity: returns dictionary of errors</response>
     [HttpPut("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IReadOnlyDictionary<string, string[]>))]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> UpdateUserAsync(int id, UserForUpdateDto userForUpdateDto)
     {
         if (userForUpdateDto is null)
@@ -107,25 +126,15 @@ public class UsersController : ControllerBase
     }
 
     /// <summary>
-    /// Deletes an existing user
-    /// </summary>
-    /// <param name="userId"></param>
-    /// <returns></returns>
-    [HttpDelete("{id:int}")]
-    public async Task<IActionResult> DeleteUserAsync(int userId)
-    {
-        await _publisher.Publish(new UserDeletedNotification(userId, TrackChanges: false));
-
-        return NoContent();
-    }
-
-    /// <summary>
     /// Partially updates an existing user
     /// </summary>
     /// <param name="id"></param>
     /// <param name="patchDoc"></param>
-    /// <returns></returns>
+    /// <response code="422">Unprocessable Entity: returns dictionary of errors</response>
     [HttpPatch("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IReadOnlyDictionary<string, string[]>))]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> PartiallyUpdateUserAsync(int id,
         [FromBody] JsonPatchDocument<UserForUpdateDto> patchDoc)
     {
@@ -148,14 +157,19 @@ public class UsersController : ControllerBase
     }
 
     /// <summary>
-    /// Get available HTTP Verbs
+    /// Deletes an existing user
     /// </summary>
+    /// <param name="userId"></param>
     /// <returns></returns>
-    [HttpOptions]
-    public IActionResult GetOptions()
+    [HttpDelete("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> DeleteUserAsync(int userId)
     {
-        Response.Headers.Add("Allow", "GET, OPTIONS, POST, PUT, PATCH, DELETE");
-        return Ok();
+        await _publisher.Publish(new UserDeletedNotification(userId, TrackChanges: false));
+
+        return NoContent();
     }
+
 
 }

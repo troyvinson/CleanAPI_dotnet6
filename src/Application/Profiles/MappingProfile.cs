@@ -15,12 +15,8 @@ public class MappingProfile : Profile
         CreateMap<TenantForUpdateDto, Tenant>().ReverseMap();
 
         CreateMap<Member, MemberDto>()
-            .ForMember(m => m.TenantName, opt => opt.MapFrom(x => x.Tenant!.Name))
-            .ForMember(m => m.Username, opt => opt.MapFrom(u => u.User!.Username))
-            .ForMember(m => m.FirstName, opt => opt.MapFrom(u => u.User!.GivenName))
-            .ForMember(m => m.LastName, opt => opt.MapFrom(u => u.User!.Surname))
-            .ForMember(m => m.Email, opt => opt.MapFrom(u => u.User!.Email))
-            .ForMember(m => m.PhoneNumber, opt => opt.MapFrom(u => u.User!.PhoneNumber))
+            .ForMember(m => m.Tenant, opt => opt.MapFrom(x => x.Tenant))
+            .ForMember(m => m.User, opt => opt.MapFrom(u => u.User))
             .ReverseMap();
         CreateMap<MemberForCreationDto, Member>().ReverseMap();
         CreateMap<MemberForUpdateDto, Member>().ReverseMap();
