@@ -27,7 +27,6 @@ public class MembersController : ControllerBase
     /// </summary>
     /// <remarks>Replace {tenantIds} with a comma-delimited series of ints. </remarks>
     /// <param name="tenantId"></param>
-    /// <param name="ids"></param>
     /// <returns></returns>
     [HttpGet]
     public async Task<IActionResult> GetMembersForTenantAsync(int tenantId)

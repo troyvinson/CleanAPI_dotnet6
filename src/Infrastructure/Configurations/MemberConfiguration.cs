@@ -28,7 +28,7 @@ public class MemberConfiguration : IEntityTypeConfiguration<Member>
             new Member { Id = 13, Position = "Sales Representative", TenantId = 7, UserId = 13, IsEnabled = true },
             new Member { Id = 14, Position = "Account Manager", TenantId = 7, UserId = 14, IsEnabled = true },
             new Member { Id = 15, Position = "HR Manager", TenantId = 8, UserId = 15, IsEnabled = true },
-            new Member { Id = 16, Position = "Recruiter", TenantId = 8, UserId = 16, IsEnabled = true },
+            new Member { Id = 16, Position = "Recruiter", TenantId = 8, UserId = 21, IsEnabled = true },
             new Member { Id = 17, Position = "Financial Analyst", TenantId = 9, UserId = 17, IsEnabled = true },
             new Member { Id = 18, Position = "Controller", TenantId = 9, UserId = 18, IsEnabled = true },
             new Member { Id = 19, Position = "Marketing Manager", TenantId = 10, UserId = 19, IsEnabled = true },
