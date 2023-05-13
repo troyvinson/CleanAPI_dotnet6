@@ -11,12 +11,15 @@ using System.Text.Json;
 
 namespace Presentation.Controllers;
 
+/// <summary>
+/// Members exist only in the context of a tenant.
+/// </summary>
 [Route("api/[controller]/{tenantId:int}/members")]
 [ApiController]
 [ApiExplorerSettings(GroupName = "v1")]
 [Produces("application/json")]
-[SwaggerResponse(StatusCodes.Status401Unauthorized)]
-[SwaggerResponse(StatusCodes.Status403Forbidden)]
+//[SwaggerResponse(StatusCodes.Status401Unauthorized)]
+//[SwaggerResponse(StatusCodes.Status403Forbidden)]
 [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetails))]
 public class MembersController : ControllerBase
 {
@@ -48,7 +51,21 @@ public class MembersController : ControllerBase
     /// <summary>
     /// Get a list of members for a tenant  
     /// </summary>
-    /// <remarks>Replace {tenantIds} with a comma-delimited series of ints. </remarks>
+    /// <remarks><![CDATA[
+    /// <h2>Searching and Sorting</h2>
+    /// <h3>SearchTerm</h3>
+    /// Searches for term in User.Username, User.GivenName, and User.Surname
+    /// <ul>Example:
+    /// <li>?searchTerm=john</li>
+    /// </ul>
+    /// <h3>OrderBy</h3>
+    /// Sort by any field. My use asc or desc (default = asc).<br/>
+    /// Additional sort fields are separated by commas.
+    /// <ul>Example:
+    /// <li>?orderBy=User.Username desc</li>
+    /// <li>?orderBy=Position,User.Username desc</li>
+    /// </ul>
+    /// ]]></remarks>
     /// <param name="tenantId"></param>
     /// <param name="memberParameters"></param>
     /// <returns></returns>
@@ -66,6 +83,33 @@ public class MembersController : ControllerBase
     /// </summary>
     /// <param name="tenantId"></param>
     /// <param name="memberParameters"></param>
+    /// <remarks><![CDATA[
+    /// <h2>Searching and Sorting</h2>
+    /// <h3>SearchTerm</h3>
+    /// Searches for term in User.Username, User.GivenName, and User.Surname
+    /// <ul>Example:
+    /// <li>?searchTerm=john</li>
+    /// </ul>
+    /// <h3>OrderBy</h3>
+    /// Sort by any field. My use asc or desc (default = asc).<br/>
+    /// Additional sort fields are separated by commas.
+    /// <ul>Example:
+    /// <li>?orderBy=User.Username desc</li>
+    /// <li>?orderBy=Position,User.Username desc</li>
+    /// </ul>
+    /// <h2>Pagination</h2>
+    /// <h3>PageSize and PageNumber</h3>
+    /// PageSize is number of records to return per page (deafult = 10, max = 50).<br/> 
+    /// PageNumber is the page to return (default = 1)<br/>
+    /// <ul>Example:
+    /// <li>?pageSize=25&pageNumber=1</li>
+    /// </ul>
+    /// <h3>Pagination Metadata</h3>
+    /// Response header contains a custom header, X-Pagination, which contains pagination metadata
+    /// <ul>Example
+    /// <li>x-pagination: {"CurrentPage":1,"TotalPages":3,"PageSize":10,"TotalCount":2,"HasPrevious":false,"HasNext":true}</li>
+    /// </ul>
+    /// ]]></remarks>
     /// <returns></returns>
     [HttpGet("paged")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<MemberDto>))]
@@ -81,10 +125,25 @@ public class MembersController : ControllerBase
     /// <summary>
     /// Gets a list of members by their ids
     /// </summary>
-    /// <remarks>Replace {tenantIds} with a comma-delimited series of ints. </remarks>
     /// <param name="tenantId"></param>
     /// <param name="ids"></param>
     /// <param name="memberParameters"></param>
+    /// <remarks><![CDATA[
+    /// <p>Replace {ids} with a comma-delimited series of ints.</p>
+    /// <h2>Searching and Sorting</h2>
+    /// <h3>SearchTerm</h3>
+    /// Searches for term in User.Username, User.GivenName, and User.Surname
+    /// <ul>Example:
+    /// <li>?searchTerm=john</li>
+    /// </ul>
+    /// <h3>OrderBy</h3>
+    /// Sort by any field. My use asc or desc (default = asc).<br/>
+    /// Additional sort fields are separated by commas.
+    /// <ul>Example:
+    /// <li>?orderBy=User.Username desc</li>
+    /// <li>?orderBy=Position,User.Username desc</li>
+    /// </ul>
+    /// ]]></remarks>
     /// <returns></returns>
     [HttpGet("collection/{ids}", Name = "MemberCollection")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<MemberDto>))]
