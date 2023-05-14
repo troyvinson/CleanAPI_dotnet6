@@ -14,8 +14,6 @@ public sealed class RepositoryManager : IRepositoryManager
 
     // Use Lazy to ensure the lazy initialization so that repository instances
     // are only created when accessed the first time and not before that.
-    private readonly Lazy<ICompanyRepository> _companyRepository;
-    private readonly Lazy<IEmployeeRepository> _employeeRepository;
     private readonly Lazy<IRoleRepository> _roleRepository;
     private readonly Lazy<IRoleTypeRepository> _roleTypeRepository;
     private readonly Lazy<IUserRepository> _userRepository;
@@ -27,8 +25,6 @@ public sealed class RepositoryManager : IRepositoryManager
     public RepositoryManager(RepositoryContext repositoryContext)
     {
         _repositoryContext = repositoryContext;
-        _companyRepository = new Lazy<ICompanyRepository>(() => new CompanyRepository(repositoryContext));
-        _employeeRepository = new Lazy<IEmployeeRepository>(() => new EmployeeRepository(repositoryContext));
         _userRepository = new Lazy<IUserRepository>(() => new UserRepository(repositoryContext));
         _userRoleRepository = new Lazy<IUserRoleRepository>(() => new UserRoleRepository(repositoryContext));
         _roleRepository = new Lazy<IRoleRepository>(() => new RoleRepository(repositoryContext));
@@ -39,8 +35,6 @@ public sealed class RepositoryManager : IRepositoryManager
     }
 
     // Provide access to the defined repository class
-    public ICompanyRepository Company => _companyRepository.Value;
-    public IEmployeeRepository Employee => _employeeRepository.Value;
     public IUserRepository User => _userRepository.Value;
     public IUserRoleRepository UserRole => _userRoleRepository.Value;
     public IRoleRepository Role => _roleRepository.Value;

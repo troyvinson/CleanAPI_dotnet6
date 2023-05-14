@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataMigrations.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20230512151912_InitialCreateandSeed")]
+    [Migration("20230513160604_InitialCreateandSeed")]
     partial class InitialCreateandSeed
     {
         /// <inheritdoc />
@@ -24,100 +24,6 @@ namespace DataMigrations.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Domain.Entities.Company", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("CompanyId");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Companies");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "583 Wall Dr. Gwynn Oak, MD 21207",
-                            Country = "USA",
-                            Name = "IT_Solutions Ltd"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "312 Forest Avenue, BF 923",
-                            Country = "USA",
-                            Name = "Admin_Solutions Ltd"
-                        });
-                });
-
-            modelBuilder.Entity("Domain.Entities.Employee", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("EmployeeId");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Position")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
-
-                    b.ToTable("Employees");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Age = 26,
-                            CompanyId = 1,
-                            Name = "Sam Raiden",
-                            Position = "Software developer"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Age = 30,
-                            CompanyId = 2,
-                            Name = "Jana McLeaf",
-                            Position = "Software developer"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Age = 35,
-                            CompanyId = 2,
-                            Name = "Kane Miller",
-                            Position = "Administrator"
-                        });
-                });
 
             modelBuilder.Entity("Domain.Entities.Member", b =>
                 {
@@ -165,7 +71,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = 1,
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 12, 15, 19, 12, 596, DateTimeKind.Utc).AddTicks(3457),
+                            DateJoined = new DateTime(2023, 5, 13, 16, 6, 4, 425, DateTimeKind.Utc).AddTicks(1493),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Manager",
@@ -177,7 +83,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = 2,
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 12, 15, 19, 12, 596, DateTimeKind.Utc).AddTicks(3460),
+                            DateJoined = new DateTime(2023, 5, 13, 16, 6, 4, 425, DateTimeKind.Utc).AddTicks(1496),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Assistant Manager",
@@ -189,7 +95,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = 3,
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 12, 15, 19, 12, 596, DateTimeKind.Utc).AddTicks(3461),
+                            DateJoined = new DateTime(2023, 5, 13, 16, 6, 4, 425, DateTimeKind.Utc).AddTicks(1497),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Supervisor",
@@ -201,7 +107,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = 4,
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 12, 15, 19, 12, 596, DateTimeKind.Utc).AddTicks(3462),
+                            DateJoined = new DateTime(2023, 5, 13, 16, 6, 4, 425, DateTimeKind.Utc).AddTicks(1498),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Associate",
@@ -213,7 +119,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = 5,
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 12, 15, 19, 12, 596, DateTimeKind.Utc).AddTicks(3462),
+                            DateJoined = new DateTime(2023, 5, 13, 16, 6, 4, 425, DateTimeKind.Utc).AddTicks(1499),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Team Lead",
@@ -225,7 +131,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = 6,
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 12, 15, 19, 12, 596, DateTimeKind.Utc).AddTicks(3463),
+                            DateJoined = new DateTime(2023, 5, 13, 16, 6, 4, 425, DateTimeKind.Utc).AddTicks(1499),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Senior Associate",
@@ -237,7 +143,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = 7,
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 12, 15, 19, 12, 596, DateTimeKind.Utc).AddTicks(3464),
+                            DateJoined = new DateTime(2023, 5, 13, 16, 6, 4, 425, DateTimeKind.Utc).AddTicks(1500),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Trainer",
@@ -249,7 +155,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = 8,
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 12, 15, 19, 12, 596, DateTimeKind.Utc).AddTicks(3465),
+                            DateJoined = new DateTime(2023, 5, 13, 16, 6, 4, 425, DateTimeKind.Utc).AddTicks(1501),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Quality Assurance",
@@ -261,7 +167,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = 9,
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 12, 15, 19, 12, 596, DateTimeKind.Utc).AddTicks(3494),
+                            DateJoined = new DateTime(2023, 5, 13, 16, 6, 4, 425, DateTimeKind.Utc).AddTicks(1502),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Consultant",
@@ -273,7 +179,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = 10,
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 12, 15, 19, 12, 596, DateTimeKind.Utc).AddTicks(3495),
+                            DateJoined = new DateTime(2023, 5, 13, 16, 6, 4, 425, DateTimeKind.Utc).AddTicks(1503),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Project Manager",
@@ -285,7 +191,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = 11,
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 12, 15, 19, 12, 596, DateTimeKind.Utc).AddTicks(3496),
+                            DateJoined = new DateTime(2023, 5, 13, 16, 6, 4, 425, DateTimeKind.Utc).AddTicks(1504),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Technical Lead",
@@ -297,7 +203,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = 12,
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 12, 15, 19, 12, 596, DateTimeKind.Utc).AddTicks(3497),
+                            DateJoined = new DateTime(2023, 5, 13, 16, 6, 4, 425, DateTimeKind.Utc).AddTicks(1505),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Software Engineer",
@@ -309,7 +215,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = 13,
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 12, 15, 19, 12, 596, DateTimeKind.Utc).AddTicks(3498),
+                            DateJoined = new DateTime(2023, 5, 13, 16, 6, 4, 425, DateTimeKind.Utc).AddTicks(1505),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Sales Representative",
@@ -321,7 +227,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = 14,
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 12, 15, 19, 12, 596, DateTimeKind.Utc).AddTicks(3498),
+                            DateJoined = new DateTime(2023, 5, 13, 16, 6, 4, 425, DateTimeKind.Utc).AddTicks(1506),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Account Manager",
@@ -333,7 +239,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = 15,
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 12, 15, 19, 12, 596, DateTimeKind.Utc).AddTicks(3499),
+                            DateJoined = new DateTime(2023, 5, 13, 16, 6, 4, 425, DateTimeKind.Utc).AddTicks(1507),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "HR Manager",
@@ -345,7 +251,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = 16,
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 12, 15, 19, 12, 596, DateTimeKind.Utc).AddTicks(3500),
+                            DateJoined = new DateTime(2023, 5, 13, 16, 6, 4, 425, DateTimeKind.Utc).AddTicks(1508),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Recruiter",
@@ -357,7 +263,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = 17,
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 12, 15, 19, 12, 596, DateTimeKind.Utc).AddTicks(3501),
+                            DateJoined = new DateTime(2023, 5, 13, 16, 6, 4, 425, DateTimeKind.Utc).AddTicks(1509),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Financial Analyst",
@@ -369,7 +275,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = 18,
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 12, 15, 19, 12, 596, DateTimeKind.Utc).AddTicks(3502),
+                            DateJoined = new DateTime(2023, 5, 13, 16, 6, 4, 425, DateTimeKind.Utc).AddTicks(1510),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Controller",
@@ -381,7 +287,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = 19,
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 12, 15, 19, 12, 596, DateTimeKind.Utc).AddTicks(3503),
+                            DateJoined = new DateTime(2023, 5, 13, 16, 6, 4, 425, DateTimeKind.Utc).AddTicks(1510),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Marketing Manager",
@@ -393,7 +299,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = 20,
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 12, 15, 19, 12, 596, DateTimeKind.Utc).AddTicks(3504),
+                            DateJoined = new DateTime(2023, 5, 13, 16, 6, 4, 425, DateTimeKind.Utc).AddTicks(1511),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Social Media Specialist",
@@ -1850,17 +1756,6 @@ namespace DataMigrations.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Domain.Entities.Employee", b =>
-                {
-                    b.HasOne("Domain.Entities.Company", "Company")
-                        .WithMany("Employees")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Company");
-                });
-
             modelBuilder.Entity("Domain.Entities.Member", b =>
                 {
                     b.HasOne("Domain.Entities.Tenant", "Tenant")
@@ -1927,11 +1822,6 @@ namespace DataMigrations.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Company", b =>
-                {
-                    b.Navigation("Employees");
                 });
 
             modelBuilder.Entity("Domain.Entities.Member", b =>

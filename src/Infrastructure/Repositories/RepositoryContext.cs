@@ -13,8 +13,6 @@ public class RepositoryContext : DbContext
     {
     }
 
-    public DbSet<Company> Companies { get; set; }
-    public DbSet<Employee> Employees { get; set; }
     public DbSet<Tenant> Tenants { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Role> Roles { get; set; }
@@ -25,8 +23,6 @@ public class RepositoryContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(new CompanyConfiguration());
-        modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
         modelBuilder.ApplyConfiguration(new RoleConfiguration());
         modelBuilder.ApplyConfiguration(new RoleTypeConfiguration());
         modelBuilder.ApplyConfiguration(new TenantConfiguration());
