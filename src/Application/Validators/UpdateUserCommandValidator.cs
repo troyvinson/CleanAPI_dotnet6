@@ -5,9 +5,9 @@ using System.Text.RegularExpressions;
 
 namespace Application.Validators;
 
-public sealed class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
+public sealed class UpdateUserCommandValidator : AbstractValidator<UpdateUserCommand>
 {
-    public CreateUserCommandValidator()
+    public UpdateUserCommandValidator()
     {
         RuleFor(x => x.User.GivenName).NotEmpty().WithMessage("Given Name is required.");
         RuleFor(x => x.User.GivenName).MaximumLength(60).WithMessage("Given Name is too long (60 chars max).");
@@ -42,11 +42,11 @@ public sealed class CreateUserCommandValidator : AbstractValidator<CreateUserCom
         return Regex.IsMatch(emailAddress, @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$");
     }
 
-    public override ValidationResult Validate(ValidationContext<CreateUserCommand> context)
+    public override ValidationResult Validate(ValidationContext<UpdateUserCommand> context)
     {
         return context.InstanceToValidate.User is null
-            ? new ValidationResult(new[] { new ValidationFailure("UserForCreationDto",
-                "UserForCreationDto object is null") })
+            ? new ValidationResult(new[] { new ValidationFailure("UserForUpdateDto",
+                "UserForUpdateDto object is null") })
             : base.Validate(context);
     }
 }
