@@ -21,7 +21,7 @@ internal sealed class GetTenantsByIdsHandler : IRequestHandler<GetTenantsByIdsQu
         if (request is null)
             throw new IdParametersBadRequestException();
 
-        var ids = request.TenantIds.Split(',').Select(id => int.Parse(id)).ToList();
+        var ids = request.TenantIds.Split(',').Select(id => Guid.Parse(id)).ToList();
 
         var companyEntities = await _repository.Tenant.GetTenantsByIdsAsync(ids, request.TrackChanges);
         if (ids.Count != companyEntities.Count())

@@ -12,17 +12,17 @@ public sealed class MemberRepository : RepositoryBase<Member>, IMemberRepository
     {
     }
 
-    public async Task<Member?> GetMemberForTenantAsync(int tenantId, int memberId, bool trackChanges) =>
+    public async Task<Member?> GetMemberForTenantAsync(Guid tenantId, Guid memberId, bool trackChanges) =>
         await FindByCondition(e => e.TenantId.Equals(tenantId) && e.Id.Equals(memberId), trackChanges)
         .SingleOrDefaultAsync();
 
-    public async Task<IEnumerable<Member>> GetMembersForTenantAsync(int tenantId, MemberParameters memberParameters, bool trackChanges) =>
+    public async Task<IEnumerable<Member>> GetMembersForTenantAsync(Guid tenantId, MemberParameters memberParameters, bool trackChanges) =>
         await FindByCondition(e => e.TenantId.Equals(tenantId), trackChanges)
         .Search(memberParameters.SearchTerm)
         .Sort(memberParameters.OrderBy)
         .ToListAsync();
 
-    public async Task<PagedList<Member>> GetMembersForTenantPagedAsync(int tenantId, MemberAndPagingParameters memberParameters, bool trackChanges)
+    public async Task<PagedList<Member>> GetMembersForTenantPagedAsync(Guid tenantId, MemberAndPagingParameters memberParameters, bool trackChanges)
     {
         var members = await FindByCondition(e => e.TenantId.Equals(tenantId), trackChanges)
             .Search(memberParameters.SearchTerm)
@@ -33,13 +33,13 @@ public sealed class MemberRepository : RepositoryBase<Member>, IMemberRepository
             .ToPagedList(members, memberParameters.PageNumber, memberParameters.PageSize);
     }
 
-    public async Task<IEnumerable<Member>> GetMembersByIdsAsync(int tenantId, IEnumerable<int> memberIds, MemberParameters memberParameters, bool trackChanges) =>
+    public async Task<IEnumerable<Member>> GetMembersByIdsAsync(Guid tenantId, IEnumerable<Guid> memberIds, MemberParameters memberParameters, bool trackChanges) =>
         await FindByCondition(e => e.TenantId.Equals(tenantId) && memberIds.Contains(e.Id), trackChanges)
         .Search(memberParameters.SearchTerm)
         .Sort (memberParameters.OrderBy)
         .ToListAsync();
 
-    public void CreateMemberForTenant(int tenantId, Member member)
+    public void CreateMemberForTenant(Guid tenantId, Member member)
     {
         member.TenantId = tenantId;
         Create(member);

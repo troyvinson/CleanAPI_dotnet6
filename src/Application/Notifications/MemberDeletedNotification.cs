@@ -2,4 +2,4 @@
 
 namespace Application.Notifications;
 
-public sealed record MemberDeletedNotification(int MemberId, bool TrackChanges) : INotification;
+public sealed record MemberDeletedNotification(Guid MemberId, bool TrackChanges) : INotification;

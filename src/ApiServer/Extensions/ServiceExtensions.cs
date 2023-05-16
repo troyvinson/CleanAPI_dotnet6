@@ -1,11 +1,13 @@
 ﻿using ApiServer.Transformations;
 using Application.Behaviors;
+using Domain.Entities;
 using Domain.Interfaces;
 using FluentValidation;
 using Infrastructure.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
@@ -21,7 +23,8 @@ public static class ServiceExtensions
 
     public static void ConfigureAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
-        // Adds Microsoft Identity platform (AAD v2.0) support to protect this Api
+        services.AddAuthentication();
+        services.ConfigureIdentity();
         services.AddMicrosoftIdentityWebApiAuthentication(configuration);
         services.AddAuthorization();
         services.AddTransient<IClaimsTransformation, CustomClaimsTransformation>();
@@ -96,6 +99,22 @@ public static class ServiceExtensions
             });
 
         });
+
+    }
+
+    public static void ConfigureIdentity(this IServiceCollection services)
+    {
+        var builder = services.AddIdentity<User, IdentityRole>(o =>
+        {
+            o.Password.RequireDigit = true;
+            o.Password.RequireLowercase = false;
+            o.Password.RequireUppercase = false;
+            o.Password.RequireNonAlphanumeric = false;
+            o.Password.RequiredLength = 10;
+            o.User.RequireUniqueEmail = true;
+        })
+        .AddEntityFrameworkStores<RepositoryContext>()
+        .AddDefaultTokenProviders();
     }
 
 

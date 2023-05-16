@@ -36,7 +36,7 @@ public class TenantsController : ControllerBase
     [HttpGet("{id:int}", Name = "TenantById")]
     [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(TenantDto))]
     [SwaggerResponse(StatusCodes.Status404NotFound, Type = typeof(ErrorDetails))]
-    public async Task<IActionResult> GetTenantAsync(int id)
+    public async Task<IActionResult> GetTenantAsync(Guid id)
     {
         var tenant = await _sender.Send(new GetTenantQuery(id, TrackChanges: false));
 
@@ -113,7 +113,7 @@ public class TenantsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IReadOnlyDictionary<string, string[]>))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> UpdateTenantAsync(int id, TenantForUpdateDto tenantForUpdateDto)
+    public async Task<IActionResult> UpdateTenantAsync(Guid id, TenantForUpdateDto tenantForUpdateDto)
     {
         if (tenantForUpdateDto is null)
             return BadRequest("TenantForUpdateDto object is null");
@@ -133,7 +133,7 @@ public class TenantsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IReadOnlyDictionary<string, string[]>))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> PartiallyUpdateTenantAsync(int id, [FromBody] JsonPatchDocument<TenantForUpdateDto> patchDoc)
+    public async Task<IActionResult> PartiallyUpdateTenantAsync(Guid id, [FromBody] JsonPatchDocument<TenantForUpdateDto> patchDoc)
     {
         if (patchDoc is null)
             return BadRequest("patchDoc object sent from client is null.");
@@ -160,7 +160,7 @@ public class TenantsController : ControllerBase
     [HttpDelete("{id:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> DeleteTenantAsync(int tenantId)
+    public async Task<IActionResult> DeleteTenantAsync(Guid tenantId)
     {
         await _publisher.Publish(new TenantDeletedNotification(tenantId, TrackChanges: false));
 

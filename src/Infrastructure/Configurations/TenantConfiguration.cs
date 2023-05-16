@@ -9,20 +9,15 @@ public class TenantConfiguration : IEntityTypeConfiguration<Tenant>
     public void Configure(EntityTypeBuilder<Tenant> builder)
     {
         builder.HasQueryFilter(SoftDeleteExpression.CreateFilterExpression(typeof(Tenant)));
-        //builder.HasQueryFilter(t => !t.IsEnabled);
+        //builder.HasQueryFilter(t => t.IsEnabled);
 
         builder.HasData
         (
-            new Tenant { Id = 1, Name = "NovellaTech", IsEnabled = true },
-            new Tenant { Id = 2, Name = "VeloVentures", IsEnabled = true },
-            new Tenant { Id = 3, Name = "StellarWorks", IsEnabled = true },
-            new Tenant { Id = 4, Name = "Nexus Solutions", IsEnabled = true },
-            new Tenant { Id = 5, Name = "Zenith Dynamics", IsEnabled = true },
-            new Tenant { Id = 6, Name = "Horizon Innovations", IsEnabled = true },
-            new Tenant { Id = 7, Name = "QuantumCorp", IsEnabled = true },
-            new Tenant { Id = 8, Name = "FusionX Technologies", IsEnabled = true },
-            new Tenant { Id = 9, Name = "Apex Analytics", IsEnabled = true },
-            new Tenant { Id = 10, Name = "Luminary Labs", IsEnabled = true }
+            new Tenant { Id = Guid.Parse("{D46EAE42-FE4B-4706-BE3D-965B10E3861A}"), Name = "NovellaTech", IsEnabled = true },
+            new Tenant { Id = Guid.Parse("{D55A75A9-2F99-48EA-B256-E1A44B134D4E}"), Name = "VeloVentures", IsEnabled = true },
+            new Tenant { Id = Guid.Parse("{1BAFE33A-24B2-489E-BC1B-7F7E2FD00640}"), Name = "StellarWorks", IsEnabled = true },
+            new Tenant { Id = Guid.Parse("{27B0F8E4-72DC-4618-B0F4-12A33E2600DE}"), Name = "Nexus Solutions", IsEnabled = true },
+            new Tenant { Id = Guid.Parse("{BCB1F1CF-3072-49D4-BC96-72859E6F0F08}"), Name = "Zenith Dynamics", IsEnabled = true }
         );
     }
 }

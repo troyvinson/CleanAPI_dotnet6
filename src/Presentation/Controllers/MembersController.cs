@@ -41,7 +41,7 @@ public class MembersController : ControllerBase
     [HttpGet("{id:int}", Name = "GetMemberForTenant")]
     [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(MemberDto))]
     [SwaggerResponse(StatusCodes.Status404NotFound, Type = typeof(ErrorDetails))]
-    public async Task<IActionResult> GetMemberForTenantAsync(int tenantId, int id)
+    public async Task<IActionResult> GetMemberForTenantAsync(Guid tenantId, Guid id)
     {
         var member = await _sender.Send(new GetMemberForTenantQuery(tenantId, id, TrackChanges: false));
 
@@ -54,7 +54,7 @@ public class MembersController : ControllerBase
     /// <remarks><![CDATA[
     /// <h2>Searching and Sorting</h2>
     /// <h3>SearchTerm</h3>
-    /// Searches for term in User.Username, User.GivenName, and User.Surname
+    /// Searches for term in User.UserName, User.GivenName, and User.Surname
     /// <ul>Example:
     /// <li>?searchTerm=john</li>
     /// </ul>
@@ -62,8 +62,8 @@ public class MembersController : ControllerBase
     /// Sort by any field. My use asc or desc (default = asc).<br/>
     /// Additional sort fields are separated by commas.
     /// <ul>Example:
-    /// <li>?orderBy=User.Username desc</li>
-    /// <li>?orderBy=Position,User.Username desc</li>
+    /// <li>?orderBy=User.UserName desc</li>
+    /// <li>?orderBy=Position,User.UserName desc</li>
     /// </ul>
     /// ]]></remarks>
     /// <param name="tenantId"></param>
@@ -71,7 +71,7 @@ public class MembersController : ControllerBase
     /// <returns></returns>
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<MemberDto>))]
-    public async Task<IActionResult> GetMembersForTenantAsync(int tenantId, [FromQuery] MemberParameters memberParameters)
+    public async Task<IActionResult> GetMembersForTenantAsync(Guid tenantId, [FromQuery] MemberParameters memberParameters)
     {
         var members = await _sender.Send(new GetMembersForTenantQuery(tenantId, memberParameters, TrackChanges: false));
 
@@ -86,7 +86,7 @@ public class MembersController : ControllerBase
     /// <remarks><![CDATA[
     /// <h2>Searching and Sorting</h2>
     /// <h3>SearchTerm</h3>
-    /// Searches for term in User.Username, User.GivenName, and User.Surname
+    /// Searches for term in User.UserName, User.GivenName, and User.Surname
     /// <ul>Example:
     /// <li>?searchTerm=john</li>
     /// </ul>
@@ -94,8 +94,8 @@ public class MembersController : ControllerBase
     /// Sort by any field. My use asc or desc (default = asc).<br/>
     /// Additional sort fields are separated by commas.
     /// <ul>Example:
-    /// <li>?orderBy=User.Username desc</li>
-    /// <li>?orderBy=Position,User.Username desc</li>
+    /// <li>?orderBy=User.UserName desc</li>
+    /// <li>?orderBy=Position,User.UserName desc</li>
     /// </ul>
     /// <h2>Pagination</h2>
     /// <h3>PageSize and PageNumber</h3>
@@ -113,7 +113,7 @@ public class MembersController : ControllerBase
     /// <returns></returns>
     [HttpGet("paged")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<MemberDto>))]
-    public async Task<IActionResult> GetMembersForTenantPagedAsync(int tenantId, [FromQuery] MemberAndPagingParameters memberParameters)
+    public async Task<IActionResult> GetMembersForTenantPagedAsync(Guid tenantId, [FromQuery] MemberAndPagingParameters memberParameters)
     {
         (IEnumerable<MemberDto> members, PagingMetaData metaData) = await _sender.Send(new GetMembersForTenantPagedQuery(tenantId, memberParameters, TrackChanges: false));
 
@@ -132,7 +132,7 @@ public class MembersController : ControllerBase
     /// <p>Replace {ids} with a comma-delimited series of ints.</p>
     /// <h2>Searching and Sorting</h2>
     /// <h3>SearchTerm</h3>
-    /// Searches for term in User.Username, User.GivenName, and User.Surname
+    /// Searches for term in User.UserName, User.GivenName, and User.Surname
     /// <ul>Example:
     /// <li>?searchTerm=john</li>
     /// </ul>
@@ -140,14 +140,14 @@ public class MembersController : ControllerBase
     /// Sort by any field. My use asc or desc (default = asc).<br/>
     /// Additional sort fields are separated by commas.
     /// <ul>Example:
-    /// <li>?orderBy=User.Username desc</li>
-    /// <li>?orderBy=Position,User.Username desc</li>
+    /// <li>?orderBy=User.UserName desc</li>
+    /// <li>?orderBy=Position,User.UserName desc</li>
     /// </ul>
     /// ]]></remarks>
     /// <returns></returns>
     [HttpGet("collection/{ids}", Name = "MemberCollection")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<MemberDto>))]
-    public async Task<IActionResult> GetMemberCollectionAsync(int tenantId, string ids, [FromQuery] MemberParameters memberParameters)
+    public async Task<IActionResult> GetMemberCollectionAsync(Guid tenantId, string ids, [FromQuery] MemberParameters memberParameters)
     {
         var members = await _sender.Send(new GetMembersByIdsQuery(tenantId, ids, memberParameters, TrackChanges: false));
 
@@ -163,7 +163,7 @@ public class MembersController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IReadOnlyDictionary<string, string[]>))]
-    public async Task<IActionResult> CreateMemberForTenant(int tenantId, [FromBody] MemberForCreationDto memberToCreate)
+    public async Task<IActionResult> CreateMemberForTenant(Guid tenantId, [FromBody] MemberForCreationDto memberToCreate)
     {
         if (memberToCreate is null)
             return BadRequest("MemberForCreationDto object is null");
@@ -187,7 +187,7 @@ public class MembersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IReadOnlyDictionary<string, string[]>))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> UpdateMemberForTenant(int tenantId, int id, [FromBody] MemberForUpdateDto memberToUpdate)
+    public async Task<IActionResult> UpdateMemberForTenant(Guid tenantId, Guid id, [FromBody] MemberForUpdateDto memberToUpdate)
     {
         if (memberToUpdate is null)
             return BadRequest("MemberForUpdateDto object is null");
@@ -211,7 +211,7 @@ public class MembersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IReadOnlyDictionary<string, string[]>))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> PartiallyUpdateMemberForTenantAsync(int tenantId, int id,
+    public async Task<IActionResult> PartiallyUpdateMemberForTenantAsync(Guid tenantId, Guid id,
         [FromBody] JsonPatchDocument<MemberForUpdateDto> patchDoc)
     {
         if (patchDoc is null)
@@ -239,7 +239,7 @@ public class MembersController : ControllerBase
     [HttpDelete("{id:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> DeleteMemberForTenant(int tenantId, int id)
+    public async Task<IActionResult> DeleteMemberForTenant(Guid tenantId, Guid id)
     {
         await _publisher.Publish(new DeleteMemberCommand(tenantId, id, TrackChanges: false));
 

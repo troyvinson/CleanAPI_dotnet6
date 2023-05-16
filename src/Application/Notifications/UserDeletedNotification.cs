@@ -2,4 +2,4 @@
 
 namespace Application.Notifications;
 
-public sealed record UserDeletedNotification(int UserId, bool TrackChanges) : INotification;
+public sealed record UserDeletedNotification(string UserId, bool TrackChanges) : INotification;

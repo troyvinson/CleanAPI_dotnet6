@@ -21,7 +21,7 @@ internal sealed class GetMembersByIdsHandler : IRequestHandler<GetMembersByIdsQu
         if (request is null)
             throw new IdParametersBadRequestException();
 
-        var ids = request.MemberIds.Split(',').Select(id => int.Parse(id)).ToList();
+        var ids = request.MemberIds.Split(',').Select(id => Guid.Parse(id)).ToList();
 
         var memberEntities = await _repository.Member.GetMembersByIdsAsync(request.TenantId, ids, request.MemberParameters, request.TrackChanges);
 

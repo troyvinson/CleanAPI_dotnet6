@@ -13,10 +13,10 @@ public sealed class TenantRepository : RepositoryBase<Tenant>, ITenantRepository
         .OrderBy(t => t.Name)
         .ToListAsync();
 
-    public async Task<Tenant?> GetTenantByIdAsync(int tenantId, bool trackChanges) =>
+    public async Task<Tenant?> GetTenantByIdAsync(Guid tenantId, bool trackChanges) =>
         await FindByCondition(t => t.Id.Equals(tenantId), trackChanges).SingleOrDefaultAsync();
 
-    public async Task<IEnumerable<Tenant>> GetTenantsByIdsAsync(IEnumerable<int> tenantIds, bool trackChanges) =>
+    public async Task<IEnumerable<Tenant>> GetTenantsByIdsAsync(IEnumerable<Guid> tenantIds, bool trackChanges) =>
         await FindByCondition(r => tenantIds.Contains(r.Id), trackChanges)
         .ToListAsync();
 

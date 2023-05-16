@@ -18,9 +18,8 @@ public static class MemberRepositoryExtensions
         var lowerCaseTerm = searchTerm.Trim().ToLower();
 
         return members.Where(e => 
-            e.User!.Username.ToLower().Contains(lowerCaseTerm) || 
-            e.User!.GivenName.ToLower().Contains(lowerCaseTerm) ||
-            e.User!.Surname.ToLower().Contains(lowerCaseTerm));
+            e.User!.FirstName.ToLower().Contains(lowerCaseTerm) ||
+            e.User!.LastName.ToLower().Contains(lowerCaseTerm));
     }
 
     /// <summary>

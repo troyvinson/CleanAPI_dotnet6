@@ -2,6 +2,6 @@
 
 public record MemberForUpdateDto : MemberForManipulationDto
 {
-    public int TenantId { get; set; }
+    public Guid TenantId { get; set; }
 
 }

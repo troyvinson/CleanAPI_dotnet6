@@ -2,5 +2,5 @@
 
 namespace Application.Queries.Members;
 
-public sealed record GetMemberForTenantQuery(int TenantId,
-    int MemberId, bool TrackChanges) : IRequest<MemberDto>;
+public sealed record GetMemberForTenantQuery(Guid TenantId,
+    Guid MemberId, bool TrackChanges) : IRequest<MemberDto>;

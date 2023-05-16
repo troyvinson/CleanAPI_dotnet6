@@ -2,4 +2,4 @@
 
 namespace Application.Queries.Tenants;
 
-public sealed record GetTenantQuery(int TenantId, bool TrackChanges) : IRequest<TenantDto>;
+public sealed record GetTenantQuery(Guid TenantId, bool TrackChanges) : IRequest<TenantDto>;
