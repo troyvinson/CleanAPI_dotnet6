@@ -36,15 +36,6 @@ public class UsersController : ControllerBase
 
         var result = await _sender.Send(new RegisterUserCommand(userForRegistration));
 
-        if (!result.Succeeded)
-        {
-            foreach (var error in result.Errors)
-            {
-                ModelState.TryAddModelError(error.Code, error.Description);
-            }
-            return BadRequest(ModelState);
-        }
-
         return Created("helpme", result);
     }
 
