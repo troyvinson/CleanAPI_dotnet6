@@ -1,16 +1,15 @@
-﻿using Application.Commands.Tenants;
-using AutoMapper;
+﻿using AutoMapper;
 using Domain.Exceptions;
 using MediatR;
 
-namespace Application.Handlers.Tenants;
+namespace Application.Commands.Tenants;
 
-internal sealed class UpdateTenantHandler : IRequestHandler<UpdateTenantCommand, Unit>
+internal sealed class UpdateTenantCommandHandler : IRequestHandler<UpdateTenantCommand, Unit>
 {
     private readonly IRepositoryManager _repository;
     private readonly IMapper _mapper;
 
-    public UpdateTenantHandler(IRepositoryManager repository, IMapper mapper)
+    public UpdateTenantCommandHandler(IRepositoryManager repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;

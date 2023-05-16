@@ -1,15 +1,14 @@
-﻿using Application.Queries.Tenants;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 
-namespace Application.Handlers.Tenants;
+namespace Application.Queries.Tenants;
 
-internal sealed class GetTenantsHandler : IRequestHandler<GetTenantsQuery, IEnumerable<TenantDto>>
+internal sealed class GetTenantsQueryHandler : IRequestHandler<GetTenantsQuery, IEnumerable<TenantDto>>
 {
     private readonly IRepositoryManager _repository;
     private readonly IMapper _mapper;
 
-    public GetTenantsHandler(IRepositoryManager repository, IMapper mapper)
+    public GetTenantsQueryHandler(IRepositoryManager repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;

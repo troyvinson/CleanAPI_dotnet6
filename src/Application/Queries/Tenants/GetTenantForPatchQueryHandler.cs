@@ -1,16 +1,15 @@
-﻿using Application.Queries.Tenants;
-using AutoMapper;
+﻿using AutoMapper;
 using Domain.Exceptions;
 using MediatR;
 
-namespace Application.Handlers.Tenants;
+namespace Application.Queries.Tenants;
 
-internal sealed class GetTenantForPatchHandler : IRequestHandler<GetTenantForPatchQuery, (TenantForUpdateDto tenantToPatch, Tenant tenantEntity)>
+internal sealed class GetTenantForPatchQueryHandler : IRequestHandler<GetTenantForPatchQuery, (TenantForUpdateDto tenantToPatch, Tenant tenantEntity)>
 {
     private readonly IRepositoryManager _repository;
     private readonly IMapper _mapper;
 
-    public GetTenantForPatchHandler(IRepositoryManager repository, IMapper mapper)
+    public GetTenantForPatchQueryHandler(IRepositoryManager repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;

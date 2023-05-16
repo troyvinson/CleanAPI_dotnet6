@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace Application.Profiles;
+namespace Application;
 
 public class MappingProfile : Profile
 {

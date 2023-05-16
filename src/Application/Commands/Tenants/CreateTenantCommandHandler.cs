@@ -1,15 +1,14 @@
-﻿using Application.Commands.Tenants;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 
-namespace Application.Handlers.Tenants;
+namespace Application.Commands.Tenants;
 
-internal sealed class CreateTenantHandler : IRequestHandler<CreateTenantCommand, TenantDto>
+internal sealed class CreateTenantCommandHandler : IRequestHandler<CreateTenantCommand, TenantDto>
 {
     private readonly IRepositoryManager _repository;
     private readonly IMapper _mapper;
 
-    public CreateTenantHandler(IRepositoryManager repository, IMapper mapper)
+    public CreateTenantCommandHandler(IRepositoryManager repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;

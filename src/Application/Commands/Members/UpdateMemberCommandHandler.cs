@@ -1,16 +1,15 @@
-﻿using Application.Commands.Members;
-using AutoMapper;
+﻿using AutoMapper;
 using Domain.Exceptions;
 using MediatR;
 
-namespace Application.Handlers.Members;
+namespace Application.Commands.Members;
 
-internal sealed class UpdateMemberHandler : IRequestHandler<UpdateMemberCommand, Unit>
+internal sealed class UpdateMemberCommandHandler : IRequestHandler<UpdateMemberCommand, Unit>
 {
     private readonly IRepositoryManager _repository;
     private readonly IMapper _mapper;
 
-    public UpdateMemberHandler(IRepositoryManager repository, IMapper mapper)
+    public UpdateMemberCommandHandler(IRepositoryManager repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;

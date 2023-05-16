@@ -1,17 +1,16 @@
-﻿using Application.Queries.Members;
-using AutoMapper;
+﻿using AutoMapper;
 using Domain.Exceptions;
 using Domain.RequestFeatures;
 using MediatR;
 
-namespace Application.Handlers.Members;
+namespace Application.Queries.Members;
 
-internal sealed class GetMembersForTenantHandler : IRequestHandler<GetMembersForTenantQuery, IEnumerable<MemberDto>>
+internal sealed class GetMembersForTenantQueryHandler : IRequestHandler<GetMembersForTenantQuery, IEnumerable<MemberDto>>
 {
     private readonly IRepositoryManager _repository;
     private readonly IMapper _mapper;
 
-    public GetMembersForTenantHandler(IRepositoryManager repository, IMapper mapper)
+    public GetMembersForTenantQueryHandler(IRepositoryManager repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;

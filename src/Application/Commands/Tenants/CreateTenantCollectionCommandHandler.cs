@@ -1,16 +1,15 @@
-﻿using Application.Commands.Tenants;
-using AutoMapper;
+﻿using AutoMapper;
 using Domain.Exceptions;
 using MediatR;
 
-namespace Application.Handlers.Tenants;
+namespace Application.Commands.Tenants;
 
-internal sealed class CreateTenantCollectionHandler : IRequestHandler<CreateTenantCollectionCommand, (IEnumerable<TenantDto> tenants, string ids)>
+internal sealed class CreateTenantCollectionCommandHandler : IRequestHandler<CreateTenantCollectionCommand, (IEnumerable<TenantDto> tenants, string ids)>
 {
     private readonly IRepositoryManager _repository;
     private readonly IMapper _mapper;
 
-    public CreateTenantCollectionHandler(IRepositoryManager repository, IMapper mapper)
+    public CreateTenantCollectionCommandHandler(IRepositoryManager repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;

@@ -1,16 +1,15 @@
-﻿using Application.Queries.Members;
-using AutoMapper;
+﻿using AutoMapper;
 using Domain.Exceptions;
 using MediatR;
 
-namespace Application.Handlers.Members;
+namespace Application.Queries.Members;
 
-internal sealed class GetMemberForPatchHandler : IRequestHandler<GetMemberForPatchQuery, (MemberForUpdateDto memberToPatch, Member memberEntity)>
+internal sealed class GetMemberForPatchQueryHandler : IRequestHandler<GetMemberForPatchQuery, (MemberForUpdateDto memberToPatch, Member memberEntity)>
 {
     private readonly IRepositoryManager _repository;
     private readonly IMapper _mapper;
 
-    public GetMemberForPatchHandler(IRepositoryManager repository, IMapper mapper)
+    public GetMemberForPatchQueryHandler(IRepositoryManager repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;

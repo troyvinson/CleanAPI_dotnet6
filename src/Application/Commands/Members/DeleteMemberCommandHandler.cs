@@ -1,14 +1,13 @@
-﻿using Application.Commands.Members;
-using Domain.Exceptions;
+﻿using Domain.Exceptions;
 using MediatR;
 
-namespace Application.Handlers.Members;
+namespace Application.Commands.Members;
 
-internal sealed class DeleteMemberHandler : IRequestHandler<DeleteMemberCommand>
+internal sealed class DeleteMemberCommandHandler : IRequestHandler<DeleteMemberCommand>
 {
     private readonly IRepositoryManager _repository;
 
-    public DeleteMemberHandler(IRepositoryManager repository) => _repository = repository;
+    public DeleteMemberCommandHandler(IRepositoryManager repository) => _repository = repository;
 
     public async Task Handle(DeleteMemberCommand request, CancellationToken cancellationToken)
     {

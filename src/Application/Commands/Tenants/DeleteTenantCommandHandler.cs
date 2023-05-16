@@ -2,13 +2,13 @@
 using Domain.Exceptions;
 using MediatR;
 
-namespace Application.Handlers.Tenants;
+namespace Application.Commands.Tenants;
 
-internal sealed class DeleteTenantHandler : INotificationHandler<TenantDeletedNotification>
+internal sealed class DeleteTenantCommandHandler : INotificationHandler<TenantDeletedNotification>
 {
     private readonly IRepositoryManager _repository;
 
-    public DeleteTenantHandler(IRepositoryManager repository) => _repository = repository;
+    public DeleteTenantCommandHandler(IRepositoryManager repository) => _repository = repository;
 
     public async Task Handle(TenantDeletedNotification notification, CancellationToken cancellationToken)
     {

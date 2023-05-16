@@ -1,9 +1,8 @@
-﻿using Application.Commands.Tenants;
-using FluentValidation;
+﻿using FluentValidation;
 using FluentValidation.Results;
 using System.Text.RegularExpressions;
 
-namespace Application.Validators;
+namespace Application.Commands.Tenants;
 
 public sealed class CreateTenantCommandValidator : AbstractValidator<CreateTenantCommand>
 {

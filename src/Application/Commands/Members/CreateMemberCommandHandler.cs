@@ -1,15 +1,14 @@
-﻿using Application.Commands.Members;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 
-namespace Application.Handlers.Members;
+namespace Application.Commands.Members;
 
-internal sealed class CreateMemberHandler : IRequestHandler<CreateMemberCommand, MemberDto>
+internal sealed class CreateMemberCommandHandler : IRequestHandler<CreateMemberCommand, MemberDto>
 {
     private readonly IRepositoryManager _repository;
     private readonly IMapper _mapper;
 
-    public CreateMemberHandler(IRepositoryManager repository, IMapper mapper)
+    public CreateMemberCommandHandler(IRepositoryManager repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;
