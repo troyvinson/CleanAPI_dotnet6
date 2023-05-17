@@ -31,13 +31,13 @@ public sealed class RegisterUserCommandValidator : AbstractValidator<RegisterUse
         return Regex.IsMatch(phoneNumber, @"^\+?(\d[\d-. ]+)?(\([\d-. ]+\))?[\d-. ]+\d$");
     }
 
-    private static bool BeAValidEmailAddress(string emailAddress)
-    {
-        if (string.IsNullOrEmpty(emailAddress))
-            return false;
+    //private static bool BeAValidEmailAddress(string emailAddress)
+    //{
+    //    if (string.IsNullOrEmpty(emailAddress))
+    //        return false;
 
-        return Regex.IsMatch(emailAddress, @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$");
-    }
+    //    return Regex.IsMatch(emailAddress, @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$");
+    //}
 
     public override ValidationResult Validate(ValidationContext<RegisterUserCommand> context)
     {

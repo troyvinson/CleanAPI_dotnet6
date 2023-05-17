@@ -13,16 +13,6 @@ namespace Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Session>> GetSessionsAsync(bool trackChanges)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Session>> GetSessionsByIdsAsync(IEnumerable<int> ids, bool trackChanges)
-        {
-            throw new NotImplementedException();
-        }
-
         public void CreateSession(Session role)
         {
             throw new NotImplementedException();

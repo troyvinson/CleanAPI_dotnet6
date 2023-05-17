@@ -6,13 +6,14 @@ namespace Application.Commands.Users;
 
 internal sealed class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, IdentityResult>
 {
-    private readonly IRepositoryManager _repository;
+    //private readonly IRepositoryManager _repository;
     private readonly UserManager<User> _userManager;
     private readonly IMapper _mapper;
 
-    public RegisterUserCommandHandler(IRepositoryManager repository, IMapper mapper, UserManager<User> userManager)
+    //public RegisterUserCommandHandler(IRepositoryManager repository, IMapper mapper, UserManager<User> userManager)
+    public RegisterUserCommandHandler(IMapper mapper, UserManager<User> userManager)
     {
-        _repository = repository;
+        //_repository = repository;
         _userManager = userManager;
         _mapper = mapper;
     }

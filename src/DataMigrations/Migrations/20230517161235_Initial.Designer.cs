@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataMigrations.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20230515195601_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230517161235_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,7 +69,149 @@ namespace DataMigrations.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Member");
+                    b.ToTable("Members");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("e180d192-27d6-4007-87ab-9782e45ebb62"),
+                            CreatedBy = "",
+                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DateJoined = new DateTime(2023, 5, 17, 16, 12, 35, 715, DateTimeKind.Utc).AddTicks(179),
+                            IsDeleted = false,
+                            IsEnabled = true,
+                            Position = "Manager",
+                            TenantId = new Guid("d46eae42-fe4b-4706-be3d-965b10e3861a"),
+                            UpdatedBy = "",
+                            UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            UserId = "BCB1F1CF-3072-49D4-BC96-72859E6F0F08"
+                        },
+                        new
+                        {
+                            Id = new Guid("7e2d12e1-74f6-49f9-b28f-070d048e1e14"),
+                            CreatedBy = "",
+                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DateJoined = new DateTime(2023, 5, 17, 16, 12, 35, 715, DateTimeKind.Utc).AddTicks(184),
+                            IsDeleted = false,
+                            IsEnabled = true,
+                            Position = "Assistant Manager",
+                            TenantId = new Guid("d46eae42-fe4b-4706-be3d-965b10e3861a"),
+                            UpdatedBy = "",
+                            UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            UserId = "33BCFBF7-EDFC-4F7A-8224-9802519D299D"
+                        },
+                        new
+                        {
+                            Id = new Guid("82f7a407-1c94-406a-b60e-f172c3d1b743"),
+                            CreatedBy = "",
+                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DateJoined = new DateTime(2023, 5, 17, 16, 12, 35, 715, DateTimeKind.Utc).AddTicks(186),
+                            IsDeleted = false,
+                            IsEnabled = true,
+                            Position = "Supervisor",
+                            TenantId = new Guid("d46eae42-fe4b-4706-be3d-965b10e3861a"),
+                            UpdatedBy = "",
+                            UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            UserId = "A1A68798-B47F-4653-B37D-D2C4FF37FE9D"
+                        },
+                        new
+                        {
+                            Id = new Guid("7a1a1100-c588-47d8-807f-2d242b2dea72"),
+                            CreatedBy = "",
+                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DateJoined = new DateTime(2023, 5, 17, 16, 12, 35, 715, DateTimeKind.Utc).AddTicks(188),
+                            IsDeleted = false,
+                            IsEnabled = true,
+                            Position = "Associate",
+                            TenantId = new Guid("d46eae42-fe4b-4706-be3d-965b10e3861a"),
+                            UpdatedBy = "",
+                            UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            UserId = "FF971359-568F-4CCF-8F62-194AAE51C745"
+                        },
+                        new
+                        {
+                            Id = new Guid("07c752a9-2eef-4f09-a248-78aa1e90307c"),
+                            CreatedBy = "",
+                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DateJoined = new DateTime(2023, 5, 17, 16, 12, 35, 715, DateTimeKind.Utc).AddTicks(190),
+                            IsDeleted = false,
+                            IsEnabled = true,
+                            Position = "Team Lead",
+                            TenantId = new Guid("d46eae42-fe4b-4706-be3d-965b10e3861a"),
+                            UpdatedBy = "",
+                            UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            UserId = "87C317FA-EED0-4E6F-A49F-29D73539D9DE"
+                        },
+                        new
+                        {
+                            Id = new Guid("c3c65b72-6fba-4a99-928c-ba3347efbd9a"),
+                            CreatedBy = "",
+                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DateJoined = new DateTime(2023, 5, 17, 16, 12, 35, 715, DateTimeKind.Utc).AddTicks(193),
+                            IsDeleted = false,
+                            IsEnabled = true,
+                            Position = "Senior Associate",
+                            TenantId = new Guid("d46eae42-fe4b-4706-be3d-965b10e3861a"),
+                            UpdatedBy = "",
+                            UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            UserId = "A54FF230-6063-42BD-A37B-457D579B2544"
+                        },
+                        new
+                        {
+                            Id = new Guid("0d471414-d1b6-4415-8fbf-dbec7c61de8e"),
+                            CreatedBy = "",
+                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DateJoined = new DateTime(2023, 5, 17, 16, 12, 35, 715, DateTimeKind.Utc).AddTicks(195),
+                            IsDeleted = false,
+                            IsEnabled = true,
+                            Position = "Trainer",
+                            TenantId = new Guid("d46eae42-fe4b-4706-be3d-965b10e3861a"),
+                            UpdatedBy = "",
+                            UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            UserId = "A62A61E1-419D-4C80-BA81-E6DDCCC50B1C"
+                        },
+                        new
+                        {
+                            Id = new Guid("739eb8cb-ec9f-44fb-9329-b913859e10b0"),
+                            CreatedBy = "",
+                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DateJoined = new DateTime(2023, 5, 17, 16, 12, 35, 715, DateTimeKind.Utc).AddTicks(197),
+                            IsDeleted = false,
+                            IsEnabled = true,
+                            Position = "Quality Assurance",
+                            TenantId = new Guid("d55a75a9-2f99-48ea-b256-e1a44b134d4e"),
+                            UpdatedBy = "",
+                            UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            UserId = "BCB1F1CF-3072-49D4-BC96-72859E6F0F08"
+                        },
+                        new
+                        {
+                            Id = new Guid("c118cf09-5fec-4adc-a915-52ed765f1ff3"),
+                            CreatedBy = "",
+                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DateJoined = new DateTime(2023, 5, 17, 16, 12, 35, 715, DateTimeKind.Utc).AddTicks(199),
+                            IsDeleted = false,
+                            IsEnabled = true,
+                            Position = "Consultant",
+                            TenantId = new Guid("d55a75a9-2f99-48ea-b256-e1a44b134d4e"),
+                            UpdatedBy = "",
+                            UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            UserId = "6F110D05-8EED-483B-B2FB-0D5FF1601809"
+                        },
+                        new
+                        {
+                            Id = new Guid("0724349d-d0b5-4606-bcc7-991b06605bed"),
+                            CreatedBy = "",
+                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DateJoined = new DateTime(2023, 5, 17, 16, 12, 35, 715, DateTimeKind.Utc).AddTicks(201),
+                            IsDeleted = false,
+                            IsEnabled = true,
+                            Position = "Project Manager",
+                            TenantId = new Guid("d55a75a9-2f99-48ea-b256-e1a44b134d4e"),
+                            UpdatedBy = "",
+                            UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            UserId = "B3B8EFA5-632C-4027-9D16-9703EE09BC92"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Tenant", b =>
@@ -103,7 +245,31 @@ namespace DataMigrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tenant");
+                    b.ToTable("Tenants");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("d46eae42-fe4b-4706-be3d-965b10e3861a"),
+                            CreatedBy = "",
+                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            IsDeleted = false,
+                            IsEnabled = true,
+                            Name = "NovellaTech",
+                            UpdatedBy = "",
+                            UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("d55a75a9-2f99-48ea-b256-e1a44b134d4e"),
+                            CreatedBy = "",
+                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            IsDeleted = false,
+                            IsEnabled = true,
+                            Name = "VeloVentures",
+                            UpdatedBy = "",
+                            UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
@@ -118,6 +284,10 @@ namespace DataMigrations.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTimeOffset>("CreatedDate")
                         .HasColumnType("datetimeoffset");
 
@@ -129,14 +299,15 @@ namespace DataMigrations.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsEnabled")
+                        .HasColumnType("bit");
+
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -168,6 +339,10 @@ namespace DataMigrations.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTimeOffset>("UpdatedDate")
                         .HasColumnType("datetimeoffset");
 
@@ -192,18 +367,21 @@ namespace DataMigrations.Migrations
                         {
                             Id = "BCB1F1CF-3072-49D4-BC96-72859E6F0F08",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b7a96d37-c454-4194-9909-8f087882c16a",
+                            ConcurrencyStamp = "bea0e015-c78a-42d2-8054-58683b59e3e1",
+                            CreatedBy = "",
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "johndoe@example.com",
                             EmailConfirmed = false,
                             FirstName = "John",
                             IsDeleted = false,
+                            IsEnabled = false,
                             LastName = "Doe",
                             LockoutEnabled = false,
                             PhoneNumber = "555-111-1111",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3b98bf5e-614f-4715-99eb-29b85a8fd8cd",
+                            SecurityStamp = "a312e53f-1a7e-4b9f-824e-2a8dba673fae",
                             TwoFactorEnabled = false,
+                            UpdatedBy = "",
                             UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             UserName = "johndoe"
                         },
@@ -211,18 +389,21 @@ namespace DataMigrations.Migrations
                         {
                             Id = "33BCFBF7-EDFC-4F7A-8224-9802519D299D",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "236876a4-f8d6-4b1c-ba54-efe146c8eeea",
+                            ConcurrencyStamp = "d86f600c-ac2a-4829-8ec6-2c8dcd09ebcd",
+                            CreatedBy = "",
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "janesmith@example.com",
                             EmailConfirmed = false,
                             FirstName = "Jane",
                             IsDeleted = false,
+                            IsEnabled = false,
                             LastName = "Smith",
                             LockoutEnabled = false,
                             PhoneNumber = "555-222-2222",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d5167ec8-dcf7-4fab-812b-ac47e7a311c4",
+                            SecurityStamp = "a8bcb5c5-4e7b-409a-8cec-3486ed1e2cc5",
                             TwoFactorEnabled = false,
+                            UpdatedBy = "",
                             UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             UserName = "janesmith"
                         },
@@ -230,18 +411,21 @@ namespace DataMigrations.Migrations
                         {
                             Id = "A1A68798-B47F-4653-B37D-D2C4FF37FE9D",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "008026c8-e078-481d-bea9-a1aec7455009",
+                            ConcurrencyStamp = "6f21bcac-2c94-4750-b89a-64a1c683f107",
+                            CreatedBy = "",
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "michaelj@example.com",
                             EmailConfirmed = false,
                             FirstName = "Michael",
                             IsDeleted = false,
+                            IsEnabled = false,
                             LastName = "Johnson",
                             LockoutEnabled = false,
                             PhoneNumber = "555-333-3333",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "031617df-3062-49e3-bea6-37f5b153f002",
+                            SecurityStamp = "d1eff772-063a-4906-a23f-7879a450babb",
                             TwoFactorEnabled = false,
+                            UpdatedBy = "",
                             UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             UserName = "michaelj"
                         },
@@ -249,18 +433,21 @@ namespace DataMigrations.Migrations
                         {
                             Id = "FF971359-568F-4CCF-8F62-194AAE51C745",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "de847a46-23ed-43da-8579-c16b5daf63cf",
+                            ConcurrencyStamp = "360d51b2-abec-4dd6-8ae6-9ce829e1af45",
+                            CreatedBy = "",
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "emilyw@example.com",
                             EmailConfirmed = false,
                             FirstName = "Emily",
                             IsDeleted = false,
+                            IsEnabled = false,
                             LastName = "Williams",
                             LockoutEnabled = false,
                             PhoneNumber = "555-444-4444",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "53c6ef13-00bd-405d-a796-0b0eba013d7e",
+                            SecurityStamp = "98251192-7661-42e6-bdc4-41acaa8f31d6",
                             TwoFactorEnabled = false,
+                            UpdatedBy = "",
                             UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             UserName = "emilyw"
                         },
@@ -268,18 +455,21 @@ namespace DataMigrations.Migrations
                         {
                             Id = "87C317FA-EED0-4E6F-A49F-29D73539D9DE",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8cf38674-aa80-481f-ab58-41fc43682818",
+                            ConcurrencyStamp = "4fdea714-38a4-4e5a-86eb-0f15f7d2f3f2",
+                            CreatedBy = "",
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "danielb@example.com",
                             EmailConfirmed = false,
                             FirstName = "Daniel",
                             IsDeleted = false,
+                            IsEnabled = false,
                             LastName = "Brown",
                             LockoutEnabled = false,
                             PhoneNumber = "555-555-5555",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "edb6e487-79cc-49b1-8334-523c477572fe",
+                            SecurityStamp = "a36252e3-7367-43cf-9fc5-80cac446d8f9",
                             TwoFactorEnabled = false,
+                            UpdatedBy = "",
                             UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             UserName = "danielb"
                         },
@@ -287,18 +477,21 @@ namespace DataMigrations.Migrations
                         {
                             Id = "A54FF230-6063-42BD-A37B-457D579B2544",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1c29a9b5-659c-4b8b-a676-0bb879898181",
+                            ConcurrencyStamp = "797cb012-e3d4-42a4-b37e-00a98e810ecc",
+                            CreatedBy = "",
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "oliviaj@example.com",
                             EmailConfirmed = false,
                             FirstName = "Olivia",
                             IsDeleted = false,
+                            IsEnabled = false,
                             LastName = "Jones",
                             LockoutEnabled = false,
                             PhoneNumber = "555-666-6666",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "86bda8f2-2b29-409e-a6b5-b30d561404ed",
+                            SecurityStamp = "e74ae829-e00d-45cd-b3e2-936ef2a5051e",
                             TwoFactorEnabled = false,
+                            UpdatedBy = "",
                             UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             UserName = "oliviaj"
                         },
@@ -306,18 +499,21 @@ namespace DataMigrations.Migrations
                         {
                             Id = "A62A61E1-419D-4C80-BA81-E6DDCCC50B1C",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "441b9232-9ea2-4b90-aabe-2fae6cf043db",
+                            ConcurrencyStamp = "cd43d016-e7d1-4d33-a000-0f96abe2d2e8",
+                            CreatedBy = "",
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "davidm@example.com",
                             EmailConfirmed = false,
                             FirstName = "David",
                             IsDeleted = false,
+                            IsEnabled = false,
                             LastName = "Miller",
                             LockoutEnabled = false,
                             PhoneNumber = "555-777-7777",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2cb44711-f0aa-4179-946b-7e7f50ada789",
+                            SecurityStamp = "0935cfbe-72f4-4672-b273-dbc6dc498328",
                             TwoFactorEnabled = false,
+                            UpdatedBy = "",
                             UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             UserName = "davidm"
                         },
@@ -325,18 +521,21 @@ namespace DataMigrations.Migrations
                         {
                             Id = "6F110D05-8EED-483B-B2FB-0D5FF1601809",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "78481d54-4e5e-43ec-b673-028151f544e7",
+                            ConcurrencyStamp = "75a70ec5-8773-4bcc-a41f-88fe99be630b",
+                            CreatedBy = "",
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "sophiad@example.com",
                             EmailConfirmed = false,
                             FirstName = "Sophia",
                             IsDeleted = false,
+                            IsEnabled = false,
                             LastName = "Davis",
                             LockoutEnabled = false,
                             PhoneNumber = "555-888-8888",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1fb24743-b36a-4533-b347-a38903aa1060",
+                            SecurityStamp = "3793d778-76c2-4f16-9a3f-d29183a54e23",
                             TwoFactorEnabled = false,
+                            UpdatedBy = "",
                             UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             UserName = "sophiad"
                         },
@@ -344,18 +543,21 @@ namespace DataMigrations.Migrations
                         {
                             Id = "B3B8EFA5-632C-4027-9D16-9703EE09BC92",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b2ccf4a5-0509-4842-acec-e7a6159f0ed3",
+                            ConcurrencyStamp = "13db3705-121a-47a2-96ba-57b8dcea9b91",
+                            CreatedBy = "",
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "jamesw@example.com",
                             EmailConfirmed = false,
                             FirstName = "James",
                             IsDeleted = false,
+                            IsEnabled = false,
                             LastName = "Wilson",
                             LockoutEnabled = false,
                             PhoneNumber = "555-999-9999",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fbe4a1f4-4347-48fb-a087-a70a65333e3d",
+                            SecurityStamp = "00d3eede-2ef8-4b03-bd42-02fef45446e4",
                             TwoFactorEnabled = false,
+                            UpdatedBy = "",
                             UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             UserName = "jamesw"
                         },
@@ -363,18 +565,21 @@ namespace DataMigrations.Migrations
                         {
                             Id = "28279BE8-C3F4-451A-82FE-C11828C6AA1D",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9835e4a1-d875-4654-ab13-7813cf0a3eec",
+                            ConcurrencyStamp = "9727d859-3546-4379-a9bc-96257f34c985",
+                            CreatedBy = "",
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "emmat@example.com",
                             EmailConfirmed = false,
                             FirstName = "Emma",
                             IsDeleted = false,
+                            IsEnabled = false,
                             LastName = "Taylor",
                             LockoutEnabled = false,
                             PhoneNumber = "555-000-0000",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "13def0a3-b7bc-4841-a286-f221eb562073",
+                            SecurityStamp = "5d955ca8-e156-43ad-a774-218823f1ae8a",
                             TwoFactorEnabled = false,
+                            UpdatedBy = "",
                             UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             UserName = "emmat"
                         },
@@ -382,18 +587,21 @@ namespace DataMigrations.Migrations
                         {
                             Id = "557D1752-0B6A-4FFA-B939-29A57EAA0E91",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0dff70a6-76e1-43d1-a178-4fc66145e22c",
+                            ConcurrencyStamp = "ca980d56-8ac8-4e84-8202-20d952d861e3",
+                            CreatedBy = "",
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "benjamina@example.com",
                             EmailConfirmed = false,
                             FirstName = "Benjamin",
                             IsDeleted = false,
+                            IsEnabled = false,
                             LastName = "Anderson",
                             LockoutEnabled = false,
                             PhoneNumber = "555-111-1111",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "94fb5d81-f22f-449a-b662-f03832463a0f",
+                            SecurityStamp = "3a184c27-371d-4423-b019-ef5a4e2a76f9",
                             TwoFactorEnabled = false,
+                            UpdatedBy = "",
                             UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             UserName = "benjamina"
                         },
@@ -401,18 +609,21 @@ namespace DataMigrations.Migrations
                         {
                             Id = "BDDFCAEC-E23E-4D61-8A02-0A1F75D40240",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e0d96f2d-a814-4205-a2ef-333372085c13",
+                            ConcurrencyStamp = "e7520eed-b308-429d-b794-d54fc07f1c8c",
+                            CreatedBy = "",
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "avam@example.com",
                             EmailConfirmed = false,
                             FirstName = "Ava",
                             IsDeleted = false,
+                            IsEnabled = false,
                             LastName = "Martinez",
                             LockoutEnabled = false,
                             PhoneNumber = "555-222-2222",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "794e5e3f-c71e-4c9b-be1f-5a0df09c1a1d",
+                            SecurityStamp = "97c80158-3a6a-4c33-96d9-281944a0f738",
                             TwoFactorEnabled = false,
+                            UpdatedBy = "",
                             UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             UserName = "avam"
                         },
@@ -420,18 +631,21 @@ namespace DataMigrations.Migrations
                         {
                             Id = "8D5F0776-AC3C-4C33-9EF1-FA9DC2933972",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f5400431-22cd-4546-87ce-cc69af25e5e3",
+                            ConcurrencyStamp = "80587072-ed57-4918-ac9d-bcf7e0eaf670",
+                            CreatedBy = "",
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "williamt@example.com",
                             EmailConfirmed = false,
                             FirstName = "William",
                             IsDeleted = false,
+                            IsEnabled = false,
                             LastName = "Thomas",
                             LockoutEnabled = false,
                             PhoneNumber = "555-333-3333",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bca8ebda-736b-4e50-9438-6416771446b1",
+                            SecurityStamp = "3a922db9-1a29-4ee2-a555-23f472690df0",
                             TwoFactorEnabled = false,
+                            UpdatedBy = "",
                             UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             UserName = "williamt"
                         },
@@ -439,18 +653,21 @@ namespace DataMigrations.Migrations
                         {
                             Id = "F476A298-9040-4F68-86A2-FB6F94258190",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1e38178e-6f30-4954-8702-0de3f86ba9be",
+                            ConcurrencyStamp = "c2d82b41-0040-4b5a-8bee-dcb0b7894c57",
+                            CreatedBy = "",
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "miaw@example.com",
                             EmailConfirmed = false,
                             FirstName = "Mia",
                             IsDeleted = false,
+                            IsEnabled = false,
                             LastName = "White",
                             LockoutEnabled = false,
                             PhoneNumber = "555-444-4444",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "efab69fe-5299-4f71-ae1a-b6a45596002e",
+                            SecurityStamp = "c3954e5e-c1e3-4dae-9375-6d1ad56a46ce",
                             TwoFactorEnabled = false,
+                            UpdatedBy = "",
                             UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             UserName = "miaw"
                         },
@@ -458,18 +675,21 @@ namespace DataMigrations.Migrations
                         {
                             Id = "3DFA5AEA-7D68-4BB2-B221-DA563E0ED646",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "07ff02e7-9814-46ca-9405-14b50fd5aee2",
+                            ConcurrencyStamp = "5bfa62d5-485f-4ed5-88cd-ef24d86022e7",
+                            CreatedBy = "",
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "alexanderl@example.com",
                             EmailConfirmed = false,
                             FirstName = "Alexander",
                             IsDeleted = false,
+                            IsEnabled = false,
                             LastName = "Lee",
                             LockoutEnabled = false,
                             PhoneNumber = "555-555-5555",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bc701c58-9dc0-435a-a0a9-01be2178a790",
+                            SecurityStamp = "56ed4ae5-c541-4148-879c-0a8937d9ec22",
                             TwoFactorEnabled = false,
+                            UpdatedBy = "",
                             UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             UserName = "alexanderl"
                         });
@@ -504,36 +724,36 @@ namespace DataMigrations.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0355f514-67e7-42b2-96f3-196b9f9a6f67",
-                            ConcurrencyStamp = "88b5412d-27cf-4c19-af94-817c9b575980",
+                            Id = "e866125e-6ca1-4c8b-8eec-1e2bdcc468e7",
+                            ConcurrencyStamp = "2564baa9-48d2-4413-9ae2-d05084b2d0fa",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "7e7d5a1d-89e3-4f85-9327-78b156822ffc",
-                            ConcurrencyStamp = "34eae145-54b5-4f69-a42d-67cb6e060c4b",
+                            Id = "75642c64-c595-4c4c-b739-28580eeb7c4c",
+                            ConcurrencyStamp = "6db67556-b1b6-4fac-881c-89601717541a",
                             Name = "Contributor",
                             NormalizedName = "CONTRIBUTOR"
                         },
                         new
                         {
-                            Id = "f244e5da-e181-4781-9ec8-7a1e3e23b962",
-                            ConcurrencyStamp = "65ec33b5-94aa-4c32-97d9-f28c925de7fd",
+                            Id = "cd58fc44-ed64-46bd-a976-3147347f165e",
+                            ConcurrencyStamp = "9ece3eb9-e492-4b67-8493-ee2be8290851",
                             Name = "Editor",
                             NormalizedName = "EDITOR"
                         },
                         new
                         {
-                            Id = "ed41285c-79ec-4db1-ab29-ab11758ea54a",
-                            ConcurrencyStamp = "2e20d4ee-2c0d-481c-96de-653edd9f1625",
+                            Id = "20e1ece5-ead7-420d-bd95-872af0392da8",
+                            ConcurrencyStamp = "85107b35-a485-4d58-8288-ca95fcdcab3e",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "7d8153a4-96c2-40bc-b973-10818c3262a1",
-                            ConcurrencyStamp = "11a527fa-431d-4ddf-90bc-f2487e5e7781",
+                            Id = "83aab88e-b3e1-4476-9fe8-457f9f4c277d",
+                            ConcurrencyStamp = "1ed325c4-f9ec-4270-a865-79191a05f16c",
                             Name = "SuperAdmin",
                             NormalizedName = "SUPERADMIN"
                         });
@@ -654,7 +874,7 @@ namespace DataMigrations.Migrations
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.User", "User")
-                        .WithMany("Memberships")
+                        .WithMany()
                         .HasForeignKey("UserId");
 
                     b.Navigation("Tenant");
@@ -716,11 +936,6 @@ namespace DataMigrations.Migrations
             modelBuilder.Entity("Domain.Entities.Tenant", b =>
                 {
                     b.Navigation("Members");
-                });
-
-            modelBuilder.Entity("Domain.Entities.User", b =>
-                {
-                    b.Navigation("Memberships");
                 });
 #pragma warning restore 612, 618
         }

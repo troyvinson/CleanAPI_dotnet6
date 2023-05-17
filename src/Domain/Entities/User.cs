@@ -15,4 +15,10 @@ public class User : IdentityUser, ISoftDeletable
 
     public bool IsEnabled { get; set; }
     public bool IsDeleted { get; set; }
+
+    public string GetFullName()
+    {
+        return $"{FirstName!.Trim()} {LastName!.Trim()}";
+    }
 }
+

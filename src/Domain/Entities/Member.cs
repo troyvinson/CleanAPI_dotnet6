@@ -1,9 +1,8 @@
-﻿using Domain.Interfaces;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities;
 
-public class Member : BaseEntity, ISoftDeletable
+public class Member : BaseEntity
 {
     public string? Position { get; set; }
     public DateTime DateJoined { get; set; } = DateTime.UtcNow;
@@ -15,8 +14,5 @@ public class Member : BaseEntity, ISoftDeletable
     [ForeignKey(nameof(User))]
     public string? UserId { get; set; }
     public User? User { get; set; }
-
-    public bool IsEnabled { get; set; } = true;
-    public bool IsDeleted { get; set; }
 
 }

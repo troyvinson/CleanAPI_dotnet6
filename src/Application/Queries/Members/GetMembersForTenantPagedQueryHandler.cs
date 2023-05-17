@@ -1,6 +1,7 @@
-﻿using AutoMapper;
-using Domain.Exceptions;
+﻿using Domain.DataTransferObjects;
 using Domain.RequestFeatures;
+using AutoMapper;
+using Domain.Exceptions;
 using MediatR;
 
 namespace Application.Queries.Members;

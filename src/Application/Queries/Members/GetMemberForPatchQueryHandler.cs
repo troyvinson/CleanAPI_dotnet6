@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Domain.DataTransferObjects;
+using AutoMapper;
 using Domain.Exceptions;
 using MediatR;
 

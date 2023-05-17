@@ -33,7 +33,7 @@ public class TenantsController : ControllerBase
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    [HttpGet("{id:int}", Name = "TenantById")]
+    [HttpGet("{id:guid}", Name = "TenantById")]
     [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(TenantDto))]
     [SwaggerResponse(StatusCodes.Status404NotFound, Type = typeof(ErrorDetails))]
     public async Task<IActionResult> GetTenantAsync(Guid id)
@@ -109,7 +109,7 @@ public class TenantsController : ControllerBase
     /// <param name="id"></param>
     /// <param name="tenantForUpdateDto"></param>
     /// <response code="422">Unprocessable Entity: returns dictionary of errors</response>
-    [HttpPut("{id:int}")]
+    [HttpPut("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IReadOnlyDictionary<string, string[]>))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -129,7 +129,7 @@ public class TenantsController : ControllerBase
     /// <param name="id"></param>
     /// <param name="patchDoc"></param>
     /// <response code="422">Unprocessable Entity: returns dictionary of errors</response>
-    [HttpPatch("{id:int}")]
+    [HttpPatch("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IReadOnlyDictionary<string, string[]>))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -157,7 +157,7 @@ public class TenantsController : ControllerBase
     /// </summary>
     /// <param name="tenantId"></param>
     /// <returns></returns>
-    [HttpDelete("{id:int}")]
+    [HttpDelete("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteTenantAsync(Guid tenantId)

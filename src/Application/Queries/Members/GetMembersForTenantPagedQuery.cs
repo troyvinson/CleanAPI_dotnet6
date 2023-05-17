@@ -1,4 +1,5 @@
-﻿using Domain.RequestFeatures;
+﻿using Domain.DataTransferObjects;
+using Domain.RequestFeatures;
 using MediatR;
 
 namespace Application.Queries.Members;

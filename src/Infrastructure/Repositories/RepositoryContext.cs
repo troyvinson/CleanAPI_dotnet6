@@ -14,8 +14,8 @@ public class RepositoryContext : IdentityDbContext<User>
     {
     }
 
-    //public DbSet<Tenant> Tenants { get; set; }
-    //public DbSet<Member> Members { get; set; }
+    public DbSet<Tenant> Tenants { get; set; }
+    public DbSet<Member> Members { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -24,8 +24,8 @@ public class RepositoryContext : IdentityDbContext<User>
 
         builder.ApplyConfiguration(new RoleConfiguration());
         builder.ApplyConfiguration(new UserConfiguration());
-        //modelBuilder.ApplyConfiguration(new TenantConfiguration());
-        //modelBuilder.ApplyConfiguration(new MemberConfiguration());
+        builder.ApplyConfiguration(new TenantConfiguration());
+        builder.ApplyConfiguration(new MemberConfiguration());
     }
 
     public override int SaveChanges()

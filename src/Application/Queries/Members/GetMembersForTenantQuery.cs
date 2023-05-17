@@ -1,5 +1,4 @@
-﻿using Domain.RequestFeatures;
-using MediatR;
+﻿using MediatR;
 
 namespace Application.Queries.Members;
 

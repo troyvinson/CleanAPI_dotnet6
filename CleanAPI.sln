@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationTests", "tests\I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcceptanceTests", "tests\AcceptanceTests\AcceptanceTests.csproj", "{33F8EE53-27F8-493E-B4D7-9409F2806B77}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataMigrations", "src\DataMigrations\DataMigrations.csproj", "{015D2B71-D799-4B47-8C13-DF8253CE8639}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataMigrations", "src\DataMigrations\DataMigrations.csproj", "{5325642E-323A-44BE-93C7-6E482C2A09B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,10 +61,10 @@ Global
 		{33F8EE53-27F8-493E-B4D7-9409F2806B77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33F8EE53-27F8-493E-B4D7-9409F2806B77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33F8EE53-27F8-493E-B4D7-9409F2806B77}.Release|Any CPU.Build.0 = Release|Any CPU
-		{015D2B71-D799-4B47-8C13-DF8253CE8639}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{015D2B71-D799-4B47-8C13-DF8253CE8639}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{015D2B71-D799-4B47-8C13-DF8253CE8639}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{015D2B71-D799-4B47-8C13-DF8253CE8639}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5325642E-323A-44BE-93C7-6E482C2A09B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5325642E-323A-44BE-93C7-6E482C2A09B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5325642E-323A-44BE-93C7-6E482C2A09B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5325642E-323A-44BE-93C7-6E482C2A09B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

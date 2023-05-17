@@ -14,7 +14,7 @@ namespace Presentation.Controllers;
 /// <summary>
 /// Members exist only in the context of a tenant.
 /// </summary>
-[Route("api/[controller]/{tenantId:int}/members")]
+[Route("api/[controller]/{tenantId:guid}/members")]
 [ApiController]
 [ApiExplorerSettings(GroupName = "v1")]
 [Produces("application/json")]
@@ -38,7 +38,7 @@ public class MembersController : ControllerBase
     /// <param name="tenantId"></param>
     /// <param name="id"></param>
     /// <returns></returns>
-    [HttpGet("{id:int}", Name = "GetMemberForTenant")]
+    [HttpGet("{id:guid}", Name = "GetMemberForTenant")]
     [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(MemberDto))]
     [SwaggerResponse(StatusCodes.Status404NotFound, Type = typeof(ErrorDetails))]
     public async Task<IActionResult> GetMemberForTenantAsync(Guid tenantId, Guid id)
@@ -183,7 +183,7 @@ public class MembersController : ControllerBase
     /// <param name="id"></param>
     /// <param name="memberToUpdate"></param>
     /// <response code="422">Unprocessable Entity: returns dictionary of errors</response>
-    [HttpPut("{id:int}")]
+    [HttpPut("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IReadOnlyDictionary<string, string[]>))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -207,7 +207,7 @@ public class MembersController : ControllerBase
     /// <param name="id"></param>
     /// <param name="patchDoc"></param>
     /// <response code="422">Unprocessable Entity: returns dictionary of errors</response>
-    [HttpPatch("{id:int}")]
+    [HttpPatch("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IReadOnlyDictionary<string, string[]>))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -236,7 +236,7 @@ public class MembersController : ControllerBase
     /// </summary>
     /// <param name="tenantId"></param>
     /// <param name="id"></param>
-    [HttpDelete("{id:int}")]
+    [HttpDelete("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteMemberForTenant(Guid tenantId, Guid id)

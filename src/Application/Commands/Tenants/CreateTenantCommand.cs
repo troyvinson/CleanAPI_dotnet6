@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Domain.DataTransferObjects;
+using MediatR;
 
 namespace Application.Commands.Tenants;
 

@@ -19,7 +19,8 @@ public static class ServiceExtensions
 {
     public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) =>
         services.AddDbContext<RepositoryContext>(opts =>
-            opts.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            opts.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
+            b => b.MigrationsAssembly("ApiServer")));
 
     public static void ConfigureAuthentication(this IServiceCollection services, IConfiguration configuration)
     {

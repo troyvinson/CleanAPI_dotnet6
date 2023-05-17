@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Domain.DataTransferObjects;
+using AutoMapper;
 using MediatR;
 
 namespace Application.Commands.Tenants;
