@@ -1,9 +1,9 @@
-﻿namespace UnitTests;
+﻿using Domain.Entities;
+using NUnit.Framework;
+using Shouldly;
 
-public class RoleTester
+namespace UnitTests;
+
+internal class RoleTester
 {
-
-
-
-
 }

@@ -86,7 +86,7 @@ CheckForError
 # Data
 ./build-migrations `
     -ProjectDirectory ../src/DataMigrations `
-    -StartupProjectDirectory ../src/ApiServer `
+    -StartupProjectDirectory ../src/DataMigrations `
     -DbContextName RepositoryContext `
     -PackageDirectory $PackageDirectory `
     -CI:$CI `
