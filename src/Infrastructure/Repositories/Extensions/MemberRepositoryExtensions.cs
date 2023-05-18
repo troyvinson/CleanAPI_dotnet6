@@ -17,13 +17,14 @@ public static class MemberRepositoryExtensions
 
         var lowerCaseTerm = searchTerm.Trim().ToLower();
 
-        return members.Where(e => 
-            e.User!.FirstName.ToLower().Contains(lowerCaseTerm) ||
-            e.User!.LastName.ToLower().Contains(lowerCaseTerm));
+        return members.Where(e =>
+            e.User!.UserName!.ToLower().Contains(lowerCaseTerm) ||
+            e.User!.FirstName!.ToLower().Contains(lowerCaseTerm) ||
+            e.User!.LastName!.ToLower().Contains(lowerCaseTerm));
     }
 
     /// <summary>
-    /// Sorts the members by the URL "orderBy" query parameter instruction or by name if invalid or empty.
+    /// Sorts the members by the URL "orderBy" query parameter instruction or by Id if invalid or empty.
     /// </summary>
     /// <param name="members"></param>
     /// <param name="orderByQueryString"></param>

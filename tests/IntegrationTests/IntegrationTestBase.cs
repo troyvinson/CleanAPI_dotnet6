@@ -11,7 +11,6 @@ public abstract class IntegrationTestBase
 {
     protected ServiceProvider ServiceProvider { get; private set; }
     protected IRepositoryManager Repository { get; private set; }
-    protected RepositoryContext Context { get; private set; }
     protected IMapper Mapper { get; private set; }
     protected IMediator Mediator { get; private set; }
 
@@ -41,7 +40,6 @@ public abstract class IntegrationTestBase
         ServiceProvider = serviceCollection.BuildServiceProvider();
 
         // Get an instance of the DbContext and the repository
-        Context = ServiceProvider.GetRequiredService<RepositoryContext>();
         Repository = ServiceProvider.GetRequiredService<IRepositoryManager>();
         Mapper = ServiceProvider.GetRequiredService<IMapper>();
         Mediator = ServiceProvider.GetRequiredService<IMediator>();

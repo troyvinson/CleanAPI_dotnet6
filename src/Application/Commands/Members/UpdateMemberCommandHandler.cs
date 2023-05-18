@@ -20,10 +20,10 @@ internal sealed class UpdateMemberCommandHandler : IRequestHandler<UpdateMemberC
         _ = await _repository.Tenant.GetTenantByIdAsync(request.TenantId, request.TenantTrackChanges)
             ?? throw new NotFoundException($"Tenant ID: {request.TenantId} was not found.");
 
-        var employeeEntity = await _repository.Member.GetMemberForTenantAsync(request.TenantId, request.MemberId, request.MemberTrackChanges)
+        var memberEntity = await _repository.Member.GetMemberForTenantAsync(request.TenantId, request.MemberId, request.MemberTrackChanges)
             ?? throw new NotFoundException($"Member ID: {request.MemberId} not found for Tenant ID: {request.TenantId}.");
 
-        _mapper.Map(request.Member, employeeEntity);
+        _mapper.Map(request.Member, memberEntity);
         await _repository.SaveAsync();
 
         return Unit.Value;

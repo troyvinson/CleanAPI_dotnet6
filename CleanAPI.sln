@@ -19,8 +19,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "tests\UnitTest
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationTests", "tests\IntegrationTests\IntegrationTests.csproj", "{BF6FFD34-62F2-42F1-9BB7-6EB7811B72F0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcceptanceTests", "tests\AcceptanceTests\AcceptanceTests.csproj", "{33F8EE53-27F8-493E-B4D7-9409F2806B77}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataMigrations", "src\DataMigrations\DataMigrations.csproj", "{5325642E-323A-44BE-93C7-6E482C2A09B3}"
 EndProject
 Global
@@ -57,10 +55,6 @@ Global
 		{BF6FFD34-62F2-42F1-9BB7-6EB7811B72F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF6FFD34-62F2-42F1-9BB7-6EB7811B72F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF6FFD34-62F2-42F1-9BB7-6EB7811B72F0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{33F8EE53-27F8-493E-B4D7-9409F2806B77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{33F8EE53-27F8-493E-B4D7-9409F2806B77}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{33F8EE53-27F8-493E-B4D7-9409F2806B77}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{33F8EE53-27F8-493E-B4D7-9409F2806B77}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5325642E-323A-44BE-93C7-6E482C2A09B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5325642E-323A-44BE-93C7-6E482C2A09B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5325642E-323A-44BE-93C7-6E482C2A09B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -72,7 +66,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{1F5560FC-284A-42A7-AFC3-0C9E1ACDA170} = {B0BC54CA-567E-43D1-8AF7-F6AE157E100E}
 		{BF6FFD34-62F2-42F1-9BB7-6EB7811B72F0} = {B0BC54CA-567E-43D1-8AF7-F6AE157E100E}
-		{33F8EE53-27F8-493E-B4D7-9409F2806B77} = {B0BC54CA-567E-43D1-8AF7-F6AE157E100E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E149B6A1-7BFA-4C12-8B96-11B12B4F1D47}
