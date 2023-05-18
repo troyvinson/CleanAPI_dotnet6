@@ -1,5 +1,4 @@
 ﻿using Application.Commands.Tenants;
-using Application.Notifications;
 using Application.Queries.Tenants;
 using Domain.Models;
 using MediatR;
@@ -84,7 +83,7 @@ public class TenantsController : ControllerBase
     {
         var tenant = await _sender.Send(new CreateTenantCommand(tenantToCreate));
 
-        return CreatedAtRoute("TenantById", new { tenantId = tenant.Id }, tenant);
+        return CreatedAtRoute("TenantById", new { id = tenant.Id }, tenant);
     }
 
     /// <summary>
@@ -126,6 +125,12 @@ public class TenantsController : ControllerBase
     /// <summary>
     /// Partially updates an existing tenant
     /// </summary>
+    /// <remarks>
+    /// <![CDATA[
+    /// For documentation on JSON PatchDoc see: 
+    /// <a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/jsonpatch">https://learn.microsoft.com/en-us/aspnet/core/web-api/jsonpatch</a>
+    /// ]]>
+    /// </remarks>
     /// <param name="id"></param>
     /// <param name="patchDoc"></param>
     /// <response code="422">Unprocessable Entity: returns dictionary of errors</response>
@@ -147,7 +152,7 @@ public class TenantsController : ControllerBase
         if (!ModelState.IsValid)
             return UnprocessableEntity(ModelState);
 
-        await _sender.Send(new UpdateTenantCommand(id, tenantToPatch, TrackChanges: false));
+        await _sender.Send(new UpdateTenantCommand(id, tenantToPatch, TrackChanges: true));
 
         return NoContent();
     }
@@ -157,12 +162,12 @@ public class TenantsController : ControllerBase
     /// </summary>
     /// <param name="tenantId"></param>
     /// <returns></returns>
-    [HttpDelete("{id:guid}")]
+    [HttpDelete("{tenantId:guid}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteTenantAsync(Guid tenantId)
     {
-        await _publisher.Publish(new TenantDeletedNotification(tenantId, TrackChanges: false));
+        await _sender.Send(new DeleteTenantCommand(tenantId, TrackChanges: false));
 
         return NoContent();
     }

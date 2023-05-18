@@ -28,7 +28,50 @@ public class RepositoryContext : IdentityDbContext<User>
         builder.ApplyConfiguration(new MemberConfiguration());
     }
 
+    public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken))
+    {
+        UpdateSoftDeleteStatuses();
+        UpdateMetadata();
+
+        return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+    }
+
     public override int SaveChanges()
+    {
+        UpdateSoftDeleteStatuses();
+        UpdateMetadata();
+
+        return base.SaveChanges();
+    }
+
+    private void UpdateSoftDeleteStatuses()
+    {
+        var theseentries = ChangeTracker
+            .Entries();
+
+
+        var entries = ChangeTracker
+            .Entries()
+            .Where(e => e.Entity is BaseEntity && (
+                    e.State == EntityState.Added
+                    || e.State == EntityState.Deleted));
+
+        foreach (var entityEntry in entries)
+        {
+            switch (entityEntry.State)
+            {
+                case EntityState.Added:
+                    ((BaseEntity)entityEntry.Entity).IsDeleted = false;
+                    break;
+                case EntityState.Deleted:
+                    entityEntry.State = EntityState.Modified;
+                    ((BaseEntity)entityEntry.Entity).IsDeleted = true;
+                    break;
+            }
+        }
+    }
+
+    private void UpdateMetadata()
     {
         var entries = ChangeTracker
             .Entries()
@@ -45,7 +88,6 @@ public class RepositoryContext : IdentityDbContext<User>
                 ((BaseEntity)entityEntry.Entity).CreatedDate = DateTimeOffset.Now;
             }
         }
-
-        return base.SaveChanges();
     }
 }
+

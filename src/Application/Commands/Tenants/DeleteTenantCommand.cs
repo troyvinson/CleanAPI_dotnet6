@@ -2,4 +2,4 @@
 
 namespace Application.Commands.Tenants;
 
-public record DeleteTenantCommand(string TenantId, bool TrackChanges) : IRequest;
+public record DeleteTenantCommand(Guid TenantId, bool TrackChanges) : IRequest;

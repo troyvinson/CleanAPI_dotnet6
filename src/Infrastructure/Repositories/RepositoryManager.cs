@@ -1,4 +1,7 @@
-﻿namespace Infrastructure.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Runtime.CompilerServices;
+
+namespace Infrastructure.Repositories;
 
 /// <summary>
 ///  Creates instances of defined repository classes and registers them inside 
@@ -10,7 +13,7 @@
 /// </example>
 public sealed class RepositoryManager : IRepositoryManager
 {
-    private readonly RepositoryContext _repositoryContext;
+    public readonly RepositoryContext _repositoryContext;
 
     // Use Lazy to ensure the lazy initialization so that repository instances
     // are only created when accessed the first time and not before that.
@@ -28,6 +31,9 @@ public sealed class RepositoryManager : IRepositoryManager
     public ITenantRepository Tenant => _tenantRepository.Value;
     public IMemberRepository Member => _memberRepository.Value;
 
+    public void ClearTracking() => _repositoryContext.ChangeTracker.Clear();
+
     // Saves changes to the database
     public async Task SaveAsync() => await _repositoryContext.SaveChangesAsync();
+
 }

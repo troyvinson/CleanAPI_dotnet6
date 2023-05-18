@@ -173,7 +173,7 @@ public class MembersController : ControllerBase
 
         var memberToReturn = await _sender.Send(new CreateMemberCommand(tenantId, memberToCreate));
 
-        return CreatedAtRoute("GetMemberForTenant", new { tenantId, memberToReturn.Id }, memberToReturn);
+        return CreatedAtRoute("GetMemberForTenant", new { memberToReturn.TenantId, memberToReturn.Id }, memberToReturn);
     }
 
     /// <summary>
@@ -187,7 +187,8 @@ public class MembersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IReadOnlyDictionary<string, string[]>))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> UpdateMemberForTenant(Guid tenantId, Guid id, [FromBody] MemberForUpdateDto memberToUpdate)
+    public async Task<IActionResult> UpdateMemberForTenant(Guid tenantId, Guid id, 
+        [FromBody] MemberForUpdateDto memberToUpdate)
     {
         if (memberToUpdate is null)
             return BadRequest("MemberForUpdateDto object is null");
@@ -195,7 +196,8 @@ public class MembersController : ControllerBase
         if (!ModelState.IsValid)
             return UnprocessableEntity(ModelState);
 
-        await _sender.Send(new UpdateMemberCommand(tenantId, id, memberToUpdate, TenantTrackChanges: false, MemberTrackChanges: true));
+        await _sender.Send(new UpdateMemberCommand(tenantId, id, 
+            memberToUpdate, TenantTrackChanges: false, MemberTrackChanges: true));
 
         return NoContent();
     }
@@ -217,7 +219,9 @@ public class MembersController : ControllerBase
         if (patchDoc is null)
             return BadRequest("patchDoc object sent from client is null.");
 
-        (MemberForUpdateDto memberToPatch, _) = await _sender.Send(new GetMemberForPatchQuery(tenantId, id, TenantTrackChanges: false, MemberTrackChanges: true));
+        (MemberForUpdateDto memberToPatch, _) = await _sender
+            .Send(new GetMemberForPatchQuery(tenantId, id, 
+                TenantTrackChanges: false, MemberTrackChanges: false));
 
         patchDoc.ApplyTo(memberToPatch, ModelState);
 
@@ -226,7 +230,8 @@ public class MembersController : ControllerBase
         if (!ModelState.IsValid)
             return UnprocessableEntity(ModelState);
 
-        await _sender.Send(new UpdateMemberCommand(tenantId, id, memberToPatch, TenantTrackChanges: false, MemberTrackChanges: true));
+        await _sender.Send(new UpdateMemberCommand(tenantId, id, 
+            memberToPatch, TenantTrackChanges: false, MemberTrackChanges: true));
 
         return NoContent();
     }

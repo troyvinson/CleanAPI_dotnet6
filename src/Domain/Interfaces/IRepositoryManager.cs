@@ -6,4 +6,6 @@ public interface IRepositoryManager
     IMemberRepository Member { get; }
 
     Task SaveAsync();
+
+    void ClearTracking();
 }

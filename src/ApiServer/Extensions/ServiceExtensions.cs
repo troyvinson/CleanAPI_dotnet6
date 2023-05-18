@@ -1,4 +1,5 @@
-﻿using ApiServer.Transformations;
+﻿using ApiServer.Filters;
+using ApiServer.Transformations;
 using Application.Behaviors;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -98,7 +99,7 @@ public static class ServiceExtensions
             {
                 { jwtSecurityScheme, Array.Empty<string>() }
             });
-
+            s.DocumentFilter<JsonPatchDocumentFilter>();
         });
 
     }

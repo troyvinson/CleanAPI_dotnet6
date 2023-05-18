@@ -11,7 +11,6 @@ public class MappingProfile : Profile
         CreateMap<Tenant, TenantDto>().ReverseMap();
         CreateMap<TenantForCreationDto, Tenant>().ReverseMap();
         CreateMap<TenantForUpdateDto, Tenant>().ReverseMap();
-        CreateMap<MemberTenantDto, Tenant>().ReverseMap();
 
         CreateMap<Member, MemberDto>()
             .ForMember(m => m.Tenant, opt => opt.MapFrom(x => x.Tenant))
@@ -20,5 +19,8 @@ public class MappingProfile : Profile
         CreateMap<MemberForUpdateDto, Member>().ReverseMap();
 
         CreateMap<MemberUserDto, User>().ReverseMap();
+        CreateMap<MemberTenantDto, Tenant>().ReverseMap();
+
+
     }
 }
