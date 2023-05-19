@@ -11,18 +11,10 @@ public class TenantConfiguration : IEntityTypeConfiguration<Tenant>
         builder.HasQueryFilter(SoftDeleteExpression.CreateFilterExpression(typeof(Tenant)));
         //builder.HasQueryFilter(t => !t.IsEnabled);
 
-        //builder.HasData
-        //(
-        //    new Tenant { Id = 1, Name = "NovellaTech", IsEnabled = true },
-        //    new Tenant { Id = 2, Name = "VeloVentures", IsEnabled = true },
-        //    new Tenant { Id = 3, Name = "StellarWorks", IsEnabled = true },
-        //    new Tenant { Id = 4, Name = "Nexus Solutions", IsEnabled = true },
-        //    new Tenant { Id = 5, Name = "Zenith Dynamics", IsEnabled = true },
-        //    new Tenant { Id = 6, Name = "Horizon Innovations", IsEnabled = true },
-        //    new Tenant { Id = 7, Name = "QuantumCorp", IsEnabled = true },
-        //    new Tenant { Id = 8, Name = "FusionX Technologies", IsEnabled = true },
-        //    new Tenant { Id = 9, Name = "Apex Analytics", IsEnabled = true },
-        //    new Tenant { Id = 10, Name = "Luminary Labs", IsEnabled = true }
-        //);
+        builder.HasData
+        (
+            new Tenant { Id = Guid.Parse("{0AAA2440-01FE-451C-BCD9-CA6CBC876A3A}"), Name = "NovellaTech", IsEnabled = true },
+            new Tenant { Id = Guid.Parse("{5217A17E-FFFF-4FBC-AA1B-29175AB98F69}"), Name = "VeloVentures", IsEnabled = true }
+        );
     }
 }
