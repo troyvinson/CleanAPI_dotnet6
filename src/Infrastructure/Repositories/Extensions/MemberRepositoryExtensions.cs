@@ -17,10 +17,14 @@ public static class MemberRepositoryExtensions
 
         var lowerCaseTerm = searchTerm.Trim().ToLower();
 
-        return members.Where(e => 
-            e.User!.Username.ToLower().Contains(lowerCaseTerm) || 
-            e.User!.GivenName.ToLower().Contains(lowerCaseTerm) ||
-            e.User!.Surname.ToLower().Contains(lowerCaseTerm));
+        return members.Where(e =>
+            e.User!.UserName.ToLower().Contains(lowerCaseTerm) ||
+            e.User.NormalizedUserName.ToLower().Contains(lowerCaseTerm) ||
+            e.User.GivenName.ToLower().Contains(lowerCaseTerm) ||
+            e.User.Surname.ToLower().Contains(lowerCaseTerm) ||
+            e.User.NormalizedName.ToLower().Contains(lowerCaseTerm) ||
+            e.User.Email.ToLower().Contains(lowerCaseTerm) ||
+            e.User.NormalizedEmail.ToLower().Contains(lowerCaseTerm));
     }
 
     /// <summary>

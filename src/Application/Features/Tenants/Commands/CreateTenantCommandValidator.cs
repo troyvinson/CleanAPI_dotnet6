@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
-using System.Text.RegularExpressions;
 
 namespace Application.Features.Tenants.Commands;
 

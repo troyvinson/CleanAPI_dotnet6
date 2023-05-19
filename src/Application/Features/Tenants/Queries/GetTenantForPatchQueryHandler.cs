@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Domain.Entities;
 using Domain.Exceptions;
 using MediatR;
 

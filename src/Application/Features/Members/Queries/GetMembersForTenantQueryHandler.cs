@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Domain.Exceptions;
-using Domain.RequestFeatures;
 using MediatR;
 
 namespace Application.Features.Members.Queries;

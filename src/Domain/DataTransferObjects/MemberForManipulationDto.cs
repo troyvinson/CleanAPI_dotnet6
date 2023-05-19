@@ -1,7 +1,4 @@
-﻿using Domain.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Domain.DataTransferObjects;
+﻿namespace Domain.DataTransferObjects;
 
 public abstract record MemberForManipulationDto
 {
