@@ -36,7 +36,7 @@ public sealed class MemberRepository : RepositoryBase<Member>, IMemberRepository
     public async Task<IEnumerable<Member>> GetMembersByIdsAsync(Guid tenantId, IEnumerable<Guid> memberIds, MemberParameters memberParameters, bool trackChanges) =>
         await FindByCondition(e => e.TenantId.Equals(tenantId) && memberIds.Contains(e.Id), trackChanges)
         .Search(memberParameters.SearchTerm)
-        .Sort (memberParameters.OrderBy)
+        .Sort(memberParameters.OrderBy)
         .ToListAsync();
 
     public void CreateMemberForTenant(Guid tenantId, Member member)

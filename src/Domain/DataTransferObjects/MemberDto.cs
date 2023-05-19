@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Domain.DataTransferObjects;
+﻿namespace Domain.DataTransferObjects;
 
 public record MemberDto
 {
@@ -12,4 +10,5 @@ public record MemberDto
     public Guid UserId { get; set; }
     public MemberUserDto? User { get; set; }
     public bool IsEnabled { get; set; } = true;
+
 }

@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using System.Text;
-using System.Linq;
 
 namespace Infrastructure.Repositories.Extensions;
 
@@ -40,23 +39,23 @@ public static class OrderByQueryBuilder
 
             // Loop through the property path to find the final property
             foreach (var (propName, objects) in
-                from propName in propertyPath 
-                // Get the properties of the current property type
+                from propName in propertyPath
+                    // Get the properties of the current property type
                 let objects = property.GetProperties(BindingFlags.Public | BindingFlags.Instance)
                                 ?? Array.Empty<PropertyInfo>()
                 where objects.Length > 0
                 select (propName, objects))
-                {
-                    // Make sure the requested property exists in the current property type
-                    objectProperty = objects.FirstOrDefault(p =>
-                                        p.Name.Equals(propName, StringComparison.OrdinalIgnoreCase));
+            {
+                // Make sure the requested property exists in the current property type
+                objectProperty = objects.FirstOrDefault(p =>
+                                    p.Name.Equals(propName, StringComparison.OrdinalIgnoreCase));
 
-                    if (objectProperty == null)
-                        break;
+                if (objectProperty == null)
+                    break;
 
-                    // Set the property to the property type of the current property in the path
-                    property = objectProperty.PropertyType;
-                }
+                // Set the property to the property type of the current property in the path
+                property = objectProperty.PropertyType;
+            }
 
             if (objectProperty == null)
                 continue;
