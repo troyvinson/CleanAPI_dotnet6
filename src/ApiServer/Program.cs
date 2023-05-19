@@ -5,8 +5,7 @@ using NLog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var parentDirectory = Directory.GetParent(Directory.GetCurrentDirectory());
-LogManager.LoadConfiguration(string.Concat(parentDirectory, "/Application/nlog.config"));
+LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
 // Add services to the container.
 builder.Services.ConfigureLoggerService();

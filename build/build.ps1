@@ -92,5 +92,8 @@ CheckForError
     -CI:$CI `
     -Clean:$Clean `
 
+Run {Copy-Item -Path ../src/ApiServer/nlog.config -Destination ../package/Migrations/DataMigrations }
+
+
 # Exit with stats
 End
