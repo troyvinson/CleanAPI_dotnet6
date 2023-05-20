@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Domain.Interfaces;
 using Infrastructure.Repositories;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace IntegrationTests;
 
@@ -12,6 +14,7 @@ public abstract class IntegrationTestBase
     protected IRepositoryManager Repository { get; private set; }
     protected RepositoryContext Context { get; private set; }
     protected IMapper Mapper { get; private set; }
+    protected IMediator Mediator { get; private set; }
 
     [SetUp]
     public void SetUpBase()
@@ -26,6 +29,10 @@ public abstract class IntegrationTestBase
         // Add the repository to the service collection
         serviceCollection.AddScoped<IRepositoryManager, RepositoryManager>();
         serviceCollection.AddAutoMapper(typeof(Application.AssemblyReference).Assembly);
+        serviceCollection.AddMediatR(cfg =>
+        {
+            cfg.RegisterServicesFromAssemblyContaining(typeof(Application.AssemblyReference));
+        });
 
         // Build the service provider
         ServiceProvider = serviceCollection.BuildServiceProvider();
@@ -34,6 +41,7 @@ public abstract class IntegrationTestBase
         Context = ServiceProvider.GetRequiredService<RepositoryContext>();
         Repository = ServiceProvider.GetRequiredService<IRepositoryManager>();
         Mapper = ServiceProvider.GetRequiredService<IMapper>();
+        Mediator = ServiceProvider.GetRequiredService<IMediator>();
     }
 
     [TearDown]
