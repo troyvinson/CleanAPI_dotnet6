@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
+using Domain.Entities;
 using Domain.Interfaces;
 using Infrastructure.Repositories;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 
 namespace IntegrationTests;
@@ -15,6 +18,7 @@ public abstract class IntegrationTestBase
     protected RepositoryContext Context { get; private set; }
     protected IMapper Mapper { get; private set; }
     protected IMediator Mediator { get; private set; }
+    protected UserManager<User> UserManager { get; private set; }
 
     [SetUp]
     public void SetUpBase()
@@ -27,12 +31,25 @@ public abstract class IntegrationTestBase
             options.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()), ServiceLifetime.Transient);
 
         // Add the repository to the service collection
+        serviceCollection.AddLogging(logging => logging.AddConsole());
         serviceCollection.AddScoped<IRepositoryManager, RepositoryManager>();
         serviceCollection.AddAutoMapper(typeof(Application.AssemblyReference).Assembly);
         serviceCollection.AddMediatR(cfg =>
         {
             cfg.RegisterServicesFromAssemblyContaining(typeof(Application.AssemblyReference));
         });
+
+        serviceCollection.AddIdentity<User, IdentityRole>(o =>
+        {
+            o.Password.RequireDigit = false;
+            o.Password.RequireLowercase = false;
+            o.Password.RequireUppercase = false;
+            o.Password.RequireNonAlphanumeric = false;
+            o.Password.RequiredLength = 8;
+            o.User.RequireUniqueEmail = true;
+        })
+        .AddEntityFrameworkStores<RepositoryContext>()
+        .AddDefaultTokenProviders();
 
         // Build the service provider
         ServiceProvider = serviceCollection.BuildServiceProvider();
@@ -42,6 +59,7 @@ public abstract class IntegrationTestBase
         Repository = ServiceProvider.GetRequiredService<IRepositoryManager>();
         Mapper = ServiceProvider.GetRequiredService<IMapper>();
         Mediator = ServiceProvider.GetRequiredService<IMediator>();
+        UserManager = ServiceProvider.GetRequiredService<UserManager<User>>();
     }
 
     [TearDown]
