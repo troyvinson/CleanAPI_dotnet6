@@ -18,7 +18,7 @@ internal sealed class CreateMemberCommandHandler : IRequestHandler<CreateMemberC
     {
         var memberEntity = _mapper.Map<Member>(request.Member);
 
-        _repository.Member.CreateMemberForTenant(request.TenantId, memberEntity);
+        _repository.Member.CreateMember(memberEntity);
         await _repository.SaveAsync();
 
         var memberToReturn = _mapper.Map<MemberDto>(memberEntity);

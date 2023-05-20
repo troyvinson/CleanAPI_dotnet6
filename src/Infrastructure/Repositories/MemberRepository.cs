@@ -33,19 +33,15 @@ public sealed class MemberRepository : RepositoryBase<Member>, IMemberRepository
             .ToPagedList(members, memberParameters.PageNumber, memberParameters.PageSize);
     }
 
-    public async Task<IEnumerable<Member>> GetMembersByIdsAsync(Guid tenantId, IEnumerable<Guid> memberIds, MemberParameters memberParameters, bool trackChanges) =>
+    public async Task<IEnumerable<Member>> GetMembersForTenantByIdsAsync(Guid tenantId, IEnumerable<Guid> memberIds, MemberParameters memberParameters, bool trackChanges) =>
         await FindByCondition(e => e.TenantId.Equals(tenantId) && memberIds.Contains(e.Id), trackChanges)
         .Search(memberParameters.SearchTerm)
         .Sort(memberParameters.OrderBy)
         .ToListAsync();
 
-    public void CreateMemberForTenant(Guid tenantId, Member member)
-    {
-        member.TenantId = tenantId;
-        Create(member);
-    }
+    public void CreateMember(Member member) => base.Create(member);
 
-    public void DeleteMember(Member member) => Delete(member);
+    public void DeleteMember(Member member) => base.Delete(member);
 
 
     public override IQueryable<Member> FindByCondition(Expression<Func<Member, bool>> expression, bool trackChanges)
