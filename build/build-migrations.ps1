@@ -77,7 +77,7 @@ try {
     # Reason for --configuration Bundle    
     # https://github.com/dotnet/efcore/issues/25555
     # In short, workaround to locked file error
-    Run { dotnet ef migrations bundle --project "$ProjectDirectory" --startup-project "$StartupProjectDirectory" --context $DbContextName --configuration Bundle --force --output "$BundleFilePath"}
+    Run { dotnet ef migrations bundle --project "$ProjectDirectory" --startup-project "$StartupProjectDirectory" --context $DbContextName --configuration Bundle --force --output "$BundleFilePath" --self-contained }
     # Get appsettings,including Development for local deployment. Development has the connection string.
     Run {Copy-Item -Path $StartupProjectDirectory/appsettings.json -Destination $BundleDirectory }
     Run {Copy-Item -Path $StartupProjectDirectory/appsettings.Development.json -Destination $BundleDirectory }
