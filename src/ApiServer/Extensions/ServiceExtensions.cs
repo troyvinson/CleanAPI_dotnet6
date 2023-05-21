@@ -2,6 +2,7 @@
 using Application.Behaviors;
 using Domain.Entities;
 using Domain.Interfaces;
+using Domain.Models;
 using FluentValidation;
 using Infrastructure.Repositories;
 using MediatR;
@@ -11,7 +12,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 
 namespace ApiServer.Extensions;
 
@@ -28,6 +31,34 @@ public static class ServiceExtensions
         services.AddAuthentication(); 
         services.AddAuthorization();
         services.AddTransient<IClaimsTransformation, CustomClaimsTransformation>();
+
+        // Adds JWT support
+        services.Configure<JwtConfiguration>(configuration.GetSection("JwtSettings"));
+        var secretKey = Environment.GetEnvironmentVariable("APISERVERSECRETKEY");
+
+        var jwtConfiguration = new JwtConfiguration();
+        configuration.Bind(jwtConfiguration.Section, jwtConfiguration);
+
+        services.AddAuthentication(opt =>
+        {
+            opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+        .AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+
+                ValidIssuer = jwtConfiguration.ValidIssuer,
+                ValidAudience = jwtConfiguration.ValidAudience,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+            };
+        });
+
     }
 
     public static void ConfigureValidationBehavior(this IServiceCollection services)
@@ -115,4 +146,5 @@ public static class ServiceExtensions
         .AddEntityFrameworkStores<RepositoryContext>()
         .AddDefaultTokenProviders();
     }
+
 }
