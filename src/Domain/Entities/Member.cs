@@ -6,7 +6,7 @@ namespace Domain.Entities;
 public class Member : BaseEntity, ISoftDeletable
 {
     public string? Position { get; set; }
-    public DateTime DateJoined { get; set; } = DateTime.UtcNow;
+    public DateTimeOffset DateJoined { get; set; } = DateTimeOffset.UtcNow;
 
     [ForeignKey(nameof(Tenant))]
     public Guid TenantId { get; set; }

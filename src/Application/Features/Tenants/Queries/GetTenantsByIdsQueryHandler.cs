@@ -4,12 +4,12 @@ using MediatR;
 
 namespace Application.Features.Tenants.Queries;
 
-internal sealed class GetTenantsByIdsHandler : IRequestHandler<GetTenantsByIdsQuery, IEnumerable<TenantDto>>
+internal sealed class GetTenantsByIdsQueryHandler : IRequestHandler<GetTenantsByIdsQuery, IEnumerable<TenantDto>>
 {
     private readonly IRepositoryManager _repository;
     private readonly IMapper _mapper;
 
-    public GetTenantsByIdsHandler(IRepositoryManager repository, IMapper mapper)
+    public GetTenantsByIdsQueryHandler(IRepositoryManager repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;

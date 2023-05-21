@@ -33,17 +33,17 @@ public class MembersController : ControllerBase
     }
 
     /// <summary>
-    /// Get an member for a tenant
+    /// Get a member for a tenant
     /// </summary>
     /// <param name="tenantId"></param>
-    /// <param name="id"></param>
+    /// <param name="memberId"></param>
     /// <returns></returns>
-    [HttpGet("{id:Guid}", Name = "GetMemberForTenant")]
+    [HttpGet("{memberId:Guid}", Name = "GetMemberForTenant")]
     [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(MemberDto))]
     [SwaggerResponse(StatusCodes.Status404NotFound, Type = typeof(ErrorDetails))]
-    public async Task<IActionResult> GetMemberForTenantAsync(Guid tenantId, Guid id)
+    public async Task<IActionResult> GetMemberForTenantAsync(Guid tenantId, Guid memberId)
     {
-        var member = await _sender.Send(new GetMemberForTenantQuery(tenantId, id, TrackChanges: false));
+        var member = await _sender.Send(new GetMemberForTenantQuery(tenantId, memberId, TrackChanges: false));
 
         return Ok(member);
     }
@@ -126,7 +126,7 @@ public class MembersController : ControllerBase
     /// Gets a list of members by their ids
     /// </summary>
     /// <param name="tenantId"></param>
-    /// <param name="ids"></param>
+    /// <param name="memberIds"></param>
     /// <param name="memberParameters"></param>
     /// <remarks><![CDATA[
     /// <p>Replace {ids} with a comma-delimited series of ints.</p>
@@ -145,11 +145,11 @@ public class MembersController : ControllerBase
     /// </ul>
     /// ]]></remarks>
     /// <returns></returns>
-    [HttpGet("collection/{ids}", Name = "MemberCollection")]
+    [HttpGet("collection/{memberIds}", Name = "MemberCollection")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<MemberDto>))]
-    public async Task<IActionResult> GetMemberCollectionAsync(Guid tenantId, string ids, [FromQuery] MemberParameters memberParameters)
+    public async Task<IActionResult> GetMemberCollectionAsync(Guid tenantId, string memberIds, [FromQuery] MemberParameters memberParameters)
     {
-        var members = await _sender.Send(new GetMembersByIdsQuery(tenantId, ids, memberParameters, TrackChanges: false));
+        var members = await _sender.Send(new GetMembersByIdsQuery(tenantId, memberIds, memberParameters, TrackChanges: false));
 
         return Ok(members);
     }
@@ -180,14 +180,14 @@ public class MembersController : ControllerBase
     /// Updates an member for a tenant
     /// </summary>
     /// <param name="tenantId"></param>
-    /// <param name="id"></param>
+    /// <param name="memberId"></param>
     /// <param name="memberToUpdate"></param>
     /// <response code="422">Unprocessable Entity: returns dictionary of errors</response>
-    [HttpPut("{id:Guid}")]
+    [HttpPut("{memberId:Guid}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IReadOnlyDictionary<string, string[]>))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> UpdateMemberForTenant(Guid tenantId, Guid id, [FromBody] MemberForUpdateDto memberToUpdate)
+    public async Task<IActionResult> UpdateMemberForTenant(Guid tenantId, Guid memberId, [FromBody] MemberForUpdateDto memberToUpdate)
     {
         if (memberToUpdate is null)
             return BadRequest("MemberForUpdateDto object is null");
@@ -195,7 +195,7 @@ public class MembersController : ControllerBase
         if (!ModelState.IsValid)
             return UnprocessableEntity(ModelState);
 
-        await _sender.Send(new UpdateMemberCommand(tenantId, id, memberToUpdate, TenantTrackChanges: false, MemberTrackChanges: true));
+        await _sender.Send(new UpdateMemberCommand(tenantId, memberId, memberToUpdate, TenantTrackChanges: false, MemberTrackChanges: true));
 
         return NoContent();
     }
@@ -204,20 +204,20 @@ public class MembersController : ControllerBase
     /// Partially updates an member for a tenant 
     /// </summary>
     /// <param name="tenantId"></param>
-    /// <param name="id"></param>
+    /// <param name="memberId"></param>
     /// <param name="patchDoc"></param>
     /// <response code="422">Unprocessable Entity: returns dictionary of errors</response>
-    [HttpPatch("{id:Guid}")]
+    [HttpPatch("{memberId:Guid}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IReadOnlyDictionary<string, string[]>))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> PartiallyUpdateMemberForTenantAsync(Guid tenantId, Guid id,
+    public async Task<IActionResult> PartiallyUpdateMemberForTenantAsync(Guid tenantId, Guid memberId,
         [FromBody] JsonPatchDocument<MemberForUpdateDto> patchDoc)
     {
         if (patchDoc is null)
             return BadRequest("patchDoc object sent from client is null.");
 
-        (MemberForUpdateDto memberToPatch, _) = await _sender.Send(new GetMemberForPatchQuery(tenantId, id, TenantTrackChanges: false, MemberTrackChanges: true));
+        (MemberForUpdateDto memberToPatch, _) = await _sender.Send(new GetMemberForPatchQuery(tenantId, memberId, TenantTrackChanges: false, MemberTrackChanges: true));
 
         patchDoc.ApplyTo(memberToPatch, ModelState);
 
@@ -226,7 +226,7 @@ public class MembersController : ControllerBase
         if (!ModelState.IsValid)
             return UnprocessableEntity(ModelState);
 
-        await _sender.Send(new UpdateMemberCommand(tenantId, id, memberToPatch, TenantTrackChanges: false, MemberTrackChanges: true));
+        await _sender.Send(new UpdateMemberCommand(tenantId, memberId, memberToPatch, TenantTrackChanges: false, MemberTrackChanges: true));
 
         return NoContent();
     }
@@ -235,13 +235,13 @@ public class MembersController : ControllerBase
     /// Deletes an member for a tenant
     /// </summary>
     /// <param name="tenantId"></param>
-    /// <param name="id"></param>
-    [HttpDelete("{id:Guid}")]
+    /// <param name="memberId"></param>
+    [HttpDelete("{memberId:Guid}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> DeleteMemberForTenant(Guid tenantId, Guid id)
+    public async Task<IActionResult> DeleteMemberForTenant(Guid tenantId, Guid memberId)
     {
-        await _publisher.Publish(new DeleteMemberCommand(tenantId, id, TrackChanges: false));
+        await _publisher.Publish(new DeleteMemberCommand(tenantId, memberId, TrackChanges: false));
 
         return NoContent();
     }

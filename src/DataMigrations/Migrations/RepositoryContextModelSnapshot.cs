@@ -31,8 +31,8 @@ namespace DataMigrations.Migrations
                     b.Property<DateTimeOffset>("CreatedDate")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<DateTime>("DateJoined")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset>("DateJoined")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -65,7 +65,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = new Guid("1510ed1d-317c-4e81-900b-869ff32795b3"),
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 19, 21, 54, 22, 408, DateTimeKind.Utc).AddTicks(8834),
+                            DateJoined = new DateTimeOffset(new DateTime(2023, 5, 21, 5, 0, 32, 966, DateTimeKind.Unspecified).AddTicks(5090), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Manager",
@@ -77,7 +77,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = new Guid("81a07a01-90d3-4100-b952-20ac0a6428a7"),
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 19, 21, 54, 22, 408, DateTimeKind.Utc).AddTicks(8842),
+                            DateJoined = new DateTimeOffset(new DateTime(2023, 5, 21, 5, 0, 32, 966, DateTimeKind.Unspecified).AddTicks(5096), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Assistant Manager",
@@ -89,7 +89,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = new Guid("7f96c51d-2a89-42bd-8c67-86399c12c672"),
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 19, 21, 54, 22, 408, DateTimeKind.Utc).AddTicks(8844),
+                            DateJoined = new DateTimeOffset(new DateTime(2023, 5, 21, 5, 0, 32, 966, DateTimeKind.Unspecified).AddTicks(5139), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Supervisor",
@@ -101,7 +101,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = new Guid("c2fba861-cf6a-49e0-b393-4eb01fa08fe7"),
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 19, 21, 54, 22, 408, DateTimeKind.Utc).AddTicks(8847),
+                            DateJoined = new DateTimeOffset(new DateTime(2023, 5, 21, 5, 0, 32, 966, DateTimeKind.Unspecified).AddTicks(5142), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Associate",
@@ -113,7 +113,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = new Guid("678f7712-4d04-4cc0-bbcc-8d67767b165e"),
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 19, 21, 54, 22, 408, DateTimeKind.Utc).AddTicks(8850),
+                            DateJoined = new DateTimeOffset(new DateTime(2023, 5, 21, 5, 0, 32, 966, DateTimeKind.Unspecified).AddTicks(5144), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Team Lead",
@@ -125,7 +125,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = new Guid("fc115211-a273-49a8-a955-bc9900d41acc"),
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 19, 21, 54, 22, 408, DateTimeKind.Utc).AddTicks(8852),
+                            DateJoined = new DateTimeOffset(new DateTime(2023, 5, 21, 5, 0, 32, 966, DateTimeKind.Unspecified).AddTicks(5146), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Senior Associate",
@@ -137,7 +137,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = new Guid("d88a4de2-fe96-4825-8da4-d9eebd9eceb3"),
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 19, 21, 54, 22, 408, DateTimeKind.Utc).AddTicks(8854),
+                            DateJoined = new DateTimeOffset(new DateTime(2023, 5, 21, 5, 0, 32, 966, DateTimeKind.Unspecified).AddTicks(5148), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Trainer",
@@ -149,7 +149,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = new Guid("54cb4c6a-017a-4fb5-9a16-6770bbdb6ce1"),
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 19, 21, 54, 22, 408, DateTimeKind.Utc).AddTicks(8856),
+                            DateJoined = new DateTimeOffset(new DateTime(2023, 5, 21, 5, 0, 32, 966, DateTimeKind.Unspecified).AddTicks(5150), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Quality Assurance",
@@ -161,7 +161,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = new Guid("53398a73-8b13-4ca6-803d-3c74b0dad959"),
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 19, 21, 54, 22, 408, DateTimeKind.Utc).AddTicks(8858),
+                            DateJoined = new DateTimeOffset(new DateTime(2023, 5, 21, 5, 0, 32, 966, DateTimeKind.Unspecified).AddTicks(5153), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Consultant",
@@ -173,7 +173,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = new Guid("e8d32f9e-bb43-4551-9c11-e481b98eb00f"),
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DateJoined = new DateTime(2023, 5, 19, 21, 54, 22, 408, DateTimeKind.Utc).AddTicks(8860),
+                            DateJoined = new DateTimeOffset(new DateTime(2023, 5, 21, 5, 0, 32, 966, DateTimeKind.Unspecified).AddTicks(5155), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             IsEnabled = true,
                             Position = "Project Manager",
@@ -313,7 +313,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = "0B151F5A-8029-4BED-B0C3-EE389BE7F820",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1a3529b9-3f1e-4166-af2b-b6b1a28ce3b4",
+                            ConcurrencyStamp = "2745527c-6fe0-4901-8194-9cac44484228",
                             Email = "johndoe@example.com",
                             EmailConfirmed = false,
                             GivenName = "John",
@@ -322,10 +322,10 @@ namespace DataMigrations.Migrations
                             NormalizedEmail = "johndoe@example.com",
                             NormalizedName = "JOHN DOE",
                             NormalizedUserName = "johndoe",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBsC4mgGJ93B3Fik2Qt545zriUh5MjzIHMCWiM+P++YVLbkeF8ngQqfquoxr7LwQ+g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJuUM1V2lqAZsRX7SllfNEVtARVTrG1DGgvViVEQ+p8OJbpyW08P60ZFrZG4DwdJUQ==",
                             PhoneNumber = "555-111-1111",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "48d058c4-434a-4cf9-a77a-7df9a43cec6e",
+                            SecurityStamp = "f8de8b4a-5e30-4175-8f92-4696ceee1635",
                             Surname = "Doe",
                             TwoFactorEnabled = false,
                             UserName = "johndoe"
@@ -334,7 +334,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = "B2B0AFA2-9253-44D6-B678-A2E554ADB696",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "24afe154-3274-4779-8d00-7a3fbcce069f",
+                            ConcurrencyStamp = "5ff65696-5d8d-4d36-aefe-e428a756fc39",
                             Email = "janesmith@example.com",
                             EmailConfirmed = false,
                             GivenName = "Jane",
@@ -343,10 +343,10 @@ namespace DataMigrations.Migrations
                             NormalizedEmail = "janesmith@example.com",
                             NormalizedName = "JANE SMITH",
                             NormalizedUserName = "janesmith",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMxHjasFkA/yyxDilELGpIogjEiIFg5Ah76HPs750TMzsWmCPVjCSARoVvj/Zez9GQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELfJ/0l9zEYBzu91dUCHA6ooQLRDSjgWHnzn/ZdjGHO28B/reeZ1KfBiozmT6Ytuow==",
                             PhoneNumber = "555-222-2222",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1eb2d0bb-8556-4c7c-bb3c-0040b75264fc",
+                            SecurityStamp = "fb28a86f-e9e8-43e2-ab32-d5688a70461e",
                             Surname = "Smith",
                             TwoFactorEnabled = false,
                             UserName = "janesmith"
@@ -355,7 +355,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = "E8C4BADB-3D2A-44BE-9479-254CC62660C9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1e74399d-12a7-423c-953d-4fc094fe30ad",
+                            ConcurrencyStamp = "c7b8e41f-83bb-425c-bad1-ac88bf7368ca",
                             Email = "michaelj@example.com",
                             EmailConfirmed = false,
                             GivenName = "Michael",
@@ -364,10 +364,10 @@ namespace DataMigrations.Migrations
                             NormalizedEmail = "michaelj@example.com",
                             NormalizedName = "MICHAEL JOHNSON",
                             NormalizedUserName = "michaelj",
-                            PasswordHash = "AQAAAAEAACcQAAAAEM8CPWw3QhYH/2QKkPVXJIqoX9pZ1GkEX8k4Nj5ACkd104K6M1QnpW/sPEvwWGdqtA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMe6C5YDwa6Pnf18zBtXOb1ARmgqdO5O9Zi2RzhJ9mcttaiN21GeUQpglMLUg+0YXw==",
                             PhoneNumber = "555-333-3333",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "cc9a31ff-57d0-4adc-a1f3-b7fc12b4d01b",
+                            SecurityStamp = "e857cbd8-881f-416d-a8ce-42e2481f3899",
                             Surname = "Johnson",
                             TwoFactorEnabled = false,
                             UserName = "michaelj"
@@ -376,7 +376,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = "7DE9AD64-486E-41C2-8FA2-EB3248CCF28F",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a3e2a7e5-f8c5-4f12-8074-776900a95e81",
+                            ConcurrencyStamp = "bccd97c9-2493-4555-b154-541c0ffbf779",
                             Email = "emilyw@example.com",
                             EmailConfirmed = false,
                             GivenName = "Emily",
@@ -385,10 +385,10 @@ namespace DataMigrations.Migrations
                             NormalizedEmail = "emilyw@example.com",
                             NormalizedName = "EMILY WILLIAMS",
                             NormalizedUserName = "emilyw",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPV/K9MDLGNfhCioH8SrUgGWtcTGchLMQchiOU8HguvWGYvfGtwcENpWVD82eV+HcA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENIPpNdNqvloCbo2ee9Nuu+JaciypvrPk4Mh8TTOjqP1ipKdc8ylzNNIJ7tGDD5Yfg==",
                             PhoneNumber = "555-444-4444",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "eebc99a6-f25c-4450-ac18-faab29ecdd77",
+                            SecurityStamp = "07699a46-5641-4835-8303-cbd44d129246",
                             Surname = "Williams",
                             TwoFactorEnabled = false,
                             UserName = "emilyw"
@@ -397,7 +397,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = "ECDD09D1-298B-456F-BADF-B4358AF3A08E",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "eeb38202-c0c0-4b03-a2d9-4f5dd7878928",
+                            ConcurrencyStamp = "72244d86-8468-4073-9d30-bd9b8ac48d03",
                             Email = "danielb@example.com",
                             EmailConfirmed = false,
                             GivenName = "Daniel",
@@ -406,10 +406,10 @@ namespace DataMigrations.Migrations
                             NormalizedEmail = "danielb@example.com",
                             NormalizedName = "DANIEL BROWN",
                             NormalizedUserName = "danielb",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOr1bxou/A9PGvANrfgnOjjBckIHQ3Z7nVGomC4yiLhEiWyeiRsdVi9GPZ3ohsYZUg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIHkpk0uzpoK3TVkw+VCtcsQb23Zmr2HyIuwHujM8aYDMUDE7AEfutviJxQvC26PVg==",
                             PhoneNumber = "555-555-5555",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6910256b-3e89-4294-b9a7-a1f17996f6a8",
+                            SecurityStamp = "7f092cb0-4f92-4653-920e-7fe4da54637b",
                             Surname = "Brown",
                             TwoFactorEnabled = false,
                             UserName = "danielb"
@@ -418,7 +418,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = "B5E64E97-7D3B-4338-ADD0-EAD00E4959C2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "22d610f2-1350-4523-86cf-7e4ee683fd75",
+                            ConcurrencyStamp = "301508dc-70d5-4eeb-908a-8fad8d8ed8bc",
                             Email = "oliviaj@example.com",
                             EmailConfirmed = false,
                             GivenName = "Olivia",
@@ -427,10 +427,10 @@ namespace DataMigrations.Migrations
                             NormalizedEmail = "oliviaj@example.com",
                             NormalizedName = "OLIVIA JONES",
                             NormalizedUserName = "oliviaj",
-                            PasswordHash = "AQAAAAEAACcQAAAAED3SMOE6lsIP/V4YamnZ0SRYjPPsYAB0OLn5MTx3oid9ChPqWtmeS7btv5a2focsAg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDcLG//zXM3sw7tsczAvLntXtIYOHejymTZw1EytXyHVwl+ByMgHHBipoa+bC6McCA==",
                             PhoneNumber = "555-666-6666",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "83f873ad-4fc7-41c2-9d7d-f7d8fb95601b",
+                            SecurityStamp = "da9a54d7-7771-400d-bf3c-942aa69d4ddc",
                             Surname = "Jones",
                             TwoFactorEnabled = false,
                             UserName = "oliviaj"
@@ -439,7 +439,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = "27074358-129C-40AA-9F02-7E1646F1D9AF",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e727a91c-0fc9-421b-bde1-a29b3292a77a",
+                            ConcurrencyStamp = "893f1d2d-da5d-4083-9ddf-eda15e042443",
                             Email = "davidm@example.com",
                             EmailConfirmed = false,
                             GivenName = "David",
@@ -448,10 +448,10 @@ namespace DataMigrations.Migrations
                             NormalizedEmail = "davidm@example.com",
                             NormalizedName = "DAVID MILLER",
                             NormalizedUserName = "davidm",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBS1miyXcttDBY0rQdiKXzMwUi/NKvqXy5BXmZbjEzCFAjaOGxSgRzAZTClhsRtVzQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOHucH4Qn5W9j7g23YecH1gzj62GOwwkjxSsREWSr6ODK2CD5iWaBlag9r4Tnv4AhA==",
                             PhoneNumber = "555-777-7777",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c2833df6-0da0-4563-b600-1e345276722a",
+                            SecurityStamp = "ac25f654-13c7-4e87-a0b2-e847e50edd77",
                             Surname = "Miller",
                             TwoFactorEnabled = false,
                             UserName = "davidm"
@@ -460,7 +460,7 @@ namespace DataMigrations.Migrations
                         {
                             Id = "4D2FA6AA-4921-43BF-8578-A355B14BBD63",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "25ee6d5d-46cf-4412-b739-8b7fa58be039",
+                            ConcurrencyStamp = "47592915-1d6b-4c29-a71d-fa2979dcc9b1",
                             Email = "sophiad@example.com",
                             EmailConfirmed = false,
                             GivenName = "Sophia",
@@ -469,10 +469,10 @@ namespace DataMigrations.Migrations
                             NormalizedEmail = "sophiad@example.com",
                             NormalizedName = "SOPHIA DAVIS",
                             NormalizedUserName = "sophiad",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMaTTpP42plf8InQE7KyFkFFIC2zEIZ9vMARcZ5UhNzhKYUm1phNKxgzHeRakjKzOA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKX0sgxjbtp/rCA2Ic0Tmw7jY6WhQa+PLsBI0GGjHebSsIGgUdhNqLuh7ylfi+wBaQ==",
                             PhoneNumber = "555-888-8888",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d9156960-3b6d-4ab4-b79f-c105975531d5",
+                            SecurityStamp = "6a2c3ca1-0f25-4ea7-93ea-b9261f43c212",
                             Surname = "Davis",
                             TwoFactorEnabled = false,
                             UserName = "sophiad"
@@ -508,36 +508,36 @@ namespace DataMigrations.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bba9817f-760d-4885-8acf-793cb289bd60",
-                            ConcurrencyStamp = "d9bb31d3-2e27-4528-a9fd-328676efee37",
+                            Id = "9585f639-7b9c-4580-a912-59ec5fceecbc",
+                            ConcurrencyStamp = "da93675e-dca3-452e-ad99-e4a603ebb7f6",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "2e5af43a-153f-40a6-b9b2-eb8a1af70e7d",
-                            ConcurrencyStamp = "5dbf20e7-35c5-4e35-af7e-82d0c9c0141b",
+                            Id = "6890cab0-88ee-4a9b-b49b-569a8c24380d",
+                            ConcurrencyStamp = "3b5d5bf0-f1b8-4bc2-b707-e5689ea1ea28",
                             Name = "Contributor",
                             NormalizedName = "CONTRIBUTOR"
                         },
                         new
                         {
-                            Id = "4105493a-e164-472e-b7a0-ce290eb4b884",
-                            ConcurrencyStamp = "5b2543de-6419-4f60-8d53-b99b7cb4aee2",
+                            Id = "59c21f05-ac5a-4a98-af9c-155725398422",
+                            ConcurrencyStamp = "2169773b-cfb1-41b8-a9ed-059a27423b4c",
                             Name = "Editor",
                             NormalizedName = "EDITOR"
                         },
                         new
                         {
-                            Id = "2afaa526-aa02-4d75-a7a5-ac8a3ca202f8",
-                            ConcurrencyStamp = "31303d69-b870-431d-b493-0e4f2bf02b68",
+                            Id = "184542af-0bb4-4a8e-9ddb-9baa0838196d",
+                            ConcurrencyStamp = "3176acc9-c2bd-4cf1-a356-8e9d7791e420",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "6b180793-144d-4847-923a-f115818919c4",
-                            ConcurrencyStamp = "be9ead5d-ce6d-40a7-98d5-40f21335abb3",
+                            Id = "9b39668e-6b02-4395-92de-2bae25595425",
+                            ConcurrencyStamp = "4baa41ae-5ee4-45fc-ac19-beed1134d286",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });

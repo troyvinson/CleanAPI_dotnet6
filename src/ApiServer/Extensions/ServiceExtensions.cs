@@ -105,11 +105,11 @@ public static class ServiceExtensions
     {
         var builder = services.AddIdentity<User, IdentityRole>(o =>
         {
-            o.Password.RequireDigit = true;
+            o.Password.RequireDigit = false;
             o.Password.RequireLowercase = false;
             o.Password.RequireUppercase = false;
             o.Password.RequireNonAlphanumeric = false;
-            o.Password.RequiredLength = 10;
+            o.Password.RequiredLength = 8;
             o.User.RequireUniqueEmail = true;
         })
         .AddEntityFrameworkStores<RepositoryContext>()
