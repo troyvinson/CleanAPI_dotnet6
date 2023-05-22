@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Application.Features.Users.Commands;
 
-internal sealed class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, UserDto>
+internal sealed class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, IdentityResult>
 {
     private readonly IMapper _mapper;
     private readonly UserManager<User> _userManager;
@@ -15,7 +15,7 @@ internal sealed class RegisterUserCommandHandler : IRequestHandler<RegisterUserC
         _userManager = userManager;
     }
 
-    public async Task<UserDto> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+    public async Task<IdentityResult> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
         var user = _mapper.Map<User>(request.User);
         var result = await _userManager.CreateAsync(user, request.User.Password);
@@ -23,9 +23,7 @@ internal sealed class RegisterUserCommandHandler : IRequestHandler<RegisterUserC
         if (result.Succeeded && request.User.Roles!.Count() > 0)
             await _userManager.AddToRolesAsync(user, request.User.Roles);
 
-        var userDto = _mapper.Map<UserDto>(user);
-
-        return userDto;
+        return result;
 
     }
 }

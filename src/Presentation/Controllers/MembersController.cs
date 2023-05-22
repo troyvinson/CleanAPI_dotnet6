@@ -14,7 +14,7 @@ namespace Presentation.Controllers;
 /// <summary>
 /// Members exist only in the context of a tenant.
 /// </summary>
-[Route("api/[controller]/{tenantId:Guid}/members")]
+[Route("api/tenants/{tenantId:Guid}/members")]
 [ApiController]
 [ApiExplorerSettings(GroupName = "v1")]
 [Produces("application/json")]

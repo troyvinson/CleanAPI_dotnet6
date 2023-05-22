@@ -31,7 +31,7 @@ public abstract class IntegrationTestBase
             options.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()), ServiceLifetime.Transient);
 
         // Add the repository to the service collection
-        serviceCollection.AddLogging(logging => logging.AddConsole());
+        serviceCollection.AddLogging(logging => logging.AddDebug());
         serviceCollection.AddScoped<IRepositoryManager, RepositoryManager>();
         serviceCollection.AddAutoMapper(typeof(Application.AssemblyReference).Assembly);
         serviceCollection.AddMediatR(cfg =>
