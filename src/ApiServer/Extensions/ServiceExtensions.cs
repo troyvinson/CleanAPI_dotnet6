@@ -26,13 +26,11 @@ public static class ServiceExtensions
 
     public static void ConfigureAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
-        // Adds Microsoft Identity platform (AAD v2.0) support to protect this Api
-        services.AddMicrosoftIdentityWebApiAuthentication(configuration);
-        services.AddAuthentication(); 
-        services.AddAuthorization();
-        services.AddTransient<IClaimsTransformation, CustomClaimsTransformation>();
+        // Add Microsoft Identity platform (AAD v2.0) support to protect this Api
+        services.AddMicrosoftIdentityWebApiAuthentication(configuration, 
+            configSectionName: "AzureAd", jwtBearerScheme:"AzureAdScheme");
 
-        // Adds JWT support
+        // Add Api-generated JWT support
         services.Configure<JwtConfiguration>(configuration.GetSection("JwtSettings"));
         var secretKey = Environment.GetEnvironmentVariable("APISERVERSECRETKEY");
 
@@ -44,7 +42,7 @@ public static class ServiceExtensions
             opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         })
-        .AddJwtBearer(options =>
+        .AddJwtBearer("ApiJwtScheme", options =>
         {
             options.TokenValidationParameters = new TokenValidationParameters
             {
@@ -59,6 +57,7 @@ public static class ServiceExtensions
             };
         });
 
+        services.AddTransient<IClaimsTransformation, CustomClaimsTransformation>();
     }
 
     public static void ConfigureValidationBehavior(this IServiceCollection services)

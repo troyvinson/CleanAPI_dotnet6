@@ -10,7 +10,7 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Presentation.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/tenants")]
 [ApiController]
 [ApiExplorerSettings(GroupName = "v1")]
 [Produces("application/json")]

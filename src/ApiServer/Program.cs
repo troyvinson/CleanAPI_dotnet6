@@ -12,9 +12,10 @@ builder.Services.ConfigureLoggerService();
 builder.Services.ConfigureCors();
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureSqlContext(builder.Configuration);
-builder.Services.ConfigureAuthentication(builder.Configuration);
-builder.Services.ConfigureIdentity();
 
+builder.Services.ConfigureAuthentication(builder.Configuration);
+builder.Services.AddAuthorization();
+builder.Services.ConfigureIdentity();
 
 builder.Services.AddMediatR(cfg =>
 {
