@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
+using Microsoft.Identity.Web.TokenCacheProviders.InMemory;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -26,36 +27,14 @@ public static class ServiceExtensions
 
     public static void ConfigureAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
-        // Add Microsoft Identity platform (AAD v2.0) support to protect this Api
-        services.AddMicrosoftIdentityWebApiAuthentication(configuration, 
-            configSectionName: "AzureAd", jwtBearerScheme:"AzureAdScheme");
-
-        // Add Api-generated JWT support
-        services.Configure<JwtConfiguration>(configuration.GetSection("JwtSettings"));
-        var secretKey = Environment.GetEnvironmentVariable("APISERVERSECRETKEY");
-
-        var jwtConfiguration = new JwtConfiguration();
-        configuration.Bind(jwtConfiguration.Section, jwtConfiguration);
-
-        services.AddAuthentication(opt =>
-        {
-            opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        })
-        .AddJwtBearer("ApiJwtScheme", options =>
-        {
-            options.TokenValidationParameters = new TokenValidationParameters
+        // Adds Microsoft Identity platform (Azure AD B2C) support to protect this Api
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddMicrosoftIdentityWebApi(options =>
             {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-
-                ValidIssuer = jwtConfiguration.ValidIssuer,
-                ValidAudience = jwtConfiguration.ValidAudience,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
-            };
-        });
+                configuration.Bind("AzureAdB2C", options);
+                options.TokenValidationParameters.NameClaimType = "name";
+            },
+            options => { configuration.Bind("AzureAdB2C", options); });
 
         services.AddTransient<IClaimsTransformation, CustomClaimsTransformation>();
     }
