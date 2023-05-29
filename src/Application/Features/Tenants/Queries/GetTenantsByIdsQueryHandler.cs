@@ -22,7 +22,7 @@ internal sealed class GetTenantsByIdsQueryHandler : IRequestHandler<GetTenantsBy
 
         var ids = request.TenantIds.Split(',').Select(id => Guid.Parse(id)).ToList();
 
-        var companyEntities = await _repository.Tenant.GetTenantsByIdsAsync(ids, request.TrackChanges);
+        var companyEntities = await _repository.Tenant.GetTenantsByIdsAsync(ids, request.tenantParameters, request.TrackChanges);
         if (ids.Count != companyEntities.Count())
             throw new CollectionByIdsBadRequestException();
 

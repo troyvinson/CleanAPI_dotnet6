@@ -1,8 +1,7 @@
 ﻿namespace Domain.RequestFeatures;
 
-public class MemberParameters
+public class MemberParameters : BaseParameters
 {
-    public string? SearchTerm { get; set; }
-    public string? OrderBy { get; set; } = "username";
+    public override string? OrderBy { get; set; } = "username";
 
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain.RequestFeatures;
+using Infrastructure.Repositories.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
@@ -8,16 +10,20 @@ public sealed class TenantRepository : RepositoryBase<Tenant>, ITenantRepository
     {
     }
 
-    public async Task<IEnumerable<Tenant>> GetTenantsAsync(bool trackChanges) =>
-        await FindAll(trackChanges)
-        .OrderBy(t => t.Name)
+    public async Task<IEnumerable<Tenant>> GetTenantsAsync(TenantParameters tenantParameters, bool trackChanges) =>
+    await FindAll(trackChanges)
+        .Search(tenantParameters.SearchTerm)
+        .Sort(tenantParameters.OrderBy)
         .ToListAsync();
 
     public async Task<Tenant?> GetTenantByIdAsync(Guid tenantId, bool trackChanges) =>
         await FindByCondition(t => t.Id.Equals(tenantId), trackChanges).SingleOrDefaultAsync();
 
-    public async Task<IEnumerable<Tenant>> GetTenantsByIdsAsync(IEnumerable<Guid> tenantIds, bool trackChanges) =>
+    public async Task<IEnumerable<Tenant>> GetTenantsByIdsAsync(IEnumerable<Guid> tenantIds, 
+        TenantParameters tenantParameters, bool trackChanges) =>
         await FindByCondition(r => tenantIds.Contains(r.Id), trackChanges)
+        .Search(tenantParameters.SearchTerm)
+        .Sort(tenantParameters.OrderBy)
         .ToListAsync();
 
     public void CreateTenant(Tenant tenant) => base.Create(tenant);

@@ -2,6 +2,7 @@
 using Application.Features.Tenants.Queries;
 using Application.Notifications;
 using Domain.Models;
+using Domain.RequestFeatures;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
@@ -46,12 +47,27 @@ public class TenantsController : ControllerBase
     /// <summary>
     /// Gets the list of all tenants
     /// </summary>
+    /// <remarks><![CDATA[
+    /// <h2>Searching and Sorting</h2>
+    /// <h3>SearchTerm</h3>
+    /// Searches for match in Tenant Name
+    /// <ul>Example:
+    /// <li>?searchTerm=venture</li>
+    /// </ul>
+    /// <h3>OrderBy</h3>
+    /// Sort by any field. My use asc or desc (default = asc).<br/>
+    /// Additional sort fields are separated by commas.
+    /// <ul>Example:
+    /// <li>?orderBy=Name desc</li>
+    /// </ul>
+    /// ]]></remarks>
+    /// <param name="tenantParameters"></param>
     /// <returns>The tenants list</returns>
     [HttpGet(Name = "GetTenants")]
     [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(IEnumerable<TenantDto>))]
-    public async Task<IActionResult> GetTenantsAsync()
+    public async Task<IActionResult> GetTenantsAsync([FromQuery] TenantParameters tenantParameters)
     {
-        var tenants = await _sender.Send(new GetTenantsQuery(TrackChanges: false));
+        var tenants = await _sender.Send(new GetTenantsQuery(tenantParameters, TrackChanges: false));
 
         return Ok(tenants);
     }
@@ -59,14 +75,28 @@ public class TenantsController : ControllerBase
     /// <summary>
     /// Gets a list of tenants by their ids
     /// </summary>
-    /// <remarks>Replace {tenantIds} with a comma-delimited series of ints. </remarks>
+    /// <remarks><![CDATA[
+    /// <h2>Searching and Sorting</h2>
+    /// <h3>SearchTerm</h3>
+    /// Searches for match in Tenant Name
+    /// <ul>Example:
+    /// <li>?searchTerm=venture</li>
+    /// </ul>
+    /// <h3>OrderBy</h3>
+    /// Sort by any field. My use asc or desc (default = asc).<br/>
+    /// Additional sort fields are separated by commas.
+    /// <ul>Example:
+    /// <li>?orderBy=Name desc</li>
+    /// </ul>
+    /// ]]></remarks>
     /// <param name="ids"></param>
+    /// <param name="tenantParameters"></param>
     /// <returns></returns>
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<TenantDto>))]
     [HttpGet("collection/{ids}", Name = "TenantCollection")]
-    public async Task<IActionResult> GetTenantCollectionAsync(string ids)
+    public async Task<IActionResult> GetTenantCollectionAsync(string ids, [FromQuery] TenantParameters tenantParameters)
     {
-        var tenants = await _sender.Send(new GetTenantsByIdsQuery(ids, TrackChanges: false));
+        var tenants = await _sender.Send(new GetTenantsByIdsQuery(ids, tenantParameters, TrackChanges: false));
 
         return Ok(tenants);
     }

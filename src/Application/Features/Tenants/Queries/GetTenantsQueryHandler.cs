@@ -17,7 +17,7 @@ internal sealed class GetTenantsQueryHandler : IRequestHandler<GetTenantsQuery, 
     public async Task<IEnumerable<TenantDto>> Handle(GetTenantsQuery request,
         CancellationToken cancellationToken)
     {
-        var tenants = await _repository.Tenant.GetTenantsAsync(request.TrackChanges);
+        var tenants = await _repository.Tenant.GetTenantsAsync(request.tenantParameters, request.TrackChanges);
 
         var tenantsDto = _mapper.Map<IEnumerable<TenantDto>>(tenants);
 
