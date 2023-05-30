@@ -2,8 +2,9 @@
 
 public interface IRepositoryManager
 {
-    ITenantRepository Tenant { get; }
     IMemberRepository Member { get; }
+    ITenantRepository Tenant { get; }
+    IUserRepository User { get; }
 
     Task SaveAsync();
 }

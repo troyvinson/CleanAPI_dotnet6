@@ -2,10 +2,7 @@ using Application.Features.Tenants.Commands;
 using Application.Features.Tenants.Queries;
 using Domain.DataTransferObjects;
 using Domain.Entities;
-using Domain.Exceptions;
 using Domain.RequestFeatures;
-using MediatR;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace IntegrationTests;
 
@@ -57,10 +54,10 @@ public class TenantTester : IntegrationTestBase
 
         Repository.Tenant.CreateTenant(tenant);
         await Repository.SaveAsync();
-        
+
         // Act
         var tenantsFromDb = await Mediator.Send(new GetTenantsByIdsQuery(tenant.Id.ToString(), new TenantParameters { }, false));
-        
+
         // Assert
         Assert.That(tenantsFromDb.Count, Is.EqualTo(1));
         Assert.That(tenantsFromDb.FirstOrDefault()?.Name, Is.EqualTo(tenantDto.Name));
