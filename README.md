@@ -1,7 +1,7 @@
 # CleanAPI_dotnet6
 
 ## Introduction
-A clean architecture Web API project in .NET 6
+A clean architecture, multi-tenant Web API project in .NET 6 
   
 &nbsp;  
 
